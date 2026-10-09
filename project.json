@@ -1,0 +1,30 @@
+{
+  "app_id": "tuios",
+  "display_name": "FnTuiOS",
+  "description": "飞牛桌面中文终端与持久会话，按登录用户独立运行。",
+  "upstream": "Gaurav-Gosain/tuios",
+  "upstream_policy": "default-branch-head",
+  "gateway_prefix": "/app/tuios",
+  "gateway_socket": "app.sock",
+  "buildflow": {
+    "schema": 1,
+    "requires": ">=0.1,<0.2",
+    "targets": [
+      "fpk"
+    ],
+    "steps": [],
+    "artifacts": []
+  },
+  "fnpackkit": {
+    "schema": 1,
+    "requires": ">=0.1,<0.2",
+    "adapter": "scripts/build.py:plan"
+  },
+  "build": {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ]
+  },
+  "version": "0.0.1"
+}

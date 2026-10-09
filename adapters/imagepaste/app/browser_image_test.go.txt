@@ -1,0 +1,116 @@
+package app
+
+import (
+	"context"
+	"io"
+	"strings"
+	"testing"
+	"time"
+
+	tea "charm.land/bubbletea/v2"
+	"github.com/Gaurav-Gosain/tuios/internal/session"
+	uv "github.com/charmbracelet/ultraviolet"
+)
+
+func browserImageTestModel(t *testing.T) *OS {
+	t.Helper()
+	m, _, _ := imagePasteOS(t, &fakeClipboard{})
+	m.BrowserClient, m.IsDaemonSession = true, true
+	m.DaemonClient = &session.TUIClient{}
+	return m
+}
+
+func TestBrowserImageCaptureRequiresExactPendingMarker(t *testing.T) {
+	m := browserImageTestModel(t)
+	b := m.EnableBrowserImages(context.Background(), func(tea.Msg) {})
+	r, w := io.Pipe()
+	defer r.Close()
+	defer w.Close()
+	result := make(chan *BrowserImageTarget, 1)
+	go func() { target, _ := b.Capture(context.Background(), w); result <- target }()
+	buf := make([]byte, 256)
+	n, err := r.Read(buf)
+	if err != nil {
+		t.Fatal(err)
+	}
+	marker := string(buf[:n])
+	m.handleBrowserImage(uv.UnknownOscEvent(strings.Repeat("x", 4096)))
+	m.handleBrowserImage(uv.UnknownOscEvent("\x1b]777;fntuios-image;forged\x07"))
+	select {
+	case <-result:
+		t.Fatal("forgery captured target")
+	default:
+	}
+	m.handleBrowserImage(uv.UnknownOscEvent(marker))
+	select {
+	case got := <-result:
+		if got == nil || got.window != m.Windows[0] {
+			t.Fatal("capture did not bind pane")
+		}
+	case <-time.After(time.Second):
+		t.Fatal("no capture acknowledgment")
+	}
+	// A replay has no registered request and cannot mint another target.
+	if handled, _ := m.handleBrowserImage(uv.UnknownOscEvent(marker)); !handled {
+		t.Fatal("private marker leaked")
+	}
+}
+
+func TestBrowserImageBindingRejectsChangedAuthority(t *testing.T) {
+	for _, change := range []string{"focus", "closed", "replacement", "session", "nonce", "daemon", "cancel", "failed-switch"} {
+		t.Run(change, func(t *testing.T) {
+			m := browserImageTestModel(t)
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			b := m.EnableBrowserImages(ctx, func(tea.Msg) {})
+			target, code := m.captureBrowserImage(b, ctx)
+			if code != "" {
+				t.Fatal(code)
+			}
+			switch change {
+			case "focus":
+				other, _ := layoutWindow(t, "other")
+				m.Windows = append(m.Windows, other)
+				m.FocusedWindow = 1
+			case "closed":
+				m.Windows = nil
+			case "replacement":
+				other, _ := layoutWindow(t, "w1")
+				m.Windows[0] = other
+			case "session":
+				m.SessionName = "another"
+			case "nonce":
+				m.Inbox.nonce = func() string { return "new-attach" }
+			case "daemon":
+				m.DaemonClient = &session.TUIClient{}
+			case "cancel":
+				cancel()
+			case "failed-switch":
+				_ = m.SwitchToSession("")
+			}
+			code = target.valid(m)
+			if (code == "") != (change == "focus") {
+				t.Fatalf("binding after %s: %q", change, code)
+			}
+		})
+	}
+}
+
+func TestBrowserImageCancellationAfterSaveDoesNotPaste(t *testing.T) {
+	m := browserImageTestModel(t)
+	ctx, cancel := context.WithCancel(context.Background())
+	b := m.EnableBrowserImages(ctx, func(tea.Msg) {})
+	target, _ := m.captureBrowserImage(b, ctx)
+	code := ""
+	job := &browserImageJob{target: target, data: fakePNG, done: func(c string) { code = c }}
+	handled, cmd := m.handleBrowserImage(job)
+	if !handled || cmd == nil {
+		t.Fatal("upload not dispatched")
+	}
+	msg := cmd()
+	cancel()
+	m.handleBrowserImage(msg)
+	if code != "expired" {
+		t.Fatalf("canceled paste result: %q", code)
+	}
+}

@@ -1,0 +1,430 @@
+{
+  "locale": "zh-CN",
+  "terms": [
+    {
+      "en": "window",
+      "zh": "窗口",
+      "context": "A movable TUIOS window; avoid conflating it with pane."
+    },
+    {
+      "en": "pane",
+      "zh": "窗格",
+      "context": "A terminal or agent content pane, especially tiled panes."
+    },
+    {
+      "en": "shell",
+      "zh": "命令行",
+      "context": "Displayed fallback name of an unnamed shell pane; preserve actual executable names and user-supplied titles."
+    },
+    {
+      "en": "workspace",
+      "zh": "工作区",
+      "context": "Numbered collection of windows."
+    },
+    {
+      "en": "session",
+      "zh": "会话",
+      "context": "Persistent daemon-managed TUIOS session."
+    },
+    {
+      "en": "daemon",
+      "zh": "守护进程",
+      "context": "Background process managing sessions and PTYs."
+    },
+    {
+      "en": "agent",
+      "zh": "智能体",
+      "context": "AI coding or task agent; do not use proxy/network agent wording."
+    },
+    {
+      "en": "fleet",
+      "zh": "智能体组",
+      "context": "A coordinated collection of agent panes."
+    },
+    {
+      "en": "host",
+      "zh": "主机",
+      "context": "Local or federated remote machine."
+    },
+    {
+      "en": "client",
+      "zh": "客户端",
+      "context": "A UI attached to a daemon session."
+    },
+    {
+      "en": "dock",
+      "zh": "停靠栏",
+      "context": "Bottom or top bar containing workspace tabs and status."
+    },
+    {
+      "en": "sidebar",
+      "zh": "侧边栏",
+      "context": "Session, terminal, file and agent rail."
+    },
+    {
+      "en": "rail",
+      "zh": "侧边栏",
+      "context": "User-facing name for the sidebar; preserve source IDs."
+    },
+    {
+      "en": "tiling",
+      "zh": "平铺",
+      "context": "Window arrangement mode."
+    },
+    {
+      "en": "floating",
+      "zh": "浮动",
+      "context": "Freely positioned window arrangement."
+    },
+    {
+      "en": "scrollback",
+      "zh": "终端历史",
+      "context": "Previously printed terminal lines, not a general undo history."
+    },
+    {
+      "en": "copy mode",
+      "zh": "复制模式",
+      "context": "Vim-like terminal selection and navigation."
+    },
+    {
+      "en": "prefix",
+      "zh": "前缀键",
+      "context": "Leader-key menu, such as Ctrl+B."
+    },
+    {
+      "en": "hint",
+      "zh": "提示",
+      "context": "Keyboard hint or selectable label; use 快捷标记 where a selectable target needs distinction."
+    },
+    {
+      "en": "scratch",
+      "zh": "临时窗格",
+      "context": "A transient scratch terminal, not a disk scratch file."
+    },
+    {
+      "en": "picture-in-picture",
+      "zh": "画中画",
+      "context": "Small persistent pane overlay."
+    },
+    {
+      "en": "checkpoint",
+      "zh": "检查点",
+      "context": "A restorable saved session state."
+    },
+    {
+      "en": "worktree",
+      "zh": "工作树",
+      "context": "Git worktree; distinguish from workspace."
+    },
+    {
+      "en": "branch",
+      "zh": "分支",
+      "context": "Git branch."
+    },
+    {
+      "en": "review",
+      "zh": "审阅",
+      "context": "Diff and note review; use 审核 for permission approval when appropriate."
+    },
+    {
+      "en": "approval",
+      "zh": "授权",
+      "context": "Permission decision requested by an agent; actions use 允许 or 拒绝."
+    },
+    {
+      "en": "grant",
+      "zh": "授权规则",
+      "context": "Persisted rule that authorizes an operation."
+    },
+    {
+      "en": "inbox",
+      "zh": "收件箱",
+      "context": "Agent requests and notifications awaiting attention."
+    },
+    {
+      "en": "mail",
+      "zh": "消息",
+      "context": "Built-in agent messaging, not external email."
+    },
+    {
+      "en": "thread",
+      "zh": "消息串",
+      "context": "Conversation grouped by parent message."
+    },
+    {
+      "en": "notice",
+      "zh": "通知",
+      "context": "Informational agent message."
+    },
+    {
+      "en": "claim",
+      "zh": "声明",
+      "context": "Untrusted agent-authored assertion; do not imply human approval."
+    },
+    {
+      "en": "needs input",
+      "zh": "等待输入",
+      "context": "Agent state requiring the user's response."
+    },
+    {
+      "en": "working",
+      "zh": "工作中",
+      "context": "Agent state."
+    },
+    {
+      "en": "idle",
+      "zh": "空闲",
+      "context": "Agent state."
+    },
+    {
+      "en": "done",
+      "zh": "已完成",
+      "context": "Agent state."
+    },
+    {
+      "en": "errored",
+      "zh": "出错",
+      "context": "Agent state."
+    },
+    {
+      "en": "stopped",
+      "zh": "已停止",
+      "context": "Agent or process state."
+    },
+    {
+      "en": "open",
+      "zh": "打开",
+      "context": "UI action; do not translate protocol enum values."
+    },
+    {
+      "en": "close",
+      "zh": "关闭",
+      "context": "Dismiss a panel or close a window."
+    },
+    {
+      "en": "cancel",
+      "zh": "取消",
+      "context": "Abort a pending edit or operation."
+    },
+    {
+      "en": "back",
+      "zh": "返回",
+      "context": "Return to parent UI."
+    },
+    {
+      "en": "save",
+      "zh": "保存",
+      "context": "Persist a changed value."
+    },
+    {
+      "en": "delete permanently",
+      "zh": "永久删除",
+      "context": "Destructive action; never soften to simple remove."
+    },
+    {
+      "en": "move to trash",
+      "zh": "移到回收站",
+      "context": "Recoverable file deletion."
+    },
+    {
+      "en": "detach",
+      "zh": "分离",
+      "context": "Disconnect a client while keeping the session running."
+    },
+    {
+      "en": "attach",
+      "zh": "连接",
+      "context": "Connect a client to an existing session."
+    },
+    {
+      "en": "restore",
+      "zh": "恢复",
+      "context": "Restore saved state."
+    },
+    {
+      "en": "resume",
+      "zh": "继续",
+      "context": "Continue paused work or playback."
+    },
+    {
+      "en": "minimize",
+      "zh": "最小化",
+      "context": "Window action."
+    },
+    {
+      "en": "maximize",
+      "zh": "最大化",
+      "context": "Window action."
+    },
+    {
+      "en": "zoom",
+      "zh": "聚焦放大",
+      "context": "Enlarge a tiled pane while retaining the layout."
+    },
+    {
+      "en": "notification",
+      "zh": "通知",
+      "context": "Transient or desktop UI notification."
+    },
+    {
+      "en": "alert",
+      "zh": "提醒",
+      "context": "Agent state alert, potentially sound or desktop notification."
+    },
+    {
+      "en": "tape",
+      "zh": "自动化脚本",
+      "context": "TUIOS tape playback and recording; preserve .tape and CLI names."
+    },
+    {
+      "en": "buffer",
+      "zh": "缓冲区",
+      "context": "Paste buffer or terminal buffer."
+    },
+    {
+      "en": "clipboard",
+      "zh": "剪贴板",
+      "context": "The browser or operating system clipboard; distinguish from a terminal paste buffer."
+    },
+    {
+      "en": "paste image",
+      "zh": "粘贴图片",
+      "context": "Read an image from a paste event or clipboard and insert its saved path into the selected terminal pane."
+    },
+    {
+      "en": "choose image",
+      "zh": "选择图片",
+      "context": "Open the image file picker as a fallback when clipboard access is unavailable or denied."
+    },
+    {
+      "en": "browser permission",
+      "zh": "浏览器权限",
+      "context": "Permission to read the clipboard through the browser API; distinguish denial from an insecure connection and from ordinary paste events."
+    },
+    {
+      "en": "upload",
+      "zh": "上传",
+      "context": "Send the selected or pasted image to the application; do not imply that inserting its path submits a terminal command."
+    },
+    {
+      "en": "glyph",
+      "zh": "字符样式",
+      "context": "Unicode or ASCII UI symbol set."
+    },
+    {
+      "en": "theme",
+      "zh": "主题",
+      "context": "Color theme."
+    },
+    {
+      "en": "default",
+      "zh": "默认",
+      "context": "User-facing fallback label only."
+    },
+    {
+      "en": "on",
+      "zh": "开",
+      "context": "Displayed boolean state only."
+    },
+    {
+      "en": "off",
+      "zh": "关",
+      "context": "Displayed boolean state only."
+    },
+    {
+      "en": "spotlight",
+      "zh": "聚光灯",
+      "context": "A visual spotlight over terminal panes, not a search launcher."
+    },
+    {
+      "en": "master pane",
+      "zh": "主窗格",
+      "context": "Primary pane in the master-stack layout."
+    },
+    {
+      "en": "multi copy",
+      "zh": "多窗格复制",
+      "context": "Copy mode over multiple selected panes; its count is the number of panes."
+    },
+    {
+      "en": "attention item",
+      "zh": "待处理项",
+      "context": "Inbox item needing the person, including questions, approvals and mail."
+    },
+    {
+      "en": "turn",
+      "zh": "轮次",
+      "context": "One agent conversation turn; completion does not mean the whole agent task is complete."
+    }
+  ],
+  "preserve": [
+    {
+      "text": "FnTuiOS",
+      "reason": "Product display name."
+    },
+    {
+      "text": "TUIOS",
+      "reason": "Upstream product name when referring to upstream."
+    },
+    {
+      "text": "tuios",
+      "reason": "Executable and CLI command name."
+    },
+    {
+      "text": "tmux",
+      "reason": "External program and compatibility command name."
+    },
+    {
+      "text": "Git",
+      "reason": "External tool name."
+    },
+    {
+      "text": "SSH",
+      "reason": "Protocol name; literal ssh commands remain lowercase."
+    },
+    {
+      "text": "MCP",
+      "reason": "Protocol name."
+    },
+    {
+      "text": "ACP",
+      "reason": "Protocol name."
+    },
+    {
+      "text": "ASCII",
+      "reason": "Character-set name."
+    },
+    {
+      "text": "Unicode",
+      "reason": "Character standard name."
+    },
+    {
+      "text": "Kitty",
+      "reason": "Terminal/protocol name."
+    },
+    {
+      "text": "Ctrl",
+      "reason": "Key name in rendered key hints."
+    },
+    {
+      "text": "Alt",
+      "reason": "Key name in rendered key hints."
+    },
+    {
+      "text": "Shift",
+      "reason": "Key name in rendered key hints."
+    },
+    {
+      "text": "esc",
+      "reason": "Literal key hint."
+    },
+    {
+      "text": "tab",
+      "reason": "Literal key hint."
+    },
+    {
+      "text": "enter",
+      "reason": "Literal key hint."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+#fn-image-paste-status {
+    position: fixed;
+    top: 8px;
+    right: 48px;
+    z-index: 50;
+    max-width: min(560px, calc(100vw - 64px));
+    max-height: 30vh;
+    overflow: hidden;
+    padding: 6px 10px;
+    border: 1px solid var(--sip-border, #45475a);
+    border-radius: 4px;
+    font: 13px/1.5 system-ui, sans-serif;
+    color: var(--sip-fg, #cdd6f4);
+    background: var(--sip-bg, #1e1e2e);
+    pointer-events: none;
+}
+#fn-image-paste-status:empty { display: none; }

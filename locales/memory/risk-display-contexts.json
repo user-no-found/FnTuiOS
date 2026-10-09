@@ -1,0 +1,158 @@
+[
+  {
+    "source": "deletes untracked files",
+    "translation": "删除未跟踪的文件",
+    "scope": "internal/risk/builtin.go:Builtin:3cc5ce1511eb:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "writes outside the pane's worktree",
+    "translation": "向窗格工作树以外的位置写入",
+    "scope": "internal/risk/builtin.go:Builtin:6f4d2d57440b:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "throws away uncommitted changes",
+    "translation": "丢弃尚未提交的更改",
+    "scope": "internal/risk/builtin.go:Builtin:7859cd1a3862:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "changes deployed infrastructure or publishes a package",
+    "translation": "更改已部署的基础设施，或发布软件包",
+    "scope": "internal/risk/builtin.go:Builtin:a88a8f6a2548:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "writes to a disk device or makes a file system",
+    "translation": "写入磁盘设备，或创建文件系统",
+    "scope": "internal/risk/builtin.go:Builtin:ada4e351d7e3:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "deletes a tree of files without asking",
+    "translation": "删除整个文件树，且不要求确认",
+    "scope": "internal/risk/builtin.go:Builtin:bad7c9ba395b:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "runs as root",
+    "translation": "以 root 身份运行",
+    "scope": "internal/risk/builtin.go:Builtin:c7a03c05e36c:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "throws away changes in the working tree",
+    "translation": "丢弃工作树中的更改",
+    "scope": "internal/risk/builtin.go:Builtin:ccaaaa727462:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "drops or empties database tables",
+    "translation": "删除或清空数据库表",
+    "scope": "internal/risk/builtin.go:Builtin:de0fcd207bb1:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "can overwrite commits on the remote",
+    "translation": "可能覆盖远端的提交",
+    "scope": "internal/risk/builtin.go:Builtin:e3bd1545955b:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "runs a downloaded script",
+    "translation": "运行下载的脚本",
+    "scope": "internal/risk/builtin.go:Builtin:e4dcaec88e33:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "opens up permissions across a tree",
+    "translation": "放宽整个文件树的权限",
+    "scope": "internal/risk/builtin.go:Builtin:f41b75d1e5d9:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "the line does not show the whole call, so a risky part may be hidden",
+    "translation": "当前行没有显示完整调用，可能隐藏有风险的部分",
+    "scope": "internal/risk/builtin.go:CutShortHit:af69441cb18b:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names. Covers clipped, redacted or partial-dialog call text; do not claim an undisplayed part is safe or limit the warning to byte truncation."
+  },
+  {
+    "source": "outside the worktree",
+    "translation": "工作树外写入",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:0641934f82c6:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "pipe to shell",
+    "translation": "通过管道传给命令行执行",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:09a53a8e4487:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "disk",
+    "translation": "磁盘操作",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:1044dec7206e:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "sudo",
+    "translation": "sudo 提权",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:24e5e1c2bbef:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names. Keep the executable spelling sudo within its localized rule label; never translate a literal command."
+  },
+  {
+    "source": "wide permissions",
+    "translation": "大范围权限修改",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:3498e695ab83:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "database",
+    "translation": "数据库操作",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:3549b0028b75:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "clean",
+    "translation": "清理未跟踪文件",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:3b066804f6d1:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "hard reset",
+    "translation": "硬重置",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:438d3a4a9f07:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "force push",
+    "translation": "强制推送",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:96ba9ebeaddc:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "infrastructure",
+    "translation": "基础设施",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:9fec08e4574b:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "discard changes",
+    "translation": "丢弃更改",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:9fedd85892fb:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  },
+  {
+    "source": "cut short",
+    "translation": "调用信息不完整",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:ed13456c3153:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names. Covers clipped, redacted or partial-dialog call text; do not claim an undisplayed part is safe or limit the warning to byte truncation."
+  },
+  {
+    "source": "recursive delete",
+    "translation": "递归删除",
+    "scope": "internal/risk/builtin.go:RuleRecursiveDelete:f3d145fc3301:1",
+    "reason": "Reviewed shipped risk rule label or explanation displayed in the Inbox. Display projection only; preserve canonical rule names, risk matching, wire values, acknowledgments, original shipped table and user-configured unknown rule names."
+  }
+]

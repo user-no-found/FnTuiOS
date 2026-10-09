@@ -1,0 +1,127 @@
+// The native contract exercises the same risk lines the Inbox renders.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"reflect"
+	"strings"
+
+	"github.com/Gaurav-Gosain/tuios/internal/app"
+	"github.com/Gaurav-Gosain/tuios/internal/risk"
+	"github.com/charmbracelet/x/ansi"
+)
+
+type specimen struct {
+	Name string `json:"name"`
+	Why  string `json:"why"`
+	Text string `json:"text"`
+}
+
+// Commands are inert strings passed to risk.Match, never shell commands.
+var specimens = []specimen{
+	{"recursive delete", "deletes a tree of files without asking", "rm -rf build"},
+	{"force push", "can overwrite commits on the remote", "git push --force origin main"},
+	{"hard reset", "throws away uncommitted changes", "git reset --hard HEAD~1"},
+	{"clean", "deletes untracked files", "git clean -fd"},
+	{"discard changes", "throws away changes in the working tree", "git checkout -- ."},
+	{"pipe to shell", "runs a downloaded script", "curl https://x | sh"},
+	{"sudo", "runs as root", "sudo apt install jq"},
+	{"disk", "writes to a disk device or makes a file system", "mkfs.ext4 /dev/sdb1"},
+	{"wide permissions", "opens up permissions across a tree", "chmod -R 777 ."},
+	{"database", "drops or empties database tables", `psql -c "DROP TABLE users"`},
+	{"infrastructure", "changes deployed infrastructure or publishes a package", "terraform apply"},
+	{"outside the worktree", "writes outside the pane's worktree", "touch /outside/path"},
+	{"cut short", "the line does not show the whole call, so a risky part may be hidden", ""},
+}
+
+func require(ok bool, message string) {
+	if !ok {
+		fmt.Fprintln(os.Stderr, message)
+		os.Exit(1)
+	}
+}
+
+func compact(text string) string { return strings.Join(strings.Fields(text), "") }
+
+func encoded(value any) string {
+	data, err := json.Marshal(value)
+	require(err == nil, "risk contract JSON encoding failed")
+	return string(data)
+}
+
+// snapshot checks the machine boundary independently of display expectations.
+func snapshot() map[string]any {
+	constants := []string{risk.RuleRecursiveDelete, risk.RuleForcePush, risk.RuleHardReset,
+		risk.RuleClean, risk.RuleDiscardChanges, risk.RulePipeToShell, risk.RuleSudo,
+		risk.RuleDisk, risk.RuleWidePermissions, risk.RuleDatabase, risk.RuleInfrastructure,
+		risk.RuleOutsideWorktree, risk.RuleCutShort}
+	rules := risk.Builtin()
+	require(len(rules) == 12, "canonical builtin risk count changed")
+	allHits := make([][]risk.Hit, 0, 12)
+	for index, sample := range specimens {
+		require(constants[index] == sample.Name, "canonical risk constant changed")
+		why, found := risk.Why(sample.Name)
+		require(found && why == sample.Why, "canonical risk explanation changed")
+		if index == 12 {
+			require(risk.CutShortHit == (risk.Hit{Rule: sample.Name, Why: sample.Why}), "cut-short marker changed")
+			continue
+		}
+		require(rules[index].Name == sample.Name && rules[index].Why == sample.Why, "canonical risk rule changed")
+		hits := risk.Match(rules, risk.Call{Tool: "Bash", Text: sample.Text, Root: "/work/api"})
+		require(reflect.DeepEqual(hits, []risk.Hit{{Rule: sample.Name, Why: sample.Why}}), "canonical risk match changed: "+sample.Name)
+		require(encoded(hits) == encoded([]map[string]string{{"rule": sample.Name, "why": sample.Why}}), "canonical risk wire fields changed")
+		allHits = append(allHits, hits)
+	}
+	require(len(risk.Match(rules, risk.Call{Tool: "Bash", Text: "echo okay", Root: "/work/api"})) == 0, "safe call became risky")
+	return map[string]any{"constants": constants, "rules": rules, "hits": allHits, "cut_short": risk.CutShortHit}
+}
+
+func main() {
+	require(len(os.Args) == 2, "risk contract requires a reviewed fixture")
+	data, err := os.ReadFile(os.Args[1])
+	require(err == nil, "risk fixture could not be read")
+	var expected map[string]string
+	require(json.Unmarshal(data, &expected) == nil && len(expected) == 26, "risk fixture must contain 26 reviewed translations")
+	before := snapshot()
+	rows := make([]map[string]any, 0, 39)
+	for _, sample := range specimens {
+		name, nameOK := expected[sample.Name]
+		why, whyOK := expected[sample.Why]
+		require(nameOK && whyOK && name != "" && why != "" && name != sample.Name && why != sample.Why, "risk fixture missing a translated name or explanation")
+		for _, width := range []int{4096, 40, 24} {
+			lines := app.FnRiskContractLines([]string{sample.Name}, width)
+			joined := compact(strings.Join(lines, ""))
+			require(strings.Contains(joined, compact(name)), "risk display name is untranslated: "+sample.Name)
+			require(strings.Contains(joined, compact(why)), "risk display explanation is untranslated: "+sample.Name)
+			for _, line := range lines {
+				require(ansi.StringWidth(line) <= width+2, "risk display exceeded its line width")
+			}
+			rows = append(rows, map[string]any{"name": sample.Name, "width": width, "lines": lines})
+		}
+	}
+	customRows := make([]map[string]any, 0, 3)
+	for _, name := range []string{"New window", "deletes untracked files", "User-defined approval label"} {
+		_, builtin := risk.Why(name)
+		require(!builtin, "custom fixture collided with a builtin rule name")
+		rule, err := risk.Custom(name, []string{"Bash"}, "CUSTOM_SENTINEL")
+		require(err == nil, "custom fixture regex failed")
+		hits := risk.Match([]risk.Rule{rule}, risk.Call{Tool: "Bash", Text: "echo CUSTOM_SENTINEL"})
+		require(reflect.DeepEqual(hits, []risk.Hit{{Rule: name, Why: "matches the rule " + name + " in your config"}}), "custom risk machine identity changed")
+		lines := app.FnRiskContractLines(risk.Names(hits), 4096)
+		require(strings.Contains(strings.Join(lines, ""), name), "custom risk name was translated")
+		customRows = append(customRows, map[string]any{"name": name, "lines": lines, "hits": hits})
+	}
+	after := snapshot()
+	require(encoded(before) == encoded(after), "risk rendering mutated canonical machine data")
+	checks := []string{
+		"13 builtin risk names and explanations rendered at widths 4096, 40 and 24",
+		"risk line wrapping preserves all translated text within the actual width budget",
+		"12 representative risk matches, safe call, 13 canonical identities and JSON fields remain unchanged",
+		"3 actual custom risk names retain their text, including a builtin-explanation collision",
+		"rendering leaves canonical rules, matches and cut-short marker unchanged",
+	}
+	require(json.NewEncoder(os.Stdout).Encode(map[string]any{"checks": checks, "rows": rows,
+		"custom_rows": customRows, "canonical_before": before, "canonical_after": after}) == nil, "risk report encoding failed")
+}

@@ -1,0 +1,63 @@
+#!/bin/bash
+set -euo pipefail
+source "$(dirname -- "$0")/paths.sh"
+umask 077
+
+fnt_stop() {
+    if ! fnt_running; then
+        rm -f -- "$fnt_pidfile"
+        return 0
+    fi
+    kill -TERM "$fnt_pid"
+    # Supervisor owns each user's daemon-first persistence shutdown.
+    for ((attempt=0; attempt<1200; attempt++)); do
+        if ! fnt_running; then
+            rm -f -- "$fnt_pidfile"
+            return 0
+        fi
+        sleep 0.1
+    done
+    echo "FnTuiOS is still saving sessions; inspect $fnt_log and retry stop." >&2
+    return 1
+}
+
+fnt_start() {
+    if fnt_running; then
+        "$fnt_app/bin/fntuios" health --config "$fnt_etc/gateway.json"
+        return $?
+    fi
+    [[ -s $fnt_etc/gateway.json ]] || { echo 'Missing gateway.json.' >&2; return 1; }
+    (cd -- "$fnt_app/bin" && sha256sum --status -c SHA256SUMS) || return 1
+    (
+        exec 9>&-
+        umask 077
+        exec "$fnt_app/bin/fntuios" serve --config "$fnt_etc/gateway.json"
+    ) </dev/null >> "$fnt_log" 2>&1 &
+    fnt_pid=$!
+    local stamp current
+    stamp=$(fnt_stamp "$fnt_pid") || return 1
+    printf '%s %s\n' "$fnt_pid" "$stamp" > "$fnt_pidfile"
+    chmod 600 "$fnt_pidfile"
+    for ((attempt=0; attempt<150; attempt++)); do
+        current=$(fnt_stamp "$fnt_pid") || { echo "FnTuiOS startup failed; inspect $fnt_log." >&2; return 1; }
+        [[ $current == "$stamp" ]] && kill -0 "$fnt_pid" 2>/dev/null || {
+            echo "FnTuiOS startup failed; inspect $fnt_log." >&2; return 1;
+        }
+        if [[ -S $fnt_app/app.sock ]]; then
+            if "$fnt_app/bin/fntuios" health --config "$fnt_etc/gateway.json" >/dev/null 2>&1 && fnt_running; then return 0; fi
+        fi
+        sleep 0.1
+    done
+    fnt_stop
+    echo "FnTuiOS gateway not ready; inspect $fnt_log." >&2
+    return 1
+}
+
+case "${1:-}" in
+    status) fnt_running && "$fnt_app/bin/fntuios" health --config "$fnt_etc/gateway.json" >/dev/null 2>&1 && exit 0; exit 3 ;;
+    start|stop) fnt_prepare ;;
+    *) exit 1 ;;
+esac
+exec 9> "$fnt_run/service.lock"
+flock -x 9
+case "$1" in start) fnt_start ;; stop) fnt_stop ;; esac

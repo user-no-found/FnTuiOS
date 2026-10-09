@@ -1,0 +1,728 @@
+[
+  {
+    "source": "Ctrl+H is byte 0x08. Terminals disagree about whether Backspace sends 0x08 or 0x7F, so this pair collides on some hosts and not others.",
+    "translation": "Ctrl+H 对应字节 0x08。不同终端的 Backspace 可能发送 0x08 或 0x7F，因此这两个按键在部分主机上冲突，在其他主机上则不会。",
+    "scope": "internal/config/keybind_ambiguity.go:Ambiguities:41533d0138cc:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Ctrl+[ is byte 0x1B, escape. Binding it also binds Esc, and Esc starts every escape sequence the terminal sends.",
+    "translation": "Ctrl+[ 对应转义字节 0x1B。绑定它也会绑定 Esc，而终端发送的所有转义序列都以 Esc 开始。",
+    "scope": "internal/config/keybind_ambiguity.go:Ambiguities:8c6dcd81ba76:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Ctrl+Space is the null byte, which is also Ctrl+@. Some terminals send nothing at all for it.",
+    "translation": "Ctrl+Space 对应空字节，与 Ctrl+@ 相同。部分终端按下它时不会发送任何内容。",
+    "scope": "internal/config/keybind_ambiguity.go:Ambiguities:981db35a3713:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Ctrl+J is byte 0x0A, line feed. Some terminals send it for Ctrl+Enter and a few send it for Enter.",
+    "translation": "Ctrl+J 对应换行字节 0x0A。部分终端在按下 Ctrl+Enter 时发送它，少数终端在按下 Enter 时也会发送它。",
+    "scope": "internal/config/keybind_ambiguity.go:Ambiguities:9ed24263722a:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Ctrl+I is byte 0x09, which is what Tab sends. Without disambiguation the two are one key.",
+    "translation": "Ctrl+I 对应字节 0x09，与 Tab 发送的字节相同。无法区分按键时，两者视为同一个按键。",
+    "scope": "internal/config/keybind_ambiguity.go:Ambiguities:aac98456b2e1:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Ctrl+M is byte 0x0D, carriage return, which is what Enter sends.",
+    "translation": "Ctrl+M 对应回车字节 0x0D，与 Enter 发送的字节相同。",
+    "scope": "internal/config/keybind_ambiguity.go:Ambiguities:e313168a2ede:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " This host cannot separate them, so ",
+    "translation": " 当前主机无法区分它们，因此 ",
+    "scope": "internal/config/keybind_ambiguity.go:AmbiguityVerdict:0503b0b52e48:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " also binds ",
+    "translation": " 也会同时绑定 ",
+    "scope": "internal/config/keybind_ambiguity.go:AmbiguityVerdict:79e9d9d66bc4:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " are separate here. On a terminal that does not, they are one key.",
+    "translation": " 在此处可以区分。在不支持区分的终端上，两者视为同一个按键。",
+    "scope": "internal/config/keybind_ambiguity.go:AmbiguityVerdict:8f251ac21fa5:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " are the same binding.",
+    "translation": " 使用同一个绑定。",
+    "scope": "internal/config/keybind_ambiguity.go:AmbiguityVerdict:9137f5dc3c4d:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " This terminal does not separate these keys, so binding ",
+    "translation": " 此终端无法区分这些按键，因此绑定 ",
+    "scope": "internal/config/keybind_ambiguity.go:AmbiguityVerdict:b4f6a06fd731:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " This terminal reports disambiguated keys, so ",
+    "translation": " 此终端会报告可区分的按键，因此 ",
+    "scope": "internal/config/keybind_ambiguity.go:AmbiguityVerdict:c34d013c8510:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Function keys and letters rather than control chords, so it collides with tuios rarely.",
+    "translation": "主要使用功能键和字母键，而非 Ctrl 组合键，因此很少与 tuios 冲突。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:01778104fe9d:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "emacs treats ctrl+x and ctrl+c as prefixes, so taking either one away removes a large part of the program.",
+    "translation": "emacs 将 ctrl+x 和 ctrl+c 用作前缀键，因此截获其中任意一个都会导致大量功能无法使用。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:03eb2f8a5884:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "yazi / ranger / mc",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:05c0229ca749:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name yazi / ranger / mc; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "window commands",
+    "translation": "窗口命令",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:0752d05c1230:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "session mode",
+    "translation": "会话模式",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:07c4ea9cc3c1:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "move down",
+    "translation": "下移",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:08bc837a975b:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "half page up",
+    "translation": "向上半页",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:0ddcacf2fa8d:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "half page up",
+    "translation": "向上半页",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:0ddcacf2fa8d:2",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "help",
+    "translation": "帮助",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:106a5842fc5f:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "screen's prefix is ctrl+a, which is also readline's start-of-line.",
+    "translation": "screen 的前缀键为 ctrl+a，readline 也用它跳到行首。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:10beb24997c3:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "GNU screen",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:1226ad70df0d:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name GNU screen; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "kill to start of line",
+    "translation": "剪切到行首",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:1b9cde99a638:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "vim binds most of the control range. ctrl+i is the one worth knowing: it is Tab's byte, so a terminal that does not disambiguate cannot tell them apart.",
+    "translation": "vim 绑定了大多数控制键。尤其要注意 ctrl+i：它与 Tab 发送相同字节，不支持区分按键的终端无法分辨两者。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:1ed8bdc3b51e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "cancel",
+    "translation": "取消",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:2374d91794b7:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "search",
+    "translation": "搜索",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:241932906782:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "tmux's default prefix is the same key as tuios's. Nested, the outer one wins and the inner multiplexer is unreachable.",
+    "translation": "tmux 的默认前缀键与 tuios 相同。嵌套运行时，外层会先截获按键，内层终端复用器便无法接收前缀键。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:275091e8c353:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "htop",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:275c60bb296f:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name htop; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "resize mode",
+    "translation": "调整尺寸模式",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:27ce8c37f91e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "zellij",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:2aba4e52c86c:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name zellij; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "kill line",
+    "translation": "剪切到行尾",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:2df77f7a46f3:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity. In this occurrence emacs ctrl+k runs kill-line, which cuts from the cursor to the end of the line."
+  },
+  {
+    "source": "jump forward (the same byte as Tab)",
+    "translation": "向前跳转（与 Tab 发送相同字节）",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:300191b22331:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "prefix, in wlterm -multi only",
+    "translation": "前缀键，仅用于 wlterm -multi",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:310161e75d8f:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "history back",
+    "translation": "上一条历史记录",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:35cc1e71dd7a:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "write out",
+    "translation": "保存文件",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:38335885f375:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "vim / neovim",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:3bfc6530198d:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name vim / neovim; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "jump back",
+    "translation": "向后跳转",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:3e0c83164123:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "yank",
+    "translation": "粘贴剪切内容",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:45f1b9fc8fd5:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "fzf is usually reached through a shell widget, so its keys are live for as long as the picker is up and not before.",
+    "translation": "fzf 通常通过命令行组件打开，其按键仅在选择器打开期间生效，打开前不会生效。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:48d7ece43597:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "wlterm",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:49d3114e3dbb:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name wlterm; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "keyword completion",
+    "translation": "关键词补全",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:4b25bdb86082:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "keyword completion",
+    "translation": "关键词补全",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:4b25bdb86082:2",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "move up",
+    "translation": "上移",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:4b6bad1ea490:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "readline (bash, zsh, and most REPLs)",
+    "translation": "readline（bash、zsh 及大多数交互式解释器）",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:50103b78bc5c:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "prefix (every tmux command starts here)",
+    "translation": "前缀键（所有 tmux 命令都从此开始）",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:521eb032db2f:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "pane mode",
+    "translation": "窗格模式",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:5980c4529dfc:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "prefix (every screen command starts here)",
+    "translation": "前缀键（所有 screen 命令都从此开始）",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:5c83b40d702c:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "File managers lean on plain letters, which terminal mode forwards untouched.",
+    "translation": "文件管理器主要使用普通字母键，终端模式会原样转发这些按键。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:5d4b7d2cc2a5:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "incremental search",
+    "translation": "增量搜索",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6026645f7ff4:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "kill previous word",
+    "translation": "剪切前一个单词",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6253300efd93:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "accept the autosuggestion",
+    "translation": "接受自动建议",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:65a3884f6dca:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "transpose characters",
+    "translation": "交换相邻字符",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6937aac581e3:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "tab mode",
+    "translation": "选项卡模式",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6bf4d4b2d9c9:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "start of line",
+    "translation": "行首",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6e2b24aa6cd5:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "start of line",
+    "translation": "行首",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6e2b24aa6cd5:2",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "fish's ctrl+f is the autosuggestion, which is the thing people notice missing first.",
+    "translation": "fish 使用 ctrl+f 接受自动建议，这通常是按键被截获后最先被发现无法使用的功能。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:6f950a5cbc27:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "nano's whole command set is control chords, and it prints them along the bottom, so a stolen one is visibly broken.",
+    "translation": "nano 的所有命令都使用 Ctrl 组合键，并显示在底部，因此按键被截获后，功能失效会十分明显。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:706f5d7f1a86:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "search / scroll mode",
+    "translation": "搜索/滚动模式",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:72061064314a:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "end of line",
+    "translation": "行尾",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:7655a5b47b16:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "end of line",
+    "translation": "行尾",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:7655a5b47b16:2",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "redo",
+    "translation": "重做",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:77276c72c008:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "lock the whole keyboard",
+    "translation": "锁定全部按键",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:7af66a240b8d:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "history search",
+    "translation": "搜索历史记录",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:88a4e325580c:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "reverse history search",
+    "translation": "反向搜索历史记录",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:8dc7031f6dfc:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "help prefix",
+    "translation": "帮助前缀键",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:905fa48cf40d:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "emacs",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:9dc3436295db:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name emacs; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "The default single-app mode has no prefix and sends every key to the app. A compositor in a pane also wants key releases.",
+    "translation": "默认的单应用模式没有前缀键，会将所有按键传给应用。在窗格中运行的合成器还需要接收按键释放事件。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:9e29d1130eee:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "clear screen",
+    "translation": "清屏",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:9e8fd728c2d8:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "history forward",
+    "translation": "下一条历史记录",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:a12c49d88ebf:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "less binds ctrl+b to page back, so a leader on ctrl+b is felt in every man page.",
+    "translation": "less 将 ctrl+b 用于返回上一页，因此将 ctrl+b 设为前缀键会影响所有 man 手册页的浏览。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:a1a45b1ef139:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "select all",
+    "translation": "全选",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:a36fc761262f:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "file widget",
+    "translation": "文件选择组件",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:a3f8885ff665:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "the C-c prefix (mode-specific commands)",
+    "translation": "C-c 前缀键（当前模式的命令）",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:a4b456f8719c:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "tapped twice, quits wlterm",
+    "translation": "连按两次退出 wlterm",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:a9d4252b6748:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "half page down",
+    "translation": "向下半页",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:adad30b143ee:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "half page down",
+    "translation": "向下半页",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:adad30b143ee:2",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "tmux",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:adb519257aeb:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name tmux; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "kill to end of line",
+    "translation": "剪切到行尾",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:af43c4f63628:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "fish",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:b474a99a2705:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name fish; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "less / man / git pager",
+    "translation": "less / man / git 分页器",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:c5aa19af36aa:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "page forward",
+    "translation": "下一页",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:c60d27bddc31:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "zellij claims a row of bare ctrl+letter chords rather than one prefix, so it collides with more of tuios than tmux does.",
+    "translation": "zellij 使用一组 ctrl+字母组合键，而非单个前缀键，因此比 tmux 更容易与 tuios 的按键冲突。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:ca301d3d7f4c:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "the C-x prefix (half of emacs lives here)",
+    "translation": "C-x 前缀键（emacs 的大量功能都从此开始）",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:d23b8dd33b35:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "refresh",
+    "translation": "刷新",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:d6cc0a088c07:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "cut line",
+    "translation": "剪切当前行",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:d9a932394d8b:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "exit",
+    "translation": "退出",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:e596899f114b:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "end of input",
+    "translation": "结束输入",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:e6d428a02096:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "visual block",
+    "translation": "块选择",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:ec1393ea1bfe:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "page back",
+    "translation": "上一页",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:ec6a07f9704e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Every readline program shares this set, so a tuios binding on one of these keys is felt in the shell and in every REPL launched from it.",
+    "translation": "所有使用 readline 的程序都共用这组按键，因此 tuios 绑定其中任意一个，都会影响命令行及其中启动的所有交互式解释器。",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:ee496cee866d:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "history widget",
+    "translation": "历史记录选择组件",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:ef4327c654c2:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "fzf",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:efdb464cc861:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name fzf; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "history for the current token",
+    "translation": "当前输入片段的历史记录",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:f0f12661d219:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "increment number",
+    "translation": "增加数字",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:f64eb236e4b4:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "nano",
+    "decision": "keep",
+    "scope": "internal/config/keybind_guest.go:GuestPrograms:f7a5936c485e:1",
+    "reason": "GuestPrograms.Name displays the exact external program or program-family name nano; preserve recognizable product/executable spellings. This exception does not apply to the program key descriptions or explanatory notes."
+  },
+  {
+    "source": "Start a prefix chord",
+    "translation": "开始前缀组合键",
+    "scope": "internal/config/keybind_guest.go:KeybindRegistry.TerminalModeSwallowed:59b761171f04:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "No key press matches this key.",
+    "translation": "没有任何按键事件能匹配此按键。",
+    "scope": "internal/config/keybind_report.go:KeybindRegistry.KeyProblems:a3df1b84a742:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Derived from tuios's own keybind registry and dispatch order. If this is wrong, tuios has a bug.",
+    "translation": "依据 tuios 自身的快捷键注册表和分发顺序得出。若结果有误，说明 tuios 存在缺陷。",
+    "scope": "internal/config/keybind_report.go:KeybindRegistry.Report:7f5d471f20f0:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Read from the pane when this report was built. True then, and possibly stale now.",
+    "translation": "在生成此报告时从窗格读取。当时有效，当前可能已过时。",
+    "scope": "internal/config/keybind_report.go:KeybindRegistry.Report:cfabc2f69390:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "A fixed list of what these programs bind by default. Nothing was detected. If you rebound the program, this entry is wrong for you.",
+    "translation": "这些程序默认快捷键的固定参考列表，未进行实际检测。若您已修改程序的快捷键，此条目便不适用于您。",
+    "scope": "internal/config/keybind_report.go:KeybindRegistry.Report:f904154c463a:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": " is the foreground process in this pane",
+    "translation": " 是此窗格的前台进程",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:033fb4916918:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "this terminal reports disambiguated keys, so Ctrl+I, Ctrl+M and Ctrl+[ are separable from Tab, Enter and Esc",
+    "translation": "此终端会报告可区分的按键，因此 Ctrl+I、Ctrl+M 和 Ctrl+[ 可以分别与 Tab、Enter 和 Esc 区分",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:04c0fa066043:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "this terminal does not separate these keys. Ctrl+I is Tab, Ctrl+M is Enter and Ctrl+[ is Esc",
+    "translation": "此终端无法区分这些按键。Ctrl+I 等同于 Tab，Ctrl+M 等同于 Enter，Ctrl+[ 等同于 Esc",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:115c8b51ea65:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "a full-screen program is drawing in this pane. It probably wants most of the keyboard",
+    "translation": "全屏程序正在此窗格中绘制内容，可能需要接收大多数按键",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:1ae5454f6a0e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Host keyboard",
+    "translation": "主机键盘",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:3a50a68482a8:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Host keyboard",
+    "translation": "主机键盘",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:3a50a68482a8:2",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "the program in this pane uses the kitty keyboard protocol. It asked for keys tuios must not take",
+    "translation": "此窗格中的程序使用 kitty 键盘协议，并请求接收 tuios 不应截获的按键",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:4706f0485619:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "something beyond the shell is running, but its name could not be read",
+    "translation": "正在运行命令行之外的程序，但无法读取其名称",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:4e86c119f566:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Guest keyboard",
+    "translation": "窗格程序键盘",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:8675a7594d2e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Alt screen",
+    "translation": "备用屏幕",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:8e4133cf089c:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": ". The program list has an entry for ",
+    "translation": "。程序参考列表中有对应条目：",
+    "scope": "internal/config/keybind_report.go:PaneFacts.Observations:be04b753c26e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Mailbox",
+    "translation": "消息箱",
+    "scope": "internal/config/keybind_scopes.go:Scopes:0a461c04dcd1:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "Global",
+    "translation": "全局",
+    "scope": "internal/config/keybind_scopes.go:Scopes:a258b30f88c3:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "the leader key. Set keybindings.leader_key to move it",
+    "translation": "前缀键。请设置 keybindings.leader_key 来更改它",
+    "scope": "internal/config/keybind_unbind.go:KeybindRegistry.StillHeldBy:147442e32a26:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": ", which is built in and not configurable",
+    "translation": "，此按键为内置设置，无法配置",
+    "scope": "internal/config/keybind_unbind.go:KeybindRegistry.StillHeldBy:795873d48870:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "%s keeps its other keys.",
+    "translation": "%s 保留其他按键。",
+    "scope": "internal/config/validation.go:DroppedKey.Outcome:23a7d113542e:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "%s has no key, because its default key runs %s.",
+    "translation": "%s 没有按键，因为其默认按键会运行 %s。",
+    "scope": "internal/config/validation.go:DroppedKey.Outcome:23b6f75f0ec5:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "%s uses its default key, %s.",
+    "translation": "%s 使用默认按键 %s。",
+    "scope": "internal/config/validation.go:DroppedKey.Outcome:8cbfe804e74a:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "%s has no key.",
+    "translation": "%s 没有按键。",
+    "scope": "internal/config/validation.go:DroppedKey.Outcome:ec4ba408b1c7:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  },
+  {
+    "source": "The leader is %s until you correct it.",
+    "translation": "更正前，前缀键使用 %s。",
+    "scope": "internal/config/validation.go:DroppedKey.Outcome:ef655e161650:1",
+    "reason": "Reviewed keyboard report display text, key-use explanation or scope label. Translate user-facing prose only; preserve shortcut/key names, byte values, program names, arguments and underlying protocol/configuration identity."
+  }
+]

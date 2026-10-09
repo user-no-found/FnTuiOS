@@ -1,0 +1,17 @@
+package session
+
+// ValidBrowserImage uses the daemon's own signature and size policy. MIME
+// claims and client-provided names never choose the saved file's extension.
+func ValidBrowserImage(data []byte) bool {
+	return len(data) <= PasteImageMaxBytes && sniffImage(data) != ""
+}
+
+// BrowserImageAlive rejects a delayed paste after the daemon connection ends.
+func (c *TUIClient) BrowserImageAlive() bool {
+	select {
+	case <-c.done:
+		return false
+	default:
+		return true
+	}
+}

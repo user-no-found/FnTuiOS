@@ -1,0 +1,632 @@
+[
+  {
+    "source": "Add master",
+    "translation": "增加主窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Add/remove master",
+    "translation": "增加/减少主窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Agents",
+    "translation": "智能体",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Agents settings",
+    "translation": "智能体设置",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Cancel",
+    "translation": "取消",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Close session",
+    "translation": "关闭会话",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Close window",
+    "translation": "关闭窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Command palette",
+    "translation": "命令面板",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Copy mode",
+    "translation": "复制模式",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Copy/paste image/buffer",
+    "translation": "复制/粘贴图片/缓冲区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Create window",
+    "translation": "新建窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Debug",
+    "translation": "调试",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Detach session",
+    "translation": "分离会话",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Equalize splits",
+    "translation": "均分拆分区域",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Find a pane",
+    "translation": "查找窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus master",
+    "translation": "聚焦主窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus pane",
+    "translation": "聚焦窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus pane down",
+    "translation": "聚焦下方窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus pane left",
+    "translation": "聚焦左侧窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus pane right",
+    "translation": "聚焦右侧窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus pane up",
+    "translation": "聚焦上方窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Focus sidebar",
+    "translation": "聚焦侧边栏",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Help",
+    "translation": "帮助",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Hints",
+    "translation": "提示",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Hints, labels",
+    "translation": "提示、标签",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Inbox",
+    "translation": "收件箱",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Inbox: mail",
+    "translation": "收件箱：消息",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Jump to window",
+    "translation": "跳转到窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Keybindings",
+    "translation": "快捷键",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Launcher",
+    "translation": "启动器",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Layout",
+    "translation": "布局",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Load layout",
+    "translation": "加载布局",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Menus",
+    "translation": "菜单",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Minimize",
+    "translation": "最小化",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Minimize focused window",
+    "translation": "最小化当前窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Modes",
+    "translation": "模式",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Move master to next side",
+    "translation": "切换主窗格位置",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Move window to workspace",
+    "translation": "移动窗口到工作区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Multi copy (%d)",
+    "translation": "多窗格复制（%d）",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration. %d counts selected panes; retain the single numeric format argument."
+  },
+  {
+    "source": "Multi copy (%d)/paste image/buffer",
+    "translation": "多窗格复制（%d）/粘贴图片/缓冲区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration. %d counts selected panes; retain the single numeric format argument."
+  },
+  {
+    "source": "New window",
+    "translation": "新建窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Newest finished",
+    "translation": "最近完成的轮次",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration. JumpToNewestFinished selects unseen AttentionFinished turns by finishing revision; does not claim the whole agent is finished."
+  },
+  {
+    "source": "Newest message",
+    "translation": "最新消息",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Next session",
+    "translation": "下一个会话",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Next window",
+    "translation": "下一个窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Next/prev window",
+    "translation": "下一个/上一个窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Oldest waiting",
+    "translation": "最早待处理项",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration. JumpToNextAttention selects the oldest item needing the user, including mail and questions; does not restrict the label to approval requests."
+  },
+  {
+    "source": "Open tape manager",
+    "translation": "打开自动化脚本管理器",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Other",
+    "translation": "其他",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Pane labels",
+    "translation": "窗格标签",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Panes",
+    "translation": "窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Paste buffer",
+    "translation": "粘贴缓冲区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Paste buffers",
+    "translation": "粘贴缓冲区列表",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Paste image",
+    "translation": "粘贴图片",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Prev/next session",
+    "translation": "上一个/下一个会话",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Previous session",
+    "translation": "上一个会话",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Previous window",
+    "translation": "上一个窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Quit application",
+    "translation": "退出应用",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Quit menu",
+    "translation": "退出菜单",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Remove master",
+    "translation": "减少主窗格",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Rename window",
+    "translation": "重命名窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Rename workspace",
+    "translation": "重命名工作区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Resize focused window height (%)",
+    "translation": "调整当前窗口高度（%）",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Resize focused window width (%)",
+    "translation": "调整当前窗口宽度（%）",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Restore all",
+    "translation": "恢复全部窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Restore window",
+    "translation": "恢复窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Restore window (%d minimized)",
+    "translation": "恢复窗口（%d 个已最小化）",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration. %d counts minimized windows; retain the single numeric format argument."
+  },
+  {
+    "source": "Review changes",
+    "translation": "审阅更改",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Review project tape",
+    "translation": "审阅项目自动化脚本",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Rotate split",
+    "translation": "旋转拆分方向",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Save layout",
+    "translation": "保存布局",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Scratch session",
+    "translation": "临时终端",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration. The toggle_scratch action shows/hides the built-in scratch terminal; follows the existing 临时终端 UI wording."
+  },
+  {
+    "source": "Screenshot",
+    "translation": "截图",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Scrollback browser",
+    "translation": "终端历史浏览器",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Scrollback/buffers",
+    "translation": "终端历史/缓冲区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Search files",
+    "translation": "搜索文件",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Sessions",
+    "translation": "会话",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Settings",
+    "translation": "设置",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Show last message",
+    "translation": "显示上一条消息",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Sidebar",
+    "translation": "侧边栏",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Sidebar/spotlight",
+    "translation": "侧边栏/聚光灯",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Sidebar/spotlight off",
+    "translation": "侧边栏/关闭聚光灯",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Snap window to a corner",
+    "translation": "将窗口贴靠到角落",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Split horizontal",
+    "translation": "水平拆分",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Split vertical",
+    "translation": "垂直拆分",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Spotlight",
+    "translation": "聚光灯",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Spotlight off",
+    "translation": "关闭聚光灯",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Start recording",
+    "translation": "开始录制",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Stop recording",
+    "translation": "停止录制",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Swap with master",
+    "translation": "与主窗格交换",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Switch to workspace",
+    "translation": "切换到工作区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Tape",
+    "translation": "自动化脚本",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle animations",
+    "translation": "切换动画",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle cache statistics",
+    "translation": "切换缓存统计",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle log viewer",
+    "translation": "切换日志查看器",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle showkeys overlay",
+    "translation": "切换按键显示层",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle tiling",
+    "translation": "切换平铺",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle tiling mode",
+    "translation": "切换平铺模式",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Toggle zoom",
+    "translation": "切换聚焦放大",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Tools",
+    "translation": "工具",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Window",
+    "translation": "窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Window mode",
+    "translation": "窗口模式",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Windows",
+    "translation": "窗口",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Workspace",
+    "translation": "工作区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  },
+  {
+    "source": "Workspaces",
+    "translation": "工作区",
+    "scope": "internal/config/whichkey_menu.go",
+    "reason": "Reviewed native prefix-menu display text; applies only to descriptions and titles projected for display, preserving key labels, action IDs and canonical configuration."
+  }
+]

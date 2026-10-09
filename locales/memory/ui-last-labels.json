@@ -1,0 +1,21 @@
+[
+{"source":" of ","translation":" / ","scope":"internal/app/inbox_reply.go"},
+{"source":"close","translation":"关闭","scope":"internal/app/log_viewer.go"},
+{"source":"cancel","translation":"取消","scope":"internal/app/multicopy_render.go"},
+{"source":"quit","translation":"退出","scope":"internal/app/multicopy_render.go"},
+{"source":"wake","translation":"重新显示","scope":"internal/app/render_inbox.go"},
+{"source":"snooze","translation":"稍后处理","scope":"internal/app/render_inbox.go"},
+{"source":"save","translation":"保存","scope":"internal/app/render_rename.go"},
+{"source":"search","translation":"搜索","scope":"internal/app/render_settings.go"},
+{"source":"select","translation":"选择","scope":"internal/app/render_sidebar_editor.go"},
+{"source":"rename","translation":"重命名","scope":"internal/app/render_workspace_switcher.go"},
+{"source":"files","translation":"文件","scope":"internal/app/review_compare.go"},
+{"source":"move","translation":"移动","scope":"internal/app/settings_agents.go"},
+{"source":"run","translation":"运行","scope":"internal/app/settings_hosts.go"},
+{"source":"agent","translation":"智能体","scope":"internal/app/sidebar_strip.go"},
+{"source":"delete","translation":"删除","scope":"internal/app/tapemanager.go"},
+{"source":"shell","translation":"命令行","scope":"internal/app/tooltip_rail.go"},
+{"source":"terminal","translation":"终端","scope":"internal/app/tooltip_rail.go"},
+{"source":"pane","translation":"窗格","scope":"internal/app/paste_buffers.go"},
+{"source":"buffers","decision":"keep","scope":"internal/app/paste_buffers.go","reason":"Internal paste-buffer overlay kind identifier used for hit routing."}
+]
