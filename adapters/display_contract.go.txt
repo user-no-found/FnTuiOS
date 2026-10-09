@@ -1,0 +1,107 @@
+package main
+
+import (
+ "encoding/json"
+ "fmt"
+ "os"
+ "reflect"
+ "sort"
+ "strings"
+ "github.com/Gaurav-Gosain/tuios/internal/config"
+ "github.com/Gaurav-Gosain/tuios/internal/app"
+)
+
+func require(ok bool, message string) { if !ok { fmt.Fprintln(os.Stderr, message); os.Exit(1) } }
+func snapshot(value any) string { data, err := json.Marshal(value); if err != nil { panic(err) }; return string(data) }
+
+func main() {
+ expected := map[string]string{}
+ if err := json.NewDecoder(os.Stdin).Decode(&expected); err != nil { panic(err) }
+ checks := []string{}
+ cfg := config.DefaultConfig()
+ registry := config.NewKeybindRegistry(cfg)
+ originalTables := snapshot(config.GuestPrograms)
+ rawReport := snapshot(registry.Report(config.PaneFacts{Command:"tmux", HasForeground:true}))
+ rawBindings := snapshot(registry.Bindings())
+ prefixCases := 0
+ countChecks := 0
+ customRows := 0
+ for _, text:=range []string{"New window","Open settings"} {
+  require(app.FnDisplayProbeBinding("prefix_new_window",text)!=text,"custom-text fixture did not collide with an actual builtin translation")
+  require(app.FnDisplayProbeBinding("command:user",text)==text,"custom description collided with builtin translation")
+ }
+ for _, rebound := range []bool{false,true} {
+  current := config.DefaultConfig()
+  if rebound { current.Keybindings.PrefixMode["terminal_focus_left"] = nil }
+  current.Keybindings.Command = []config.CommandBinding{{Name:"user-help", Key:"prefix+alt+g", Command:"true", Description:"New window"}}
+  r := config.NewKeybindRegistry(current)
+  for _, prefix := range []string{"","workspace","minimize","window","layout","tape","debug"} {
+   for _, daemon := range []bool{false,true} {
+    for _, active := range []bool{false,true} {
+     state := config.MenuState{Daemon:daemon,Minimized:-1}
+     if active { state.MultiCopy=137; state.Minimized=137; state.Spotlight=true }
+     before := config.PrefixMenuGroups(r,prefix,state)
+     original := snapshot(before)
+     shown := app.FnDisplayProbePrefix(r,prefix,state)
+     require(len(before)==len(shown),"display projection changed prefix groups")
+     for i, group := range before {
+      if want, ok := expected[group.Title]; ok { require(shown[i].Title==want,"prefix title was not projected") }
+      require(len(group.Bindings)==len(shown[i].Bindings),"display projection changed prefix rows")
+      for j, binding := range group.Bindings {
+       translated := shown[i].Bindings[j]
+       require(binding.Action==translated.Action && binding.Key==translated.Key && binding.Submenu==translated.Submenu,"display projection changed canonical key/action/submenu")
+       if strings.HasPrefix(binding.Action,config.CommandActionPrefix) {
+        customRows++
+        require(translated.Description==binding.Description,"user command description was translated")
+       } else if want, ok := expected[binding.Description]; ok {
+        require(translated.Description==want,fmt.Sprintf("prefix description missing projection: %q",binding.Description))
+        if strings.Contains(binding.Description,"137") { countChecks++;require(strings.Contains(translated.Description,"137"),"multi-digit count was lost") }
+       } else if strings.Contains(binding.Description,"137") {
+        panic("dynamic count assertion had no reviewed expectation")
+       }
+      }
+     }
+     require(snapshot(config.PrefixMenuGroups(r,prefix,state))==original,"localized prefix polluted original API or its routing cache")
+     prefixCases++
+    }
+   }
+  }
+ }
+ require(countChecks>=4,"multi-digit dynamic display cases were not exercised")
+ require(customRows>0,"custom prefix row was not exercised")
+ checks=append(checks,fmt.Sprintf("%d prefix/state/rebinding cases preserve machine fields and apply reviewed labels including count 137",prefixCases))
+ shownReport := registry.FnDisplayReport(config.PaneFacts{Command:"tmux",HasForeground:true})
+ beforeReport := registry.Report(config.PaneFacts{Command:"tmux",HasForeground:true})
+ require(len(shownReport.GuestClashes)==len(beforeReport.GuestClashes),"guest projection changed clash detection")
+ for i, original := range beforeReport.GuestClashes {
+  shown := shownReport.GuestClashes[i]
+  require(shown.Key==original.Key && shown.TuiosAction==original.TuiosAction && shown.Evidence==original.Evidence && shown.Running==original.Running,"guest projection changed protocol or process matching")
+ }
+ require(snapshot(registry.Report(config.PaneFacts{Command:"tmux",HasForeground:true}))==rawReport,"localized report polluted canonical report")
+ require(snapshot(registry.Bindings())==rawBindings,"localized report polluted binding cache")
+ require(snapshot(config.GuestPrograms)==originalTables,"localized report mutated original guest table")
+ require(len(config.GuestPrograms)==len(config.FnDisplayGuestPrograms),"guest table projection changed entries")
+ for i, original := range config.GuestPrograms {
+  shown:=config.FnDisplayGuestPrograms[i]
+  require(reflect.DeepEqual(shown.Comms,original.Comms),"process match names were translated")
+  keys:=func(values map[string]string) []string { var out []string; for key:=range values {out=append(out,key)};sort.Strings(out);return out }
+  require(reflect.DeepEqual(keys(original.Keys),keys(shown.Keys)),"guest shortcut map keys were translated")
+ }
+ checks=append(checks,"original/localized/original reports and real registry caches agree; guest process names, key maps, evidence and Running classification stay canonical")
+ for _, content := range []string{"summary","title","unknown-user-token"} {
+  current:=config.DefaultConfig();current.Notify.Content=content
+  for _, title:=range []string{"Custom","Create window","My own workspace"} {
+   current.Appearance.Sidebar.Custom.Title=title
+   require(current.Appearance.Sidebar.Custom.FnDisplayResolvedTitle()==title,"explicit user sidebar title was translated")
+  }
+  before:=config.ValidateConfig(current); localized:=config.FnDisplayValidateConfig(current)
+  for _, pair:=range [][2][]config.ValidationError{{before.Errors,localized.Errors},{before.Warnings,localized.Warnings}} {
+   require(len(pair[0])==len(pair[1]),"localized validation changed validity/count")
+   for i, issue:=range pair[0] {require(issue.Field==pair[1][i].Field && issue.Key==pair[1][i].Key,"localized validation changed Field/Key identity")}
+  }
+  original:=snapshot(config.ConfigWarnings(current));config.FnDisplayConfigWarnings(current)
+  require(snapshot(config.ConfigWarnings(current))==original,"localized warnings mutated canonical configuration")
+ }
+ checks=append(checks,"default and explicit title notification enums retain validity; invalid values retain Field/Key; custom sidebar title is unchanged")
+ if err:=json.NewEncoder(os.Stdout).Encode(map[string]any{"checks":checks,"prefix_cases":prefixCases,"count_cases":countChecks,"custom_rows":customRows,"verified":true});err!=nil{panic(err)}
+}

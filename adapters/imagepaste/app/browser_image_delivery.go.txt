@@ -1,0 +1,80 @@
+package app
+
+import (
+	"context"
+	"sync"
+
+	tea "charm.land/bubbletea/v2"
+)
+
+type browserImageJob struct {
+	target   *BrowserImageTarget
+	data     []byte
+	done     func(string)
+	mu       sync.Mutex
+	running  bool
+	stop     func() bool
+	finished sync.Once
+}
+
+type browserImageResult struct {
+	job    *browserImageJob
+	result ImagePastedMsg
+}
+
+func (job *browserImageJob) complete(code string) {
+	job.finished.Do(func() {
+		if job.stop != nil {
+			job.stop()
+		}
+		job.done(code)
+	})
+}
+
+// Deliver queues validated bytes on the original model. Cancellation stops a
+// queued paste; an in-progress daemon call keeps its resource slot until it
+// returns, then discards the result without sending a path to any pane.
+func (t *BrowserImageTarget) Deliver(data []byte, done func(string)) {
+	job := &browserImageJob{target: t, data: data, done: done}
+	job.mu.Lock()
+	job.stop = context.AfterFunc(t.ctx, func() {
+		job.mu.Lock()
+		defer job.mu.Unlock()
+		job.data = nil
+		if !job.running {
+			job.complete("expired")
+		}
+	})
+	job.mu.Unlock()
+	t.bridge.send(job)
+}
+
+func (m *OS) startBrowserImage(job *browserImageJob) tea.Cmd {
+	job.mu.Lock()
+	defer job.mu.Unlock()
+	if code := job.target.valid(m); code != "" {
+		job.complete(code)
+		return nil
+	}
+	cmd := m.deliverImageCmd(job.target.window.ID, job.data)
+	job.data = nil
+	if cmd == nil {
+		job.complete("paste_failed")
+		return nil
+	}
+	job.running = true
+	return func() tea.Msg {
+		var result ImagePastedMsg
+		if job.target.ctx.Err() == nil {
+			result, _ = cmd().(ImagePastedMsg)
+		}
+		job.mu.Lock()
+		defer job.mu.Unlock()
+		job.running = false
+		if job.target.ctx.Err() != nil {
+			job.complete("expired")
+			return nil
+		}
+		return browserImageResult{job: job, result: result}
+	}
+}

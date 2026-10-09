@@ -1,0 +1,146 @@
+[
+  {
+    "source": "Preparing image paste…",
+    "translation": "正在准备粘贴图片…",
+    "scope": "browser",
+    "reason": "Image preparation status."
+  },
+  {
+    "source": "Uploading image…",
+    "translation": "正在上传图片…",
+    "scope": "browser",
+    "reason": "Image upload status."
+  },
+  {
+    "source": "Image path inserted into the original pane. Press Enter only when you are ready.",
+    "translation": "图片路径已插入原窗格。准备好后再按 Enter。",
+    "scope": "browser",
+    "reason": "Confirms the original target pane and explains that path insertion does not submit a terminal command."
+  },
+  {
+    "source": "Image paste failed. Reconnect if needed, then try again.",
+    "translation": "图片粘贴失败。必要时请重新连接，然后重试。",
+    "scope": "browser",
+    "reason": "Fixed user-facing failure without backend diagnostics."
+  },
+  {
+    "source": "Connect to a writable terminal before pasting an image.",
+    "translation": "请先连接可输入的终端，再粘贴图片。",
+    "scope": "browser",
+    "reason": "Requires a connected terminal that accepts input; avoids implying a filesystem write permission."
+  },
+  {
+    "source": "An image is already being uploaded. Wait for it to finish.",
+    "translation": "已有图片正在上传，请等待上传完成。",
+    "scope": "browser",
+    "reason": "Explains one active upload at a time."
+  },
+  {
+    "source": "The image exceeds this server's upload limit.",
+    "translation": "图片超过服务器允许上传的大小。",
+    "scope": "browser",
+    "reason": "Server upload-size limit without inventing a numeric limit."
+  },
+  {
+    "source": "The file is not a valid supported image.",
+    "translation": "文件不是有效图片，或格式不受支持。",
+    "scope": "browser",
+    "reason": "Covers invalid image data and unsupported formats."
+  },
+  {
+    "source": "The original pane has closed. Select another pane and paste again.",
+    "translation": "原窗格已关闭。请选择其他窗格，再次粘贴。",
+    "scope": "browser",
+    "reason": "Does not silently redirect an upload to the newly focused pane."
+  },
+  {
+    "source": "The image paste request expired or the connection closed. Paste again.",
+    "translation": "本次图片粘贴已超时，或连接已关闭。请再次粘贴。",
+    "scope": "browser",
+    "reason": "Request expiry or closed connection requires a new paste action."
+  },
+  {
+    "source": "The image paste request is no longer authorized. Reconnect and paste again.",
+    "translation": "本次图片粘贴的授权已失效。请重新连接后再次粘贴。",
+    "scope": "browser",
+    "reason": "Expired authorization without exposing internal tokens or protocol details."
+  },
+  {
+    "source": "This terminal is read-only. Open a writable terminal to paste an image.",
+    "translation": "此终端为只读。请打开可输入的终端，再粘贴图片。",
+    "scope": "browser",
+    "reason": "Read-only terminal state refers to terminal input, not filesystem permissions."
+  },
+  {
+    "source": "Paste an image directly into the web terminal using your browser's paste command.",
+    "translation": "请使用浏览器的粘贴命令，直接将图片粘贴到网页终端。",
+    "scope": "browser",
+    "reason": "Native image-paste guidance directs BrowserClient users to ordinary browser paste into the web terminal; no toolbar, clipboard-reading button or file picker remains."
+  },
+  {
+    "source": "Paste a PNG, JPEG, GIF or WebP image.",
+    "translation": "请粘贴 PNG、JPEG、GIF 或 WebP 图片。",
+    "scope": "browser",
+    "reason": "Direct image paste instruction; preserves supported image format names and does not suggest a removed file picker."
+  },
+  {
+    "source": "Paste image",
+    "translation": "粘贴图片",
+    "scope": "browser",
+    "reason": "Explicit image action; ordinary mixed text/image paste follows the text path."
+  },
+  {
+    "source": "Choose image",
+    "translation": "选择图片",
+    "scope": "browser",
+    "reason": "Image file picker fallback when clipboard reading is unavailable or denied."
+  },
+  {
+    "source": "Use the web page's Paste image or Choose image button to paste an image.",
+    "translation": "请使用网页上的“粘贴图片”或“选择图片”按钮来粘贴图片。",
+    "scope": "browser",
+    "reason": "BrowserClient native image-paste menu points to browser controls; NAS-local clipboard reading remains disabled."
+  },
+  {
+    "source": "Image selection cancelled.",
+    "translation": "已取消选择图片。",
+    "scope": "browser",
+    "reason": "File-picker cancellation or no selected file; distinct from an empty clipboard."
+  },
+  {
+    "source": "Paste text normally. Use Paste image to choose an image from mixed clipboard content, or choose an image file.",
+    "translation": "照常粘贴文本。剪贴板同时包含文本和图片时，可点击“粘贴图片”；也可选择图片文件。",
+    "scope": "browser",
+    "reason": "Explains the explicit image action without changing ordinary text paste behavior."
+  },
+  {
+    "source": "This connection cannot read the clipboard. Choose an image file, or paste directly into the terminal.",
+    "translation": "当前连接无法读取剪贴板。请选择图片文件，或直接在终端中粘贴。",
+    "scope": "browser",
+    "reason": "Clipboard API unavailable on the current connection, including insecure HTTP; ordinary paste events remain a separate fallback."
+  },
+  {
+    "source": "The browser or embedded page does not allow clipboard access. Allow it and retry, or choose an image file.",
+    "translation": "浏览器或当前嵌入页面不允许读取剪贴板。请检查权限后重试，或选择图片文件。",
+    "scope": "browser",
+    "reason": "Distinguishes browser or embedded-page clipboard restrictions from an insecure connection; offers an actionable file fallback."
+  },
+  {
+    "source": "This browser cannot read clipboard images. Choose an image file, or paste directly into the terminal.",
+    "translation": "此浏览器无法读取剪贴板中的图片。请选择图片文件，或直接在终端中粘贴。",
+    "scope": "browser",
+    "reason": "Browser API support failure is distinct from permission denial and native paste event support."
+  },
+  {
+    "source": "The clipboard contains no supported image. Choose an image file instead.",
+    "translation": "剪贴板中没有受支持的图片。请选择图片文件。",
+    "scope": "browser",
+    "reason": "No usable image in the clipboard; points to the file picker."
+  },
+  {
+    "source": "Choose a PNG, JPEG, GIF or WebP image.",
+    "translation": "请选择 PNG、JPEG、GIF 或 WebP 图片。",
+    "scope": "browser",
+    "reason": "Preserves supported image format names."
+  }
+]

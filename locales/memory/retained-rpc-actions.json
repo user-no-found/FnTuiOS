@@ -1,0 +1,386 @@
+[
+  {
+    "source": "paste-image",
+    "decision": "keep",
+    "scope": "internal/app/image_paste.go",
+    "reason": "Daemon RPC verb for authenticated image paste."
+  },
+  {
+    "source": "reply-approval",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go",
+    "reason": "Daemon RPC verb for responding to authorization prompts."
+  },
+  {
+    "source": "review-diff",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go",
+    "reason": "Daemon capability/RPC verb probed for review support."
+  },
+  {
+    "source": "get-approval",
+    "decision": "keep",
+    "scope": "internal/app/inbox_approvals_ext.go",
+    "reason": "Daemon RPC verb retrieving authorization/plan details."
+  },
+  {
+    "source": "mark-attention",
+    "decision": "keep",
+    "scope": "internal/app/inbox_lifecycle.go",
+    "reason": "Daemon RPC verb changing Inbox attention status."
+  },
+  {
+    "source": "list-verbs",
+    "decision": "keep",
+    "scope": "internal/app/inbox_lifecycle.go",
+    "reason": "Daemon RPC capability discovery verb."
+  },
+  {
+    "source": "peek-prompt",
+    "decision": "keep",
+    "scope": "internal/app/inbox_peek.go",
+    "reason": "Daemon RPC verb reading a pane prompt."
+  },
+  {
+    "source": "agent-activity",
+    "decision": "keep",
+    "scope": "internal/app/inbox_recap.go",
+    "reason": "Daemon RPC verb requesting agent activity recap."
+  },
+  {
+    "source": "queue-prompt",
+    "decision": "keep",
+    "scope": "internal/app/inbox_reply.go",
+    "reason": "Daemon RPC verb enqueuing a human-originated reply."
+  },
+  {
+    "source": "list-queued",
+    "decision": "keep",
+    "scope": "internal/app/inbox_reply.go",
+    "reason": "Daemon RPC verb listing queued agent messages."
+  },
+  {
+    "source": "cancel-queued",
+    "decision": "keep",
+    "scope": "internal/app/inbox_reply.go",
+    "reason": "Daemon RPC verb canceling a queued message."
+  },
+  {
+    "source": "plan",
+    "decision": "keep",
+    "scope": "internal/app/inbox_recap.go",
+    "reason": "Agent metadata lookup key; displayed plan prefix translated separately."
+  },
+  {
+    "source": "info",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go",
+    "reason": "Notification severity identifier passed to alert pipeline."
+  },
+  {
+    "source": "warning",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go",
+    "reason": "Notification severity identifier passed to alert pipeline."
+  },
+  {
+    "source": "success",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go",
+    "reason": "Notification severity identifier passed to alert pipeline."
+  },
+  {
+    "source": "error",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go",
+    "reason": "Notification severity identifier passed to alert pipeline."
+  },
+  {
+    "source": "delete-buffer",
+    "decision": "keep",
+    "scope": "internal/app/paste_buffers.go",
+    "reason": "Daemon RPC verb removing a paste buffer."
+  },
+  {
+    "source": "list-buffers",
+    "decision": "keep",
+    "scope": "internal/app/paste_buffers.go",
+    "reason": "Daemon RPC verb listing paste buffers."
+  },
+  {
+    "source": "set-buffer",
+    "decision": "keep",
+    "scope": "internal/app/paste_buffers.go",
+    "reason": "Daemon RPC verb storing a paste buffer."
+  },
+  {
+    "source": "show-buffer",
+    "decision": "keep",
+    "scope": "internal/app/paste_buffers.go",
+    "reason": "Daemon RPC verb reading paste buffer content."
+  },
+  {
+    "source": "base64",
+    "decision": "keep",
+    "scope": "internal/app/paste_buffers.go",
+    "reason": "Wire encoding identifier for paste buffer payload."
+  },
+  {
+    "source": "keep-fan",
+    "decision": "keep",
+    "scope": "internal/app/review_compare.go",
+    "reason": "Daemon RPC verb retaining a selected fan attempt."
+  },
+  {
+    "source": "compare-fan",
+    "decision": "keep",
+    "scope": "internal/app/review_compare.go",
+    "reason": "Daemon RPC verb comparing fan attempts."
+  },
+  {
+    "source": "verify-fan",
+    "decision": "keep",
+    "scope": "internal/app/review_compare.go",
+    "reason": "Daemon RPC verb verifying fan attempts."
+  },
+  {
+    "source": "send-review",
+    "decision": "keep",
+    "scope": "internal/app/review_overlay.go",
+    "reason": "Daemon RPC verb delivering review notes."
+  },
+  {
+    "source": "review-note",
+    "decision": "keep",
+    "scope": "internal/app/review_overlay.go",
+    "reason": "Daemon RPC verb editing review notes."
+  },
+  {
+    "source": "edit",
+    "decision": "keep",
+    "scope": "internal/app/review_overlay.go",
+    "reason": "reviewNoteCmd machine operation parameter editing an existing note."
+  },
+  {
+    "source": "add",
+    "decision": "keep",
+    "scope": "internal/app/review_overlay.go",
+    "reason": "reviewNoteCmd machine operation parameter adding a note."
+  },
+  {
+    "source": "remove",
+    "decision": "keep",
+    "scope": "internal/app/review_overlay.go",
+    "reason": "reviewNoteCmd machine operation parameter removing/resolving a note."
+  },
+  {
+    "source": "apply-config",
+    "decision": "keep",
+    "scope": "internal/app/settings_hosts.go",
+    "reason": "Daemon RPC verb applying host configuration."
+  },
+  {
+    "source": "set-session-accent",
+    "decision": "keep",
+    "scope": "internal/app/rename_daemon.go",
+    "reason": "Daemon RPC verb setting session accent color."
+  },
+  {
+    "source": "rename-session",
+    "decision": "keep",
+    "scope": "internal/app/window_rename.go",
+    "reason": "Daemon RPC verb renaming a session."
+  },
+  {
+    "source": "set-workspace-name",
+    "decision": "keep",
+    "scope": "internal/app/window_rename.go",
+    "reason": "Daemon RPC verb setting a workspace name."
+  },
+  {
+    "source": "set-workspace-order",
+    "decision": "keep",
+    "scope": "internal/app/workspace_order.go",
+    "reason": "Daemon RPC verb reordering workspaces."
+  },
+  {
+    "source": "resize_width_%d",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Parameterized action registry identifier for width presets."
+  },
+  {
+    "source": "resize_height_%d",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Parameterized action registry identifier for height presets."
+  },
+  {
+    "source": "switch_workspace_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before workspace number."
+  },
+  {
+    "source": "move_and_follow_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before workspace number."
+  },
+  {
+    "source": "select_window_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before window number."
+  },
+  {
+    "source": "switch_session_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before session number."
+  },
+  {
+    "source": "set_tiling_scheme_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before tiling scheme name."
+  },
+  {
+    "source": "set_master_position_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before master position name."
+  },
+  {
+    "source": "restore_minimized_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action registry identifier prefix before minimized-window number."
+  },
+  {
+    "source": "up",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Direction identifier passed to terminal focus handler."
+  },
+  {
+    "source": "down",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Direction identifier passed to terminal focus handler."
+  },
+  {
+    "source": "unsnap",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Action name registered with the dispatcher."
+  },
+  {
+    "source": "mail",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier; visible message labels translated elsewhere."
+  },
+  {
+    "source": "activate",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "kill",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "last",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "menu",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "section",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "jump_",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher prefix before row number."
+  },
+  {
+    "source": "narrow",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "collapse",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "first",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "expand",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "exit",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "widen",
+    "decision": "keep",
+    "scope": "internal/input/actions.go",
+    "reason": "Sidebar action dispatcher identifier."
+  },
+  {
+    "source": "hints",
+    "decision": "keep",
+    "scope": "internal/input/prefix_actions.go",
+    "reason": "Action name registered with prefix dispatcher."
+  },
+  {
+    "source": "workspace_prefix_switch_",
+    "decision": "keep",
+    "scope": "internal/input/prefix_actions.go",
+    "reason": "Workspace prefix action identifier before workspace number."
+  },
+  {
+    "source": "workspace_prefix_move_",
+    "decision": "keep",
+    "scope": "internal/input/prefix_actions.go",
+    "reason": "Workspace prefix action identifier before workspace number."
+  },
+  {
+    "source": "prefix_select_",
+    "decision": "keep",
+    "scope": "internal/input/prefix_actions.go",
+    "reason": "Window prefix action identifier before window number."
+  },
+  {
+    "source": "minimize_prefix_restore_",
+    "decision": "keep",
+    "scope": "internal/input/prefix_actions.go",
+    "reason": "Minimize prefix action identifier before window number."
+  }
+]

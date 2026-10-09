@@ -1,0 +1,16 @@
+{
+  "internal_hint": "Paste an image directly into the web terminal using your browser's paste command.",
+  "preparing": "Preparing image paste…",
+  "uploading": "Uploading image…",
+  "complete": "Image path inserted into the original pane. Press Enter only when you are ready.",
+  "unsupported": "Paste a PNG, JPEG, GIF or WebP image.",
+  "failed": "Image paste failed. Reconnect if needed, then try again.",
+  "disconnected": "Connect to a writable terminal before pasting an image.",
+  "busy": "An image is already being uploaded. Wait for it to finish.",
+  "too_large": "The image exceeds this server's upload limit.",
+  "invalid_image": "The file is not a valid supported image.",
+  "target_closed": "The original pane has closed. Select another pane and paste again.",
+  "expired": "The image paste request expired or the connection closed. Paste again.",
+  "unauthorized": "The image paste request is no longer authorized. Reconnect and paste again.",
+  "read_only": "This terminal is read-only. Open a writable terminal to paste an image."
+}

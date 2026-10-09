@@ -1,0 +1,171 @@
+package app
+
+import (
+	"context"
+	"crypto/rand"
+	"encoding/hex"
+	"io"
+	"strings"
+	"sync"
+	"time"
+
+	tea "charm.land/bubbletea/v2"
+	"github.com/Gaurav-Gosain/tuios/internal/session"
+	"github.com/Gaurav-Gosain/tuios/internal/terminal"
+	uv "github.com/charmbracelet/ultraviolet"
+)
+
+const browserImageMarker = "\x1b]777;fntuios-image;"
+
+type browserImageCapture struct {
+	marker string
+	ctx    context.Context
+	answer chan browserImageAnswer
+}
+
+type browserImageAnswer struct {
+	target *BrowserImageTarget
+	code   string
+}
+
+// BrowserImageBridge joins ordered terminal input to a browser's own model.
+// Only a marker registered here can capture authority; pasted escape strings
+// and pane output cannot mint upload capabilities.
+type BrowserImageBridge struct {
+	ctx     context.Context
+	send    func(tea.Msg)
+	mu      sync.Mutex
+	pending *browserImageCapture
+}
+
+// EnableBrowserImages binds the bridge before the program starts running.
+func (m *OS) EnableBrowserImages(ctx context.Context, send func(tea.Msg)) *BrowserImageBridge {
+	b := &BrowserImageBridge{ctx: ctx, send: send}
+	m.browserImages = b
+	return b
+}
+
+// Capture inserts a private marker behind prior keys and mouse events. The
+// transport must wait for this acknowledgment before writing its next input.
+func (b *BrowserImageBridge) Capture(ctx context.Context, input io.Writer) (*BrowserImageTarget, string) {
+	var raw [32]byte
+	if _, err := rand.Read(raw[:]); err != nil {
+		return nil, "unavailable"
+	}
+	req := &browserImageCapture{marker: browserImageMarker + hex.EncodeToString(raw[:]) + "\x07", ctx: ctx, answer: make(chan browserImageAnswer, 1)}
+	b.mu.Lock()
+	if b.pending != nil {
+		b.mu.Unlock()
+		return nil, "busy"
+	}
+	b.pending = req
+	b.mu.Unlock()
+	defer func() {
+		b.mu.Lock()
+		if b.pending == req {
+			b.pending = nil
+		}
+		b.mu.Unlock()
+	}()
+	writeDone := make(chan error, 1)
+	go func() { _, err := io.WriteString(input, req.marker); writeDone <- err }()
+	limit := time.NewTimer(5 * time.Second)
+	defer limit.Stop()
+	for {
+		select {
+		case result := <-req.answer:
+			return result.target, result.code
+		case err := <-writeDone:
+			if err != nil {
+				return nil, "unavailable"
+			}
+			writeDone = nil
+		case <-ctx.Done():
+			return nil, "expired"
+		case <-b.ctx.Done():
+			return nil, "expired"
+		case <-limit.C:
+			return nil, "unavailable"
+		}
+	}
+}
+
+// BrowserImageTarget is opaque browser paste authority. It never exposes the
+// attach nonce, a pane ID, or a filesystem path to the HTTP/browser layer.
+type BrowserImageTarget struct {
+	bridge                              *BrowserImageBridge
+	ctx                                 context.Context
+	window                              *terminal.Window
+	daemon                              *session.TUIClient
+	session, daemonSession, host, nonce string
+	generation                          uint64
+	epoch                               uint64
+}
+
+func (m *OS) captureBrowserImage(b *BrowserImageBridge, ctx context.Context) (*BrowserImageTarget, string) {
+	if !m.BrowserClient || !m.IsDaemonSession || m.DaemonClient == nil || m.inboxNonce() == "" {
+		return nil, "unavailable"
+	}
+	w := m.GetFocusedWindow()
+	if w == nil {
+		return nil, "target_closed"
+	}
+	if w.CopyModeVisible() {
+		return nil, "read_only"
+	}
+	t := &BrowserImageTarget{bridge: b, ctx: ctx, window: w, daemon: m.DaemonClient,
+		session: m.SessionName, daemonSession: m.DaemonClient.SessionName(), host: m.AttachedHost,
+		nonce: m.inboxNonce(), generation: m.DaemonClient.AttachGeneration(), epoch: m.browserImageEpoch}
+	return t, t.valid(m)
+}
+
+func (t *BrowserImageTarget) valid(m *OS) string {
+	if t.ctx.Err() != nil || t.bridge.ctx.Err() != nil {
+		return "expired"
+	}
+	if m.browserImages != t.bridge || !m.BrowserClient || !m.IsDaemonSession || m.DaemonClient != t.daemon ||
+		m.SessionName != t.session || m.AttachedHost != t.host || m.inboxNonce() != t.nonce || m.browserImageEpoch != t.epoch || !t.daemon.BrowserImageAlive() ||
+		t.daemon.AttachGeneration() != t.generation || t.daemon.SessionName() != t.daemonSession {
+		return "target_changed"
+	}
+	if m.windowByID(t.window.ID) != t.window {
+		return "target_closed"
+	}
+	if t.window.CopyModeVisible() {
+		return "read_only"
+	}
+	return ""
+}
+
+func (m *OS) handleBrowserImage(msg tea.Msg) (bool, tea.Cmd) {
+	switch msg := msg.(type) {
+	case uv.UnknownOscEvent:
+		value := string(msg)
+		if !strings.HasPrefix(value, browserImageMarker) {
+			return false, nil
+		}
+		b := m.browserImages
+		if b == nil || len(value) != len(browserImageMarker)+65 {
+			return true, nil
+		}
+		b.mu.Lock()
+		req := b.pending
+		if req != nil && value == req.marker {
+			b.pending = nil
+			target, code := m.captureBrowserImage(b, req.ctx)
+			req.answer <- browserImageAnswer{target: target, code: code}
+		}
+		b.mu.Unlock()
+		return true, nil
+	case *browserImageJob:
+		return true, m.startBrowserImage(msg)
+	case browserImageResult:
+		code := msg.job.target.valid(m)
+		if code == "" && !m.applyImagePasted(msg.result) {
+			code = "paste_failed"
+		}
+		msg.job.complete(code)
+		return true, nil
+	}
+	return false, nil
+}

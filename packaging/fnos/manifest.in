@@ -1,0 +1,10 @@
+appname=@APP_ID@
+version=@VERSION@
+display_name=@DISPLAY_NAME@
+desc=@DESCRIPTION@
+source=thirdparty
+platform=@PLATFORM@
+desktop_uidir=ui
+desktop_applaunchname=@APP_ID@.main
+ctl_stop=true
+checkport=false

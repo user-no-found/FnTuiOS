@@ -1,0 +1,141 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"io"
+	"strconv"
+	"strings"
+	"sync"
+	"sync/atomic"
+	"time"
+
+	tea "charm.land/bubbletea/v2"
+	"github.com/Gaurav-Gosain/sip"
+	"github.com/Gaurav-Gosain/tuios/internal/app"
+	"github.com/Gaurav-Gosain/tuios/internal/imageupload"
+	"github.com/Gaurav-Gosain/tuios/internal/session"
+)
+
+var browserImageStore = imageupload.New(session.ValidBrowserImage)
+var browserImageClients sync.Map
+var browserImageSequence atomic.Uint64
+
+type browserImageClient struct {
+	bridge *app.BrowserImageBridge
+	owner  string
+	mu     sync.Mutex
+	id     string
+	cancel context.CancelFunc
+}
+
+type browserImageRequest struct {
+	Type string `json:"type"`
+	ID   string `json:"id"`
+}
+
+func installBrowserImages(cfg *sip.Config) {
+	cfg.Routes = append(cfg.Routes, sip.Route{Pattern: "/image-paste/", Handler: browserImageStore})
+	cfg.InputControl = func(sess sip.SessionIO, data []byte, reply func([]byte)) bool {
+		return browserImageControl(sess, data, reply, cfg.ReadOnly)
+	}
+}
+
+func registerBrowserImages(sess sip.Session, model *app.OS, program *tea.Program) {
+	client := &browserImageClient{bridge: model.EnableBrowserImages(sess.Context(), program.Send),
+		owner: strconv.FormatUint(browserImageSequence.Add(1), 10)}
+	browserImageClients.Store(sess.Context(), client)
+	context.AfterFunc(sess.Context(), func() {
+		browserImageClients.Delete(sess.Context())
+		client.mu.Lock()
+		defer client.mu.Unlock()
+		if client.cancel != nil {
+			client.cancel()
+		}
+	})
+}
+
+func browserImageControl(sess sip.SessionIO, data []byte, reply func([]byte), readOnly bool) bool {
+	req := browserImageRequest{}
+	send := func(kind, id, code string) {
+		payload, _ := json.Marshal(map[string]string{"type": kind, "id": id, "code": code})
+		reply(payload)
+	}
+	decoder := json.NewDecoder(strings.NewReader(string(data)))
+	decoder.DisallowUnknownFields()
+	var extra any
+	if len(data) > 256 || decoder.Decode(&req) != nil || decoder.Decode(&extra) != io.EOF || !browserImageRequestID(req.ID) ||
+		(req.Type != "image-begin" && req.Type != "image-cancel") {
+		send("image-error", "", "invalid_request")
+		return true
+	}
+	if readOnly {
+		send("image-error", req.ID, "read_only")
+		return true
+	}
+	value, ok := browserImageClients.Load(sess.Context())
+	if !ok {
+		send("image-error", req.ID, "unavailable")
+		return false
+	}
+	client := value.(*browserImageClient)
+	client.mu.Lock()
+	if req.Type == "image-cancel" {
+		if client.id == req.ID && client.cancel != nil {
+			client.cancel()
+		}
+		client.mu.Unlock()
+		return true
+	}
+	if client.id != "" {
+		client.mu.Unlock()
+		send("image-error", req.ID, "busy")
+		return true
+	}
+	ctx, cancel := context.WithTimeout(sess.Context(), 100*time.Second)
+	client.id, client.cancel = req.ID, cancel
+	client.mu.Unlock()
+	finish := func(code string) {
+		client.mu.Lock()
+		if client.id == req.ID {
+			client.id, client.cancel = "", nil
+		}
+		client.mu.Unlock()
+		cancel()
+		kind := "image-error"
+		if code == "" {
+			kind = "image-done"
+		}
+		send(kind, req.ID, code)
+	}
+	target, code := client.bridge.Capture(ctx, sess.InputWriter())
+	if code != "" {
+		finish(code)
+		return code != "unavailable"
+	}
+	token, err := browserImageStore.Issue(ctx, client.owner, target.Deliver, finish)
+	if err != nil {
+		code = "busy"
+		if ctx.Err() != nil {
+			code = "expired"
+		}
+		finish(code)
+		return true
+	}
+	payload, _ := json.Marshal(map[string]any{"type": "image-ready", "id": req.ID, "token": token,
+		"expires_in": int(imageupload.Lifetime.Seconds()), "max_bytes": imageupload.MaxBytes})
+	reply(payload)
+	return true
+}
+
+func browserImageRequestID(id string) bool {
+	if len(id) == 0 || len(id) > 64 {
+		return false
+	}
+	for _, c := range id {
+		if c != '-' && c != '_' && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') {
+			return false
+		}
+	}
+	return true
+}

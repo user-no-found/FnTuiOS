@@ -1,0 +1,13 @@
+[
+  {"source":"[notifications.agent] notify: a browser has no desktop ","translation":"[notifications.agent] notify：浏览器不支持桌面","scope":"internal/app/browser_client.go","reason":"Client capability notice; preserves the actionable configuration table and field names."},
+  {"source":"notifications, so tuios does not send them here. The dock message still appears.","translation":"通知，因此 tuios 不会在此发送桌面通知。停靠栏仍会显示消息。","scope":"internal/app/browser_client.go","reason":"Completes the browser notification capability notice without calling the configuration invalid."},
+  {"source":"[notifications.agent] sound: the cue plays on the machine that runs ","translation":"[notifications.agent] sound：提示音会在运行 ","scope":"internal/app/browser_client.go","reason":"Explains the host on which the configured sound plays; preserves configuration keys."},
+  {"source":"the SSH server, not where you are. Set sound_mode = \"bell\" to ring the ","translation":"SSH 服务器的主机上播放，而非你当前使用的主机。设置 sound_mode = \"bell\" 则让","scope":"internal/app/browser_client.go","reason":"Distinguishes the SSH server from the viewing device and preserves the exact configuration assignment."},
+  {"source":"client terminal instead.","translation":"客户端终端响铃。","scope":"internal/app/browser_client.go","reason":"Completes the SSH sound-mode remedy."},
+  {"source":"setting","translation":"项设置","scope":"internal/app/update.go","reason":"Counted noun in the client capability notice; Chinese plural adapter keeps the same form for one or more."},
+  {"source":"works","translation":"在此处","scope":"internal/app/update.go","reason":"Singular English morphology fragment; joins the setting count and following translated notice clause."},
+  {"source":"work","translation":"在此处","scope":"internal/app/update.go","reason":"Plural English morphology fragment; Chinese uses the same clause for every count."},
+  {"source":" differently here, see the log viewer","translation":"的行为有所不同，请查看日志","scope":"internal/app/update.go","reason":"Completes the Chinese notice after the count and 在此处; directs the user to the in-app log without implying invalid settings."},
+  {"source":"INFO","decision":"keep","scope":"internal/app/update.go","reason":"Canonical diagnostic log severity passed to OS.Log; translating it would change severity classification."},
+  {"source":"Config: %s","decision":"keep","scope":"internal/app/update.go","reason":"Diagnostic log prefix, matching the existing LogWarn path; the client capability notice payload is translated separately."}
+]

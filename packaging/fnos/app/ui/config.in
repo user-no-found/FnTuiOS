@@ -1,0 +1,14 @@
+{
+  ".url": {
+    "@APP_ID@.main": {
+      "title": "@DISPLAY_NAME@",
+      "icon": "images/icon_{0}.png",
+      "type": "iframe",
+      "protocol": "",
+      "url": "@GATEWAY_PREFIX@/",
+      "gatewayPrefix": "@GATEWAY_PREFIX@",
+      "gatewaySocket": "@GATEWAY_SOCKET@",
+      "allUsers": true
+    }
+  }
+}

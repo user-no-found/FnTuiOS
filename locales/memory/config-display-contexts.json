@@ -1,0 +1,974 @@
+[
+  {
+    "source": "want HH:MM-HH:MM, got %q",
+    "translation": "应使用 HH:MM-HH:MM 格式，实际为 %q",
+    "scope": "internal/config/agent_alerts.go:ParseQuietHours:6adfa477b66d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "want HH:MM, got %q",
+    "translation": "应使用 HH:MM 格式，实际为 %q",
+    "scope": "internal/config/agent_alerts.go:parseClock:0838dccccdf7:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "minute out of range in %q",
+    "translation": "%q 中的分钟超出范围",
+    "scope": "internal/config/agent_alerts.go:parseClock:3e12fc8d38df:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "hour out of range in %q",
+    "translation": "%q 中的小时超出范围",
+    "scope": "internal/config/agent_alerts.go:parseClock:5238db2077b5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s); read as %s",
+    "translation": "'%s' 不是有效值（允许：%s）；按 %s 处理",
+    "scope": "internal/config/agents_work.go:validateAgentWork:0bc5ae892b78:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "rule %q has no pattern RE2 can compile; ignored",
+    "translation": "规则 %q 没有 RE2 可编译的模式；已忽略",
+    "scope": "internal/config/agents_work.go:validateAgentWork:17477abd831c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s, %s, %s); read as %s",
+    "translation": "'%s' 不是有效值（允许：%s、%s、%s）；按 %s 处理",
+    "scope": "internal/config/agents_work.go:validateAgentWork:2b0ea24f3a1e:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a duration such as 10m; read as %s",
+    "translation": "'%s' 不是 10m 这样的时长；按 %s 处理",
+    "scope": "internal/config/agents_work.go:validateAgentWork:383164f7da64:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "a rule has no name, so the Inbox could not say which rule matched; ignored",
+    "translation": "规则没有名称，收件箱无法说明匹配了哪条规则；已忽略",
+    "scope": "internal/config/agents_work.go:validateAgentWork:7a71e9428a73:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%d is outside 1 to %d; read as %d",
+    "translation": "%d 超出 1 到 %d 的范围；按 %d 处理",
+    "scope": "internal/config/agents_work.go:validateAgentWork:832dd9e4a804:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s, %s); read as %s",
+    "translation": "'%s' 不是有效值（允许：%s、%s）；按 %s 处理",
+    "scope": "internal/config/agents_work.go:validateAgentWork:d0093e1d457d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%d is outside 1 to %d, so it reads as %d",
+    "translation": "%d 超出 1 到 %d 的范围，因此按 %d 处理",
+    "scope": "internal/config/agents_work.go:validateAgentWork:d0e726aab482:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The key %s has no modifier and no prefix+, so tuios takes it from every pane. Use prefix+%s or add a modifier, for example alt+%s.",
+    "translation": "按键 %s 没有修饰键，也没有 prefix+，因此 tuios 会在所有窗格中截获它。请使用 prefix+%s，或添加修饰键，例如 alt+%s。",
+    "scope": "internal/config/command_keys.go:KeybindingsConfig.CommandProblems:73decfbc8567:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " tuios ignores this entry.",
+    "translation": " tuios 会忽略此条目。",
+    "scope": "internal/config/command_keys.go:KeybindingsConfig.CommandProblems:87f9af47d72a:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The entry has no name tuios can use. Add a name with letters or digits.",
+    "translation": "此条目没有 tuios 可用的名称。请添加含字母或数字的名称。",
+    "scope": "internal/config/command_keys.go:commandProblem:0a502cb06738:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The entry has no command. Add a command.",
+    "translation": "此条目没有命令。请添加命令。",
+    "scope": "internal/config/command_keys.go:commandProblem:48863f232742:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The type %q is not known. Use scratch, popup, pane or shell.",
+    "translation": "类型 %q 无法识别。请使用 scratch、popup、pane 或 shell。",
+    "scope": "internal/config/command_keys.go:commandProblem:48f89cbe0dde:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The %s is not valid: %v.",
+    "translation": "%s 无效：%v。",
+    "scope": "internal/config/command_keys.go:commandProblem:6e4a3677c2f5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The entry has no key. Add a key, for example key = \"prefix+alt+g\".",
+    "translation": "此条目没有按键。请添加按键，例如 key = \"prefix+alt+g\"。",
+    "scope": "internal/config/command_keys.go:commandProblem:83cff5986ab8:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The name scratch belongs to the built-in scratch terminal. Use a different name.",
+    "translation": "名称 scratch 已用于内置临时终端。请使用其他名称。",
+    "scope": "internal/config/command_keys.go:commandProblem:c9878685551d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " tuios uses only the first %d characters.",
+    "translation": " tuios 只使用前 %d 个字符。",
+    "scope": "internal/config/command_keys.go:nameClash:27df7c700f4a:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "This entry has no name, so tuios makes the name %q from its %s.%s Entry %d has the same name. Add a name to this entry, for example name = %q. tuios ignores this entry.",
+    "translation": "此条目没有名称，因此 tuios 生成名称 %q，依据是其 %s。%s第 %d 个条目使用了相同名称。请为此条目添加名称，例如 name = %q。tuios 会忽略此条目。",
+    "scope": "internal/config/command_keys.go:nameClash:a675a88a268c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "An earlier entry has the name %q. Add a different name. tuios ignores this entry.",
+    "translation": "前面的条目已使用名称 %q。请添加其他名称。tuios 会忽略此条目。",
+    "scope": "internal/config/command_keys.go:nameClash:c2c69a228e3f:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "A [[keybindings.copy_pipe]] entry uses the key %s. The copy pipe runs, and %s does not. Use a different key.",
+    "translation": "一个 [[keybindings.copy_pipe]] 条目使用按键 %s。复制管道会运行，%s 不会运行。请使用其他按键。",
+    "scope": "internal/config/copy_mode_actions.go:KeybindingsConfig.CopyModeProblems:2d7efcec02ec:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Copy mode uses the key %s. This binding takes the key from copy mode. Use a different key, for example home or end.",
+    "translation": "复制模式使用按键 %s。此绑定会截获该按键，使复制模式无法使用它。请使用其他按键，例如 home 或 end。",
+    "scope": "internal/config/copy_mode_actions.go:KeybindingsConfig.CopyModeProblems:99c01684e413:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The entry has no command. Add a command.",
+    "translation": "此条目没有命令。请添加命令。",
+    "scope": "internal/config/copy_pipe.go:copyPipeProblem:48863f232742:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The entry has no key. Add a key, for example key = \"p\".",
+    "translation": "此条目没有按键。请添加按键，例如 key = \"p\"。",
+    "scope": "internal/config/copy_pipe.go:copyPipeProblem:97075f5b21de:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "An earlier entry has the key %s. Use a different key. tuios ignores this entry.",
+    "translation": "前面的条目已使用按键 %s。请使用其他按键。tuios 会忽略此条目。",
+    "scope": "internal/config/copy_pipe.go:validateCopyPipes:453822d126e0:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " tuios ignores this entry.",
+    "translation": " tuios 会忽略此条目。",
+    "scope": "internal/config/copy_pipe.go:validateCopyPipes:87f9af47d72a:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Copy mode uses the key %s. This entry takes the key from copy mode. Use a different key, for example p or alt+y.",
+    "translation": "复制模式使用按键 %s。此条目会截获该按键，使复制模式无法使用它。请使用其他按键，例如 p 或 alt+y。",
+    "scope": "internal/config/copy_pipe.go:validateCopyPipes:fbb6c1e1af03:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "refresh %q is not once, push, event:TYPE or a duration",
+    "translation": "refresh 的值 %q 不是 once、push、event:TYPE 或时长",
+    "scope": "internal/config/dock.go:ParseDockRefresh:2e8fafa187c6:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "refresh %q names no event type",
+    "translation": "refresh 的值 %q 没有指定事件类型",
+    "scope": "internal/config/dock.go:ParseDockRefresh:96320f5473d0:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "no [dock.custom.%s] table defines this component",
+    "translation": "没有 [dock.custom.%s] 表定义此组件",
+    "scope": "internal/config/dock.go:validateDock:087b8d4d8505:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "unknown component; built-ins are %s, and a custom one is written custom/NAME",
+    "translation": "组件无法识别；内置组件有 %s，自定义组件使用 custom/NAME 格式",
+    "scope": "internal/config/dock.go:validateDock:0ad32bc87dce:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "nothing ever fires %q, so this component would never refresh; the events are %s",
+    "translation": "没有任何操作会触发 %q，因此此组件不会刷新；可用事件有 %s",
+    "scope": "internal/config/dock.go:validateDock:20d897a20303:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "must be between 1 and %d; using the default of %d",
+    "translation": "必须在 1 到 %d 之间；使用默认值 %d",
+    "scope": "internal/config/dock.go:validateDock:559216d13797:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "defined but not on any dock list; add %q to dock.left, dock.center or dock.right",
+    "translation": "已定义但未列入停靠栏列表；请将 %q 添加到 dock.left、dock.center 或 dock.right",
+    "scope": "internal/config/dock.go:validateDock:893aa850d022:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "this component is always drawn on the %s; it is still shown, but not here",
+    "translation": "此组件始终显示在 %s；它仍会显示，但不会出现在此处",
+    "scope": "internal/config/dock.go:validateDock:9e01459b0f9b:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "component is already on the %s; the second copy is ignored",
+    "translation": "组件已位于 %s；第二个副本已忽略",
+    "scope": "internal/config/dock.go:validateDock:b3df1de14c8a:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "; the component falls back to once",
+    "translation": "；组件改用 once",
+    "scope": "internal/config/dock.go:validateDock:d56b6a026054:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "component has no command, so it can never draw anything",
+    "translation": "组件没有命令，因此无法显示任何内容",
+    "scope": "internal/config/dock.go:validateDock:ff681b5ead0e:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Unknown built-in pattern %s. Use all, none, or names from: %s.",
+    "translation": "内置模式 %s 无法识别。请使用 all、none 或以下名称：%s。",
+    "scope": "internal/config/hints.go:validateHints:ac9ce0b4d8f7:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Hints mode skips this pattern: %v.",
+    "translation": "提示模式跳过此模式：%v。",
+    "scope": "internal/config/hints.go:validateHints:da54e5370123:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The alphabet %q has fewer than two letters a to z. Hints mode uses %q.",
+    "translation": "字符集 %q 中 a 到 z 的字母不足两个。提示模式使用 %q。",
+    "scope": "internal/config/hints.go:validateHints:e00689eb9044:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Labels use only the letters a to z. Hints mode does not use %q from the alphabet. It uses %q.",
+    "translation": "标签只使用 a 到 z 的字母。提示模式不使用字符集中的 %q，而使用 %q。",
+    "scope": "internal/config/hints.go:validateHints:f8e2401d93e1:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Minimize prefix",
+    "translation": "最小化前缀键",
+    "scope": "internal/config/keybind_scopes.go:Scopes:018f42660c78:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Layout prefix",
+    "translation": "布局前缀键",
+    "scope": "internal/config/keybind_scopes.go:Scopes:0bb51038dac7:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Debug prefix",
+    "translation": "调试前缀键",
+    "scope": "internal/config/keybind_scopes.go:Scopes:112776ff23d5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Inbox prompt",
+    "translation": "收件箱提示框",
+    "scope": "internal/config/keybind_scopes.go:Scopes:115403ebf458:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Sidebar files",
+    "translation": "侧边栏文件",
+    "scope": "internal/config/keybind_scopes.go:Scopes:19854a0cda39:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Tape prefix",
+    "translation": "自动化脚本前缀键",
+    "scope": "internal/config/keybind_scopes.go:Scopes:4345ec1d9461:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Sidebar agents",
+    "translation": "侧边栏智能体",
+    "scope": "internal/config/keybind_scopes.go:Scopes:7c5372a19646:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Window mode",
+    "translation": "窗口模式",
+    "scope": "internal/config/keybind_scopes.go:Scopes:b3d71d813ca6:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Window prefix",
+    "translation": "窗口前缀键",
+    "scope": "internal/config/keybind_scopes.go:Scopes:ba9769b9801b:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Script playback",
+    "translation": "脚本播放",
+    "scope": "internal/config/keybind_scopes.go:Scopes:d0c3a41f01b3:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Workspace prefix",
+    "translation": "工作区前缀键",
+    "scope": "internal/config/keybind_scopes.go:Scopes:fbfefaadd5f9:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "key cannot be empty",
+    "translation": "按键不能为空",
+    "scope": "internal/config/keynormalizer.go:KeyNormalizer.ValidateKey:008b876f0bab:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "unknown special key: ",
+    "translation": "特殊按键无法识别：",
+    "scope": "internal/config/keynormalizer.go:KeyNormalizer.ValidateKey:09294a2276ee:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "invalid modifier: ",
+    "translation": "修饰键无效：",
+    "scope": "internal/config/keynormalizer.go:KeyNormalizer.ValidateKey:6ad3dbbb16d1:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "duplicate modifier: ",
+    "translation": "修饰键重复：",
+    "scope": "internal/config/keynormalizer.go:KeyNormalizer.ValidateKey:90d079292ff7:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "key combination incomplete (ends with +)",
+    "translation": "组合键不完整（以 + 结尾）",
+    "scope": "internal/config/keynormalizer.go:KeyNormalizer.ValidateKey:c36e5e8aa4d9:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is not a duration such as \"10m\" or \"0\"",
+    "translation": "%q 不是 \"10m\" 或 \"0\" 这样的时长",
+    "scope": "internal/config/link_policy.go:ParseHostedGrace:bb8566979be0:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is negative",
+    "translation": "%q 为负值",
+    "scope": "internal/config/link_policy.go:ParseHostedGrace:c02034e3d43d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a capability (allowed: %s); it is ignored",
+    "translation": "'%s' 不是有效能力（允许：%s）；已忽略",
+    "scope": "internal/config/link_policy.go:validateLinkPolicies:13e21efe1180:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "; the inherited value is used",
+    "translation": "；使用继承值",
+    "scope": "internal/config/link_policy.go:validateLinkPolicies:ace4812aedf3:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the url holds a user name or password. Put the credential in token, token_env or token_file",
+    "translation": "url 包含用户名或密码。请将凭据放在 token、token_env 或 token_file 中",
+    "scope": "internal/config/notify.go:checkNotifyURL:5b7bb741a578:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the url is empty. Set it to the address that takes the notification",
+    "translation": "url 为空。请将其设置为接收通知的地址",
+    "scope": "internal/config/notify.go:checkNotifyURL:658f68dc36e5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the url is not an http or https address",
+    "translation": "url 不是 http 或 https 地址",
+    "scope": "internal/config/notify.go:checkNotifyURL:a066edc5be96:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is not one of %s. The summary is sent",
+    "translation": "%q 不属于 %s。将发送摘要",
+    "scope": "internal/config/notify.go:validateNotify:295df1a710fb:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "_file. The first one in that order is used",
+    "translation": "_file 中的一个。按此顺序使用第一个设置的值",
+    "scope": "internal/config/notify.go:validateNotify:4ef6a86a143b:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "web_url is not an http or https address. Notifications are sent with no link",
+    "translation": "web_url 不是 http 或 https 地址。发送的通知将不包含链接",
+    "scope": "internal/config/notify.go:validateNotify:5f5f5cc9582d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "_env and ",
+    "translation": "_env 和 ",
+    "scope": "internal/config/notify.go:validateNotify:636d551f213f:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "priority must be 1 to 5, or 0 for the default",
+    "translation": "priority 必须为 1 到 5，或使用 0 表示默认值",
+    "scope": "internal/config/notify.go:validateNotify:8ae7d1aedae3:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Pushover needs an application token. Set token, token_env or token_file",
+    "translation": "Pushover 需要应用令牌。请设置 token、token_env 或 token_file",
+    "scope": "internal/config/notify.go:validateNotify:c74cd736879b:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "set only one of ",
+    "translation": "请只设置 ",
+    "scope": "internal/config/notify.go:validateNotify:e5695057028c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Pushover needs your user key. Set user, user_env or user_file",
+    "translation": "Pushover 需要您的用户密钥。请设置 user、user_env 或 user_file",
+    "scope": "internal/config/notify.go:validateNotify:e6f1c53bce48:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s); read as strict",
+    "translation": "'%s' 不是有效值（允许：%s）；按 strict 处理",
+    "scope": "internal/config/pane_grants.go:validatePanePermissions:c171b8e2f8d9:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "unknown grant %s (allowed: %s); dropped",
+    "translation": "授权规则 %s 无法识别（允许：%s）；已移除",
+    "scope": "internal/config/pane_grants.go:validatePanePermissions:f01a0d114a56:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Pane labels use only the letters a to z and the digits. They do not use %q. They use %q.",
+    "translation": "窗格标签只使用 a 到 z 的字母及数字。不使用 %q，而使用 %q。",
+    "scope": "internal/config/panes.go:validatePanes:2116fb4e0871:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The label keys %q have fewer than two letters or digits. Pane labels use %q.",
+    "translation": "标签按键 %q 中字母或数字不足两个。窗格标签使用 %q。",
+    "scope": "internal/config/panes.go:validatePanes:60c522fc0f67:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "The navigator layout %q is not tree, flat or cards. The navigator uses tree.",
+    "translation": "导航器布局 %q 不是 tree、flat 或 cards。导航器使用 tree。",
+    "scope": "internal/config/panes.go:validatePanes:ad62a01a9909:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%d is outside 0 to %d (256 MiB); read as %d",
+    "translation": "%d 超出 0 到 %d（256 MiB）的范围；按 %d 处理",
+    "scope": "internal/config/paste_buffers.go:validatePasteBuffers:872c9983cafd:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%d is outside 0 to %d; read as %d",
+    "translation": "%d 超出 0 到 %d 的范围；按 %d 处理",
+    "scope": "internal/config/paste_buffers.go:validatePasteBuffers:c3e4c2f1bce1:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "size is empty",
+    "translation": "尺寸为空",
+    "scope": "internal/config/scratch.go:ParseBoxSize:0fd298ba494e:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is more than the whole region, ask for 100%% or less",
+    "translation": "%q 超过整个区域，请使用 100%% 或更小的值",
+    "scope": "internal/config/scratch.go:ParseBoxSize:4d156f955a7c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is not a number of cells or a percentage, e.g. 60 or 60%%",
+    "translation": "%q 不是单元格数量或百分比，例如 60 或 60%%",
+    "scope": "internal/config/scratch.go:ParseBoxSize:7258dba764ea:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is not a size, ask for at least 1",
+    "translation": "%q 不是有效尺寸，请使用至少为 1 的值",
+    "scope": "internal/config/scratch.go:ParseBoxSize:efc8dd40d139:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%v. The scratch terminal uses %s.",
+    "translation": "%v。临时终端使用 %s。",
+    "scope": "internal/config/scratch.go:validateScratch:6b4cbdf3d6da:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s must be a table with fg, bold, dim and rule entries",
+    "translation": "%s 必须是含 fg、bold、dim 和 rule 条目的表",
+    "scope": "internal/config/sidebar_agent_row.go:ParseSidebarAgentRow:0d922d3fe7b5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s is listed twice in tokens, so the second one is ignored",
+    "translation": "%s 在 tokens 中重复列出，第二个已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:ParseSidebarAgentRow:32beb2690b85:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "tokens names nothing the row can draw, so the row keeps its default order",
+    "translation": "tokens 没有指定行中可显示的内容，因此保留默认顺序",
+    "scope": "internal/config/sidebar_agent_row.go:ParseSidebarAgentRow:5bcc2e5d013e:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "there is no agent row token called %s. The names are %s",
+    "translation": "没有名为 %s 的智能体行标记。可用名称有 %s",
+    "scope": "internal/config/sidebar_agent_row.go:ParseSidebarAgentRow:747cb5e6d574:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "there is no agent row token called %s. The names are %s",
+    "translation": "没有名为 %s 的智能体行标记。可用名称有 %s",
+    "scope": "internal/config/sidebar_agent_row.go:ParseSidebarAgentRow:747cb5e6d574:2",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "tokens must be a list of names in quotes, so the row keeps its default order",
+    "translation": "tokens 必须是由带引号的名称组成的列表，因此行保留默认顺序",
+    "scope": "internal/config/sidebar_agent_row.go:ParseSidebarAgentRow:fa2adfb7b27f:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s.fg is %s, which is not a colour the row knows. Use one of %s, or #rrggbb",
+    "translation": "%s.fg 为 %s，行无法识别此颜色。请使用 %s 中的一个值，或 #rrggbb",
+    "scope": "internal/config/sidebar_agent_row.go:parseLook:8c9d86023ca9:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s.%s must be true or false, so it is ignored",
+    "translation": "%s.%s 必须为 true 或 false；已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseLook:e8291d7f8ad5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s.fg must be a colour name or #rrggbb in quotes, so it is ignored",
+    "translation": "%s.fg 必须为带引号的颜色名称或 #rrggbb；已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseLook:f9f1370572a5:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s: ignore_case must be true or false, so it is ignored",
+    "translation": "%s：ignore_case 必须为 true 或 false；已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:193013c20910:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s rule %d",
+    "translation": "%s 规则 %d",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:29d2dfeb7751:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s has %s, so it is ignored. A rule needs exactly one test",
+    "translation": "%s 含有 %s；已忽略。规则必须且只能有一个条件",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:5e7392870273:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s: %s must be a number, so the rule is ignored",
+    "translation": "%s：%s 必须为数字；此规则已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:6642e764aa5d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s sets no fg, bold or dim, so it is ignored",
+    "translation": "%s 未设置 fg、bold 或 dim；已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:6cd652804a18:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s: %s must be text in quotes, so the rule is ignored",
+    "translation": "%s：%s 必须为带引号的文本；此规则已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:84dbb78f71a8:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s: %s is not a key a rule reads",
+    "translation": "%s：%s 不是规则可读取的键",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:8d57d8dc1688:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s has no test, so it is ignored. A rule needs exactly one of %s",
+    "translation": "%s 没有条件；已忽略。规则必须且只能使用 %s 中的一个条件",
+    "scope": "internal/config/sidebar_agent_row.go:parseRule:c93ebc837140:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s.rule must be a list of [[...rule]] tables, so %s has no rules",
+    "translation": "%s.rule 必须是 [[...rule]] 表的列表，因此 %s 没有规则",
+    "scope": "internal/config/sidebar_agent_row.go:parseTokenStyle:1e5a082dcfc3:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s.%s is not a key the row reads. The keys are fg, bold, dim and rule",
+    "translation": "%s.%s 不是行可读取的键。可用键为 fg、bold、dim 和 rule",
+    "scope": "internal/config/sidebar_agent_row.go:parseTokenStyle:4ce8aacf4f6c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s has more than %d rules, so rule %d and the rest are ignored",
+    "translation": "%s 的规则超过 %d 条，因此第 %d 条及之后的规则已忽略",
+    "scope": "internal/config/sidebar_agent_row.go:parseTokenStyle:f2c342f69ce0:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": ", or $key for one metadata key",
+    "translation": "，或使用 $key 指定一个元数据键",
+    "scope": "internal/config/sidebar_agent_row.go:sidebarTokenNames:5db40836d8e3:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "refresh %q is refused for the rail section: ",
+    "translation": "侧边栏区段不允许使用 refresh 值 %q：",
+    "scope": "internal/config/sidebar_custom.go:ParseSidebarCustomRefresh:564f66861a1f:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "a command that stays running cannot see the focus or the section's size change; ",
+    "translation": "持续运行的命令无法感知焦点或区段尺寸的变化；",
+    "scope": "internal/config/sidebar_custom.go:ParseSidebarCustomRefresh:bed76196235c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "use once, a duration or event:TYPE",
+    "translation": "请使用 once、时长或 event:TYPE",
+    "scope": "internal/config/sidebar_custom.go:ParseSidebarCustomRefresh:fddebf262a58:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Custom",
+    "translation": "自定义",
+    "scope": "internal/config/sidebar_custom.go:SidebarCustomDefaultTitle:494ca78f7374:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "a command is set but \"custom\" is not in appearance.sidebar.sections, so it never runs",
+    "translation": "已设置命令，但 appearance.sidebar.sections 中没有 \"custom\"，因此不会运行",
+    "scope": "internal/config/sidebar_custom.go:validateSidebarCustom:03bcc60a72b2:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the layout names the custom section but no command is set, so it draws its title over nothing",
+    "translation": "布局指定了自定义区段，但没有设置命令，因此只显示标题，没有内容",
+    "scope": "internal/config/sidebar_custom.go:validateSidebarCustom:33cd39dc69cd:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "; the section runs nothing",
+    "translation": "；此区段不运行任何命令",
+    "scope": "internal/config/sidebar_custom.go:validateSidebarCustom:59764cbd75d0:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "nothing ever fires %q, so the section would never refresh; the events are %s",
+    "translation": "没有任何操作会触发 %q，因此此区段不会刷新；可用事件有 %s",
+    "scope": "internal/config/sidebar_custom.go:validateSidebarCustom:e92e0f6e85b7:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": ". The names are ",
+    "translation": "。可用名称有 ",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:2e3a57fa4735:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " could be used, so the rail keeps its default layout",
+    "translation": " 中没有可用区段，因此侧边栏保留默认布局",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:50c4e014dafd:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": ", which is not a whole number, so it takes what the other sections leave",
+    "translation": "，该值不是整数，因此使用其他区段分配后剩余的空间",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:7d197d7f3672:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " percent, which is clamped to 0..100",
+    "translation": "%，该值会限制在 0..100 范围内",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:b288eda9e86c:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " has a share of ",
+    "translation": " 的占比为 ",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:ce6f18238d15:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " has a share of ",
+    "translation": " 的占比为 ",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:ce6f18238d15:2",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "no section in ",
+    "translation": "配置 ",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:d1f486232a81:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "there is no rail section called ",
+    "translation": "没有名为以下名称的侧边栏区段：",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:de3ec6ce2c10:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": " is listed twice, so the second one is ignored",
+    "translation": " 重复列出，第二个已忽略",
+    "scope": "internal/config/sidebar_sections.go:SidebarSectionProblems:f71f1d80ba12:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "[%s] %s: %s",
+    "decision": "keep",
+    "scope": "internal/config/userconfig.go:ConfigWarnings:8792daac07e0:1",
+    "reason": "ConfigWarnings formats an original configuration field, key and independently localized issue message; contains only three string arguments and punctuation, no English UI prose."
+  },
+  {
+    "source": "[%s] %s: %s",
+    "decision": "keep",
+    "scope": "internal/config/userconfig.go:ConfigWarnings:8792daac07e0:2",
+    "reason": "ConfigWarnings formats an original configuration field, key and independently localized issue message; contains only three string arguments and punctuation, no English UI prose."
+  },
+  {
+    "source": "%s runs %s. These never run: %s. %s",
+    "translation": "%s 运行 %s。以下动作不会运行：%s。%s",
+    "scope": "internal/config/validation.go:ValidateConfig:4c93040c5bd6:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Run `tuios keybinds unbind <action> %s` to take the key off one of them.",
+    "translation": "运行 `tuios keybinds unbind <action> %s`，从其中一个动作中移除此按键。",
+    "scope": "internal/config/validation.go:ValidateConfig:8e667ff26be8:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Action '%s': On macOS, consider using 'opt+' instead of 'alt+' for consistency with your keyboard (⌥ Option key)",
+    "translation": "动作 '%s'：在 macOS 上，建议使用 'opt+' 代替 'alt+'，与键盘上的 ⌥ Option 键保持一致",
+    "scope": "internal/config/validation.go:ValidateConfig:d53938285505:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "Essential action '%s' has no keybinding, so TUIOS may be difficult to use",
+    "translation": "必要动作 '%s' 没有快捷键，可能导致 TUIOS 难以操作",
+    "scope": "internal/config/validation.go:ValidateConfig:d64c21743e78:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "To move a command entry, edit its key in the [[keybindings.command]] table of config.toml. For an action, run `tuios keybinds unbind <action> ",
+    "translation": "要更改命令条目的按键，请编辑 config.toml 的 [[keybindings.command]] 表中的 key。对于动作，请运行 `tuios keybinds unbind <action> ",
+    "scope": "internal/config/validation.go:ValidateConfig:f9f756c95eca:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a number or auto; read as %d",
+    "translation": "'%s' 不是数字或 auto；按 %d 处理",
+    "scope": "internal/config/validation.go:validateAppearanceEnums:8b3a8f5e8005:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a duration such as 1h, or off; read as 1h",
+    "translation": "'%s' 不是 1h 这样的时长或 off；按 1h 处理",
+    "scope": "internal/config/validation.go:validateAppearanceEnums:ae3bc5778cb6:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "no longer used: panes name their own workspace, and switching lives on the dock and alt+1..9",
+    "translation": "已不再使用：窗格会标明所属工作区，可通过停靠栏或 alt+1..9 切换",
+    "scope": "internal/config/validation.go:validateAppearanceEnums:eb41b982b9eb:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "to paint and %s; set a theme or a #RRGGBB colour",
+    "translation": "，因此 %s；请设置主题或 #RRGGBB 颜色",
+    "scope": "internal/config/validation.go:validateBackground:55f83aceada6:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%s is theme but no theme is set, so there is no theme background ",
+    "translation": "%s 为 theme，但未设置主题，没有可绘制的主题背景",
+    "scope": "internal/config/validation.go:validateBackground:7e8fba10da27:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s, or #RRGGBB); %s",
+    "translation": "'%s' 不是有效值（允许：%s 或 #RRGGBB）；%s",
+    "scope": "internal/config/validation.go:validateBackground:e10dbe9f4d33:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "panes stay transparent",
+    "translation": "窗格保持透明",
+    "scope": "internal/config/validation.go:validateBackgrounds:040f54230243:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the desktop stays transparent",
+    "translation": "桌面保持透明",
+    "scope": "internal/config/validation.go:validateBackgrounds:87df76deff36:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "pane borders and title bars stay transparent",
+    "translation": "窗格边框和标题栏保持透明",
+    "scope": "internal/config/validation.go:validateBackgrounds:aec0a70b1686:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the rail stays transparent",
+    "translation": "侧边栏保持透明",
+    "scope": "internal/config/validation.go:validateBackgrounds:bde8578581f2:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "the dock stays transparent",
+    "translation": "停靠栏保持透明",
+    "scope": "internal/config/validation.go:validateBackgrounds:c6d31d49ab2b:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "every surface it reaches stays transparent",
+    "translation": "所有受影响的界面保持透明",
+    "scope": "internal/config/validation.go:validateBackgrounds:d9993d16d60e:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a colour (expected #RRGGBB); the theme's border colour is used instead",
+    "translation": "'%s' 不是有效颜色（应为 #RRGGBB）；改用主题的边框颜色",
+    "scope": "internal/config/validation.go:validateBorderColors:7f2b1b44aae2:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' formats to '%s', which has no time in it; see the Go time layout reference",
+    "translation": "'%s' 格式化后为 '%s'，其中没有时间；请查看 Go 时间布局参考",
+    "scope": "internal/config/validation.go:validateClockFormat:8dfdc1214e84:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "no theme is set, so a cell drawn in the terminal's own default colour has no colour ",
+    "translation": "未设置主题，因此使用终端自身默认颜色的单元格，其颜色",
+    "scope": "internal/config/validation.go:validateDimUnfocused:32764d381cb2:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "tuios knows and is left undimmed; only cells a program coloured itself are quieted",
+    "translation": "无法被 tuios 识别，会保持原亮度；只有程序自行着色的单元格会变暗",
+    "scope": "internal/config/validation.go:validateDimUnfocused:95cc0bb2ba49:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is not a usable icon. Use at most %d cells and no control characters. The dock shows the default icon",
+    "translation": "%q 不是可用图标。最多使用 %d 个单元格，且不能包含控制字符。停靠栏显示默认图标",
+    "scope": "internal/config/validation.go:validateDockModeIcons:72b7572595eb:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a glyph set (see list-glyphs); the built-in glyphs are used instead",
+    "translation": "'%s' 不是字符样式集（参见 list-glyphs）；改用内置字符样式",
+    "scope": "internal/config/validation.go:validateGlyphSet:c21c392eabf4:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "a negative wait is not a thing; falling back to the default",
+    "translation": "等待时长不能为负值；改用默认值",
+    "scope": "internal/config/validation.go:validateNotificationsConfig:27c797ebff06:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%v; ignored, so alerts are never silenced by the clock",
+    "translation": "%v；已忽略，提醒不会因时间设置而静音",
+    "scope": "internal/config/validation.go:validateNotificationsConfig:42c64ff1bfbb:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "a negative gap is not a thing; falling back to the default",
+    "translation": "间隔不能为负值；改用默认值",
+    "scope": "internal/config/validation.go:validateNotificationsConfig:573cebed50c9:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%ds is shorter than the %ds needed to read a message; it is applied as written but is an accessibility (WCAG 2.2.1) failure",
+    "translation": "%d 秒短于阅读消息所需的 %d 秒；仍按设置值应用，但不满足无障碍要求（WCAG 2.2.1）",
+    "scope": "internal/config/validation.go:validateNotificationsConfig:dd816fb0332b:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "mail alerts are off, so between_agents does nothing. Set notifications.mail.enabled = true to use it.",
+    "translation": "消息提醒已关闭，因此 between_agents 不起作用。请设置 notifications.mail.enabled = true 以启用。",
+    "scope": "internal/config/validation.go:validateNotificationsConfig:e12c44de319d:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "%q is not one of %s; falling back to %q",
+    "translation": "%q 不属于 %s；改用 %q",
+    "scope": "internal/config/validation.go:validateNotificationsConfig:ffc98e974c76:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is %d cells wide; the scrollbar is one column, so the default glyph is used instead",
+    "translation": "'%s' 的宽度为 %d 个单元格；滚动条只有一列，因此改用默认字符",
+    "scope": "internal/config/validation.go:validateScrollbar:42fa71a7c43f:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s, or #RRGGBB); falling back to default",
+    "translation": "'%s' 不是有效值（允许：%s 或 #RRGGBB）；改用默认值",
+    "scope": "internal/config/validation.go:validateScrollbar:8f49e87ce755:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a known placeholder (allowed: %s); it will be shown literally",
+    "translation": "'%s' 不是已知占位符（允许：%s）；将按原样显示",
+    "scope": "internal/config/validation.go:validateTitleFormat:d722df523205:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "'%s' is not a valid value (allowed: %s); falling back to %s",
+    "translation": "'%s' 不是有效值（允许：%s）；改用 %s",
+    "scope": "internal/config/validation.go:warnEnum:80b96e071f91:1",
+    "reason": "Reviewed configuration validation or keyboard-scope text consumed by native display. Localized display projection only; preserve canonical keys, values, literal commands, examples, format arguments and user input."
+  },
+  {
+    "source": "This key is no longer used. The scratch key shows one shell in a popup. Remove the key.",
+    "translation": "此配置项已不再使用。临时终端快捷键会在弹出窗口中显示一个命令行终端。请移除此配置项。",
+    "scope": "internal/config/scratch.go:ScratchSessionUnused:24c622bc1302:1",
+    "reason": "ScratchSessionUnused explains the retired [scratch] session configuration key. First and last key refer to that config entry; the middle scratch key is the shortcut that shows the built-in scratch shell popup. Do not instruct users to remove the active shortcut."
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "locale": "zh-CN",
+  "translator": {
+    "model": "GPT-6.1-Sol",
+    "reasoning_effort": "high",
+    "ownership": "Translation data, terminology, and context-specific retention decisions only"
+  },
+  "glossary": "locales/glossary.json",
+  "source_scope": {
+    "native_display": "Application display text; evaluated settings labels, descriptions and enum display values; action help and prefix-menu projections; configuration validation messages and keyboard report labels projected into the native UI",
+    "browser_display": "sip browser shell text and accessible labels; FnTuiOS direct image-paste guidance and fixed upload status messages",
+    "gateway_display": "Fixed gateway error messages",
+    "retained": [
+      "Protocol fields, RPC verbs, state discriminators, metadata keys, and internal overlay or action IDs",
+      "Configuration storage values, command names, file formats, paths, and external product names",
+      "Literal shortcut keys, ASCII glyphs, numeric formats, regular expressions, and terminal control sequences",
+      "Developer diagnostics and upstream source inventory outside the application display scope"
+    ],
+    "excluded_content": [
+      "Terminal process output",
+      "User-entered text and user-supplied titles",
+      "File contents",
+      "Agent-authored messages and untrusted claims"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+[
+{"source":"hints","decision":"keep","scope":"internal/app/help.go:generatePrefixBindings:13f47db849be:1","reason":"Action identifier in the prefix help exclusion list, matched against the original keybind registry."},
+{"source":"changed","decision":"keep","scope":"internal/app/inbox.go:inboxReplyChanged:d67e2e944994:1","reason":"RPC reply reason discriminator compared against msg.Reason; the human notification text is translated separately."}
+]

@@ -1,0 +1,56 @@
+#!/bin/bash
+set -euo pipefail
+case "$#:${1:-}" in
+    0:) prepare_state=false ;;
+    1:--prepare-state) prepare_state=true ;;
+    *) echo 'Usage: configure [--prepare-state]' >&2; exit 1 ;;
+esac
+source "$(dirname -- "$0")/paths.sh"
+umask 077
+[[ $(id -u) == 0 ]] || exit 1
+# fnOS may unpack a root-run package with the package account as owner and
+# group-writable modes. Secure only the fixed trusted payload paths before
+# executing the broker; never follow an application-created symlink here.
+for path in "$fnt_app" "$fnt_app/bin" "$fnt_app/etc" "$fnt_app/libexec"; do
+    [[ -d $path && ! -L $path ]] || { echo "Unsafe package directory: $path" >&2; exit 1; }
+    chown root:root -- "$path"
+    chmod 755 -- "$path"
+done
+for name in tuios tuios-web fntuios SHA256SUMS; do
+    path=$fnt_app/bin/$name
+    [[ -f $path && ! -L $path ]] || { echo "Unsafe package file: $path" >&2; exit 1; }
+    chown root:root -- "$path"
+    if [[ $name == SHA256SUMS ]]; then chmod 644 -- "$path"; else chmod 755 -- "$path"; fi
+done
+for name in control configure paths.sh; do
+    path=$fnt_app/libexec/$name
+    [[ -f $path && ! -L $path ]] || exit 1
+    chown root:root -- "$path"
+    chmod 755 -- "$path"
+done
+[[ -f $fnt_app/etc/gateway.json && ! -L $fnt_app/etc/gateway.json ]] || exit 1
+chown root:root -- "$fnt_app/etc/gateway.json"
+chmod 644 -- "$fnt_app/etc/gateway.json"
+# The root broker cannot load policy through a package-account-writable ancestor.
+for path in "$fnt_etc" "$fnt_var"; do
+    [[ -d $path && ! -L $path ]] || exit 1
+    chown root:root "$path"
+    chmod 755 "$path"
+done
+[[ ! -L $fnt_etc/gateway.json ]] || { echo "Refusing symlink gateway.json." >&2; exit 1; }
+if [[ -e $fnt_etc/gateway.json ]]; then
+    [[ -f $fnt_etc/gateway.json && $(stat -c %u -- "$fnt_etc/gateway.json") == 0 && $(stat -c %h -- "$fnt_etc/gateway.json") == 1 ]] || {
+        echo 'Existing gateway policy is not root-controlled.' >&2; exit 1;
+    }
+    policy_mode=$(stat -c %a -- "$fnt_etc/gateway.json")
+    (( (8#$policy_mode & 0022) == 0 )) || { echo 'Existing gateway policy is writable by another account.' >&2; exit 1; }
+fi
+fnt_prepare
+exec 9> "$fnt_run/service.lock"
+flock -x 9
+"$fnt_app/bin/fntuios" configure \
+    --template "$fnt_app/etc/gateway.json" --output "$fnt_etc/gateway.json" \
+    --app-dir "$fnt_app" --state-dir "$fnt_state" --run-dir "$fnt_run"
+if [[ $prepare_state == true ]]; then
+    exec "$fnt_app/bin/fntuios" prepare-state --config "$fnt_etc/gateway.json"
+fi

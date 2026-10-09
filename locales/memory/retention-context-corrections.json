@@ -1,0 +1,50 @@
+[
+  {
+    "source": "errored",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:OS.fireInboxAlerts:138bb025f5c1:1",
+    "reason": "Canonical agent state passed to alert sound selection or returned to alert-state dispatch; preserve its machine identity."
+  },
+  {
+    "source": "done",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:OS.fireInboxAlerts:a4c3ed04a95a:1",
+    "reason": "Canonical agent state passed to alert sound selection or returned to alert-state dispatch; preserve its machine identity."
+  },
+  {
+    "source": "errored",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:inboxAlertMarkState:138bb025f5c1:1",
+    "reason": "Canonical agent state passed to alert sound selection or returned to alert-state dispatch; preserve its machine identity."
+  },
+  {
+    "source": "done",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:inboxAlertMarkState:a4c3ed04a95a:1",
+    "reason": "Canonical agent state passed to alert sound selection or returned to alert-state dispatch; preserve its machine identity."
+  },
+  {
+    "source": "errored",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:inboxAlertState:138bb025f5c1:1",
+    "reason": "Canonical agent state passed to alert sound selection or returned to alert-state dispatch; preserve its machine identity."
+  },
+  {
+    "source": "done",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:inboxAlertState:a4c3ed04a95a:1",
+    "reason": "Canonical agent state passed to alert sound selection or returned to alert-state dispatch; preserve its machine identity."
+  },
+  {
+    "source": "errored",
+    "translation": "出错",
+    "scope": "internal/app/inbox.go:inboxKindWords:138bb025f5c1:1",
+    "reason": "inboxKindWords returns human-facing text for an errored attention item, shown by Inbox rows and notifications; this occurrence is not a canonical agent-state argument."
+  },
+  {
+    "source": "done",
+    "decision": "keep",
+    "scope": "internal/app/inbox.go:inboxKindWords:a4c3ed04a95a:1",
+    "reason": "Canonical done state argument passed to sidebarStateWords, which generates the localized display label; the argument itself is not shown."
+  }
+]

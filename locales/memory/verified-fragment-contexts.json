@@ -1,0 +1,11 @@
+[
+{"source":" to ","translation":" 为 ","scope":"internal/app/file_ops.go:renameEntry:87721689ee42:1","reason":"Joins the old and new file names in a rename result; no message is being sent."},
+{"source":" to ","translation":" 到 ","scope":"internal/app/keybind_manager.go:OS.KeybindCommitBinding:87721689ee42:1","reason":"Joins the shortcut key and bound action in a keybinding result."},
+{"source":" to ","translation":" 到 ","scope":"internal/app/sidebar_file_ops.go:OS.SidebarFilePaste:87721689ee42:1","reason":"Introduces the destination directory after a file copy or move count."},
+{"source":"by ","translation":"截止时间：","scope":"internal/app/inbox_approvals_ext.go:OS.inboxArmedUntil:9155f2107df0:1","reason":"Names the deadline for the second confirmation press, not a sender or source."},
+{"source":" queued, sent when ","translation":" 已排队，待 ","scope":"internal/app/review_overlay.go:OS.applyReviewSent:068ed7f4a258:1","reason":"Precedes the agent name and the independently translated at-rest condition."},
+{"source":" is at rest","translation":" 空闲时发送","scope":"internal/app/review_overlay.go:OS.applyReviewSent:29c6125266fa:1","reason":"Completes the queued review-note sentence after the agent name."},
+{"source":". It is typed when ","translation":"。待 ","scope":"internal/app/inbox_reply.go:OS.applyInboxReplied:b01443b7860c:1","reason":"Precedes the agent name and the independently translated at-rest typing condition."},
+{"source":" is at rest","translation":" 空闲时输入","scope":"internal/app/inbox_reply.go:OS.applyInboxReplied:29c6125266fa:1","reason":"Completes the queued reply sentence after the agent name."},
+{"source":" still working","translation":" 仍在工作","scope":"internal/app/session_close.go:sessionToll.Line:81817fe9bc3a:1","reason":"Follows countOf(..., agent), which already includes the Chinese count classifier and noun."}
+]
