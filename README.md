@@ -88,5 +88,3 @@ is retained in place and is not copied into users' sessions.
 
 See [runtime configuration and security](docs/runtime.md),
 [localization review](docs/localization.md) and [build verification](docs/build.md).
-The GitHub workflow builds artifacts only. It contains no release, publication,
-installation or automatic translation-approval action.
