@@ -8,11 +8,13 @@ import time
 import urllib.request
 
 from buildflow.runner import Runner
+from buildflow.browser import resolve_browser
 from build_inputs import ROOT, capped, run, temporary_environment
 
 
 def verify(args, app, output, harness, profiles=None):
     """Use the same packaged binaries with strict and repaired runtime settings."""
+    tools = resolve_browser({"playwright": args.playwright, "chromium": args.chromium})
     for profile, policy in [(profile, policy) for profile in (profiles or ['desktop', 'mobile'])
                             for policy in ['strict', 'repaired']]:
         directory = Path(output) / profile / policy
@@ -42,12 +44,12 @@ def verify(args, app, output, harness, profiles=None):
                         time.sleep(.2)
                 else:
                     raise ValueError('remote gateway fixture readiness timed out')
-                command = ['node', ROOT / 'scripts/verify_gateway_browser.mjs', '--url', url,
+                command = [tools.node, ROOT / 'scripts/verify_gateway_browser.mjs', '--url', url,
                      '--output', directory, '--policy', policy, '--playwright', args.playwright,
                      '--chromium', args.chromium]
                 if profile == 'mobile':
                     command.append('--mobile')
-                run(command)
+                run(command, env=tools.environment())
             finally:
                 try:
                     urllib.request.urlopen(urllib.request.Request(url + '/__fixture_stop', method='POST'),

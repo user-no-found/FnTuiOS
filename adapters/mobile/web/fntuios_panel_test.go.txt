@@ -1,0 +1,22 @@
+package main
+
+import (
+	"encoding/json"
+	"testing"
+)
+
+func TestFnMobilePanelCopyRejectsUntrustedFields(t *testing.T) {
+	for _, input := range []string{
+		`{"type":"panel-copy","id":"copy-1","window":"other"}`,
+		`{"type":"panel-copy","id":"copy-1","direction":"up"}`,
+		`{"type":"panel-copy","id":"","history":true}`,
+		`{"type":"panel-copy","id":"copy-1"} {}`,
+		`{"type":"panel-split","id":"split-1","direction":"up","history":true}`,
+	} {
+		var result map[string]any
+		handled := browserPanelControl(nil, []byte(input), func(data []byte) { _ = json.Unmarshal(data, &result) }, false)
+		if !handled || result["code"] != "invalid_request" {
+			t.Fatal("invalid control accepted", input, result)
+		}
+	}
+}

@@ -23,13 +23,14 @@ import verify_localization
 import verify_archive
 import image_paste
 import image_backend
+import mobile
 import gateway_browser
 import verify_package
 
 
 def plan(project):
     """Provide distinct application steps; the tool owns execution and publication."""
-    load_browser_environment(project.root)
+    load_browser_environment()
     metadata = project.data
     if metadata['app_id'] != 'tuios' or metadata['gateway_socket'] != 'app.sock' or metadata['gateway_prefix'] != '/app/tuios':
         raise ValueError('application identity must match the tuios deployment contract')
@@ -110,6 +111,7 @@ def plan(project):
             image_paste.apply(sip, output)
             gateway_browser.apply(sip, output, state['gateway_browser'])
             image_backend.apply(source, sip, go)
+            mobile.apply(source, sip, go)
         run([go, 'mod', 'edit', '-replace=github.com/Gaurav-Gosain/sip=' + str(sip)], cwd=source, env=state['env'])
 
     def check(ctx):
@@ -119,8 +121,8 @@ def plan(project):
         with ctx.activity('验证源码配置、会话与风险规则'):
             run(capped([go, 'test', '-short', './internal/config/', './internal/session/', './internal/risk/']), cwd=source, env=env)
         with ctx.activity('验证窗口、会话与图片/路径适配'):
-            run(capped([go, 'test', '-run', '^TestBrowserImage|^TestSessionSlotPickSendsTheName$|^TestSessionAccentVocabulary$|^TestCreatePath|^TestRenameEntryRefusesAnExistingDestination$|^TestPasteRefusesAFolderIntoItself$', './internal/app/']), cwd=source, env=env)
-        web_security = '^TestBrowserImage|^TestPassword|^TestAllowHost|^TestLoopback|^TestNetworkBind|^TestRandomPassword|^TestCheckTransportSecurity|^TestResolveTLSFiles|^TestCertNew|^TestWebTeardown|^TestGuestTerminalEnv|^TestEphemeralWebSession|^TestMobileBar|^TestEveryTheme'
+            run(capped([go, 'test', '-run', '^TestBrowserImage|^TestFnMobile|^TestSessionSlotPickSendsTheName$|^TestSessionAccentVocabulary$|^TestCreatePath|^TestRenameEntryRefusesAnExistingDestination$|^TestPasteRefusesAFolderIntoItself$', './internal/app/']), cwd=source, env=env)
+        web_security = '^TestBrowserImage|^TestPassword|^TestAllowHost|^TestLoopback|^TestNetworkBind|^TestRandomPassword|^TestCheckTransportSecurity|^TestResolveTLSFiles|^TestCertNew|^TestWebTeardown|^TestGuestTerminalEnv|^TestEphemeralWebSession|^TestMobileBar|^TestFnMobile|^TestEveryTheme'
         with ctx.activity('验证 Web 认证、安全与界面适配'):
             run(capped([go, 'test', '-short', '-run', web_security, './cmd/tuios-web/']), cwd=source, env=env)
         with ctx.activity('验证 Web 访问与尺寸边界'):

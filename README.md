@@ -31,7 +31,9 @@ the shared tools; each project keeps its own metadata and adapters:
 
 Initialization validates and records already installed paths; it does not install
 dependencies. Shared tool paths are stored under the user configuration directory,
-and browser paths stay in this checkout's ignored `.build/environment.json`.
+and browser tools are shared through the user-level `buildflow/browser.json` registration.
+Use an independent Playwright environment rather than another application's cache.
+`./setup.sh` delegates browser registration and validation to BuildFlow.
 After initialization, run `./build.sh` without exports in an existing or new shell.
 Explicit environment variables still override the saved paths.
 
@@ -63,9 +65,12 @@ Interactive builds show the current version and let you select a stable
 stable patch or test suffix; switching channels keeps the base version:
 `0.0.1` becomes `0.0.1-01`, and `0.0.1-02` becomes `0.0.1`. The selected value
 is written back under the shared build lock before the application plan loads.
-The installed version is displayed as information; the project's version owns
-the default. CI can use `./build.sh --next-version --channel stable`, or select
-an exact value with `--build-version 0.0.1`.
+The installed version is displayed as information. Failed, cancelled or unpublished
+candidates are retried by default; only a committed successful publication consumes
+a version. A successful stable `0.0.1` resets the internal test serial to zero,
+and the first test candidate is `0.0.1-01`. Noninteractive builds can use
+`./build.sh --next-version --channel stable`, or select an exact value with
+`--build-version 0.0.1`.
 
 This package version is independent of upstream's release version. Each new
 build still resolves the default branch's latest HEAD once and records its SHA;
@@ -87,4 +92,6 @@ session history does not resume killed processes. Legacy shared `tuios` data
 is retained in place and is not copied into users' sessions.
 
 See [runtime configuration and security](docs/runtime.md),
-[localization review](docs/localization.md) and [build verification](docs/build.md).
+[localization review](docs/localization.md), [phone interaction](docs/mobile.md) and [build verification](docs/build.md).
+
+The shared runtime panel can be dragged and docks half-hidden at any edge. It controls only the current NAS user’s backend: start, stop, and restart. Stopping ends running terminal jobs after the daemon saves its session history; retained history does not resume terminated jobs. Reloading a manually stopped page keeps it stopped and offers a start action. The lightweight gateway remains available; use App Center to stop the entire application. A service restart clears the in-memory manual pause. “终端显示” opens the upstream sip display settings; the adjacent “复制文本” opens a selectable plain-text snapshot of the current pane. The panel closes and half-hides after five idle seconds, immediately on close, or three seconds after a closed-panel drag. See [mobile controls and text copying](docs/mobile.md).

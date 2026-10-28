@@ -1,0 +1,84 @@
+package app
+
+import (
+	"context"
+	"strings"
+	"time"
+	"unicode/utf8"
+)
+
+type browserPanelCopy struct {
+	target  *BrowserImageTarget
+	history bool
+	answer  chan browserPanelText
+}
+
+type browserPanelText struct {
+	text      string
+	truncated bool
+	code      string
+}
+
+// CopyText reads the captured pane on its owning model, without shell commands.
+func (t *BrowserImageTarget) CopyText(ctx context.Context, history bool) (string, bool, string) {
+	job := browserPanelCopy{t, history, make(chan browserPanelText, 1)}
+	t.bridge.send(job)
+	limit := time.NewTimer(5 * time.Second)
+	defer limit.Stop()
+	select {
+	case result := <-job.answer:
+		return result.text, result.truncated, result.code
+	case <-ctx.Done():
+		return "", false, "expired"
+	case <-limit.C:
+		return "", false, "unavailable"
+	}
+}
+
+func (m *OS) copyBrowserPanel(job browserPanelCopy) browserPanelText {
+	if code := job.target.valid(m); code != "" {
+		return browserPanelText{code: code}
+	}
+	w := job.target.window
+	if m.GetFocusedWindow() != w {
+		return browserPanelText{code: "target_changed"}
+	}
+	if !w.TryRLockIO() {
+		return browserPanelText{code: "busy"}
+	}
+	defer w.RUnlockIO()
+	if w.Terminal == nil {
+		return browserPanelText{code: "unavailable"}
+	}
+	// Keep the newest history within a bounded response. The screen is always retained.
+	const maxBytes, maxLines = 2 * 1024 * 1024, 20000
+	screen := strings.TrimRight(w.Terminal.String(), "\n ")
+	truncated := len(screen) > maxBytes
+	if truncated {
+		screen = screen[len(screen)-maxBytes:]
+		for len(screen) > 0 && !utf8.RuneStart(screen[0]) {
+			screen = screen[1:]
+		}
+	}
+	lines, size := []string{}, len(screen)
+	if job.history && !truncated {
+		count := w.Terminal.ScrollbackLen()
+		for i := count - 1; i >= 0; i-- {
+			line := strings.TrimRight(w.Terminal.ScrollbackLine(i).String(), " ")
+			if len(lines) >= maxLines || size+len(line)+1 > maxBytes {
+				truncated = true
+				break
+			}
+			lines = append(lines, line)
+			size += len(line) + 1
+		}
+	}
+	var text strings.Builder
+	text.Grow(size)
+	for i := len(lines) - 1; i >= 0; i-- {
+		text.WriteString(lines[i])
+		text.WriteByte('\n')
+	}
+	text.WriteString(screen)
+	return browserPanelText{text: text.String(), truncated: truncated}
+}

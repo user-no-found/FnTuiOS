@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+import PIL
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,7 +20,8 @@ def verify(args):
         for directory in [home, config, app / 'scripts']:
             directory.mkdir(parents=True)
         environment = {'HOME': str(home), 'XDG_CONFIG_HOME': str(config),
-                       'PATH': os.environ['PATH'], 'LANG': 'C.UTF-8'}
+                       'PATH': os.environ['PATH'], 'LANG': 'C.UTF-8',
+                       'PYTHONPATH': str(Path(PIL.__file__).resolve().parent.parent)}
 
         def run(argv, *, extra=None, expected=0):
             result = subprocess.run(list(map(str, argv)), cwd=root, env={**environment, **(extra or {})},
@@ -53,7 +55,7 @@ def verify(args):
         playwright.symlink_to(args.playwright, target_is_directory=True)
         chromium.symlink_to(args.chromium)
         run([app / 'setup.sh', '--playwright', playwright, '--chromium', chromium])
-        settings = app / '.build/environment.json'
+        settings = config / 'buildflow/browser.json'
         previous = settings.read_bytes()
         assert settings.stat().st_mode & 0o777 == 0o600
         run([app / 'setup.sh'])
@@ -64,7 +66,7 @@ def verify(args):
         settings.write_text('{broken')
         run([app / 'setup.sh', '--playwright', args.playwright, '--chromium', args.chromium])
         assert settings.read_bytes() == previous
-        checks.append('complete explicit browser paths repair malformed local configuration')
+        checks.append('complete explicit browser paths repair malformed shared configuration')
         bad_package = root / 'bad-playwright'
         bad_package.mkdir()
         (bad_package / 'package.json').write_text('[]')
@@ -74,7 +76,7 @@ def verify(args):
         data['schema'] = True
         settings.write_text(json.dumps(data))
         failure = run([app / 'setup.sh'], expected=1)
-        assert 'schema 1' in failure.stderr
+        assert 'schema' in failure.stderr
         settings.write_bytes(previous)
         checks.append('non-object package metadata and boolean config schema are rejected cleanly')
 
@@ -95,7 +97,7 @@ def verify(args):
             'buildflow': {'schema': 1, 'requires': '>=0.1,<0.2', 'targets': ['fpk'], 'steps': []},
             'fnpackkit': {'schema': 1, 'requires': '>=0.1,<0.2', 'adapter': 'scripts/adapter.py:plan'}}))
         (app / 'scripts/adapter.py').write_text('from build_environment import load_browser_environment\n'
-            'def plan(project):\n    load_browser_environment(project.root)\n'
+            'def plan(project):\n    load_browser_environment()\n'
             '    return {"steps": [], "payload": project.root / "payload.json"}\n')
         run([app / 'build.sh', '--build-version', '1.0.0'])
         success = (app / '.build/last-success.json').read_bytes()
@@ -107,13 +109,30 @@ def verify(args):
         checks.append('no-export application entry builds a real FPK and rejects invalid explicit browser override without changing success')
         # Select the real application plan without executing source/network/build steps.
         code = ('import sys;sys.path.insert(0,sys.argv[1]);from build_environment import load_browser_environment;'
-                'load_browser_environment(sys.argv[2]);from buildflow.project import load_project;'
+                'load_browser_environment();from buildflow.project import load_project;'
                 'from buildflow.metadata import version;from fnpackkit.adapter import load_plan;'
                 'p=load_project(sys.argv[3],version());plan=load_plan(p,p.data["fnpackkit"]["adapter"]);'
                 'assert len(plan["steps"])==5 and callable(plan["verify"]);print("real application plan loaded")')
         paths = str(args.buildflow / 'src') + os.pathsep + str(args.fnpackkit / 'src')
         run(['python3', '-c', code, app / 'scripts', app, ROOT / 'project.json'], extra={'PYTHONPATH': paths})
         checks.append('real FnTuiOS plan loads validated browser defaults without executing source fetch or compilation')
+        terminal_config = root / "terminal config '"
+        terminal_env = {'XDG_CONFIG_HOME': str(terminal_config)}
+        terminal_app = root / 'terminal application'
+        shutil.copytree(app, terminal_app, ignore=shutil.ignore_patterns('.build', 'output'))
+        run([args.buildflow / 'setup.sh'], extra=terminal_env)
+        run([args.fnpackkit / 'setup.sh'], extra=terminal_env)
+        missing_browser = run([terminal_app / 'build.sh', '--build-version', '1.0.0'],
+                              extra=terminal_env, expected=1)
+        assert '未登记' in missing_browser.stderr
+        assert str(terminal_config / 'buildflow/browser.json') in missing_browser.stderr
+        assert (app / '.build/last-success.json').read_bytes() == success
+        run([terminal_app / 'setup.sh', '--playwright', args.playwright, '--chromium', args.chromium], extra=terminal_env)
+        run([terminal_app / 'build.sh', '--build-version', '1.0.0'], extra=terminal_env)
+        run(['python3', '-c', code, app / 'scripts', app, ROOT / 'project.json'],
+            extra={**terminal_env, 'PYTHONPATH': paths})
+        assert settings.read_bytes() == previous
+        checks.append('terminal XDG context reports its missing registry, then builds a real FPK with registered existing tools without changing the original context')
         args.output.mkdir(parents=True, exist_ok=True)
         shutil.copy2(artifact, args.output / 'fixture.fpk')
         shutil.copy2(artifact.with_suffix('.fpk.sha256'), args.output / 'fixture.fpk.sha256')

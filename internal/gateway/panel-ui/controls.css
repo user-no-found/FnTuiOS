@@ -1,0 +1,7 @@
+.toggle[data-edge], :host([data-compact="true"]) .toggle { transform:none; opacity:1; touch-action:none; clip-path:none; }
+.toggle[data-dragging="true"] { transition:none; }
+.toggle > svg { pointer-events:none; }
+:host .toggle[data-idle="true"][data-edge="left"] { transform:translateX(-50%); opacity:.7; clip-path:inset(0 0 0 50%); }
+:host .toggle[data-idle="true"][data-edge="right"] { transform:translateX(50%); opacity:.7; clip-path:inset(0 50% 0 0); }
+:host .toggle[data-idle="true"][data-edge="top"] { transform:translateY(-50%); opacity:.7; clip-path:inset(50% 0 0); }
+:host .toggle[data-idle="true"][data-edge="bottom"] { transform:translateY(50%); opacity:.7; clip-path:inset(0 0 50%); }

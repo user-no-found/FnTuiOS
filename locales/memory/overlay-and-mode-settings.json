@@ -1,0 +1,86 @@
+[
+  {
+    "source": "Overlay frame color",
+    "translation": "浮层边框颜色",
+    "scope": "internal/app/settings_color.go:colorSettings:8dc0ecdac918:1",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "(overlay's own)",
+    "translation": "（浮层自身颜色）",
+    "scope": "internal/app/settings_color.go:colorSettings:ac9cb742f7bf:1",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Colour of every overlay's frame: dialogs, framed panels and which-key",
+    "translation": "所有浮层的边框颜色：对话框、带边框的面板及 which-key 快捷键提示",
+    "scope": "internal/app/settings_color.go:colorSettings:f1eddf0850e1:1",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Mode pill",
+    "translation": "模式标记",
+    "scope": "internal/app/settings_registry.go:settingLabels:6c26c2a0b970:1",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Overlays like panes",
+    "translation": "窗格式浮层",
+    "scope": "internal/app/settings_registry.go:settingLabels:81c3697752e2:1",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Overlay frames keep their default colour",
+    "translation": "浮层边框保留默认颜色",
+    "scope": "internal/config/validation.go:validateBorderColors:ff8718abec88:1",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "What the mode pill shows while tiling is on: tiling shows the tiling icon, input shows the terminal or window icon",
+    "translation": "开启平铺时模式标记显示的内容：tiling 显示平铺图标，input 显示终端或窗口图标",
+    "scope": "settings.appearance.dock_mode_pill.description",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Mode pill",
+    "translation": "模式标记",
+    "scope": "settings.appearance.dock_mode_pill.label",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "input",
+    "translation": "输入模式",
+    "scope": "settings.appearance.dock_mode_pill.value.input",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "tiling",
+    "translation": "平铺模式",
+    "scope": "settings.appearance.dock_mode_pill.value.tiling",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Colour of every overlay's frame: #89b4fa, a slot name such as bright_cyan, or a role such as accent. Empty keeps the overlay's own, or the focused pane's border under pane_overlays",
+    "translation": "所有浮层的边框颜色：可使用 #89b4fa、bright_cyan 等颜色槽名称，或 accent 等颜色角色。留空时保留浮层自身颜色；启用 pane_overlays 时采用焦点窗格的边框颜色",
+    "scope": "settings.appearance.overlay_border_color.description",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Overlay border color",
+    "translation": "浮层边框颜色",
+    "scope": "settings.appearance.overlay_border_color.label",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Draw dialogs and panels like pane windows: framed in the focused pane's border colour, on the pane's background",
+    "translation": "将对话框和面板绘制为窗格样式：使用焦点窗格的边框颜色和窗格背景",
+    "scope": "settings.appearance.pane_overlays.description",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  },
+  {
+    "source": "Overlays like panes",
+    "translation": "窗格式浮层",
+    "scope": "settings.appearance.pane_overlays.label",
+    "reason": "Native overlay or mode setting display; preserve configuration paths, stored enum values and named colour examples."
+  }
+]

@@ -16,12 +16,24 @@ also inventories literals outside those packages, embedded-resource directives
 and runtime assets; changes require an explicit review even when they are not
 yet identified as a display entry point.
 
+Repeated literals within a declaration also require checking their AST context:
+inserting an earlier occurrence can move a display word's ordinal ID onto an
+internal argument. Cockpit count labels have separate records from glyph-state
+keys. The display contract checks that projection translates the labels while
+retaining the exact state arguments passed to the glyph lookup.
+
 Settings labels, descriptions and accepted choices use generated display maps.
 Original option paths, enum values and registry descriptions used by JSON or
 configuration remain unchanged. The help renderer projects action and scoped
 binding descriptions at display time. Other native translations replace only
 exact source literal spans resolved from the current AST. User terminal output,
 commands, file contents and external program interfaces are not rewritten.
+
+The preset picker summaries are extracted through the typed preset API,
+including summaries stored in embedded TOML files. Their translations apply
+only when rendering the picker; preset names, bindings and source files remain
+canonical. Preset help intended for the command line is outside this display
+projection and is covered by the source asset inventory.
 
 Built-in risk rule names and explanations are reviewed as registry text. The
 Inbox uses a separate display map; the original rule identifiers, matching,
@@ -33,6 +45,8 @@ Configuration-backed native displays use the `config-display` classification.
 The scanner follows the declared prefix-menu, keyboard-report, scope and
 configuration-warning display APIs through their local functions, methods and
 typed display tables, including helpers moved into another source file.
+Package-level menu tables include keyed descriptions and titles, and the second
+positional field of `menuPart`; its first field remains the canonical action.
 Display fields and helper parameters are distinguished from actions, chords,
 process names and configuration keys. Formatting wrappers retain their actual
 format-argument index, so placeholder checks also apply to helper calls.
@@ -44,7 +58,9 @@ canonical. Native renderers explicitly call the display APIs; the original
 configuration APIs and tables remain unchanged. The projection report records
 each translated context and requires it to be applied exactly once. Missing
 catalog entries, changed source classifications, unresolved ambiguous methods
-and detected writes to shared state stop generation. Native contract checks
+and detected writes to shared state stop generation. Receiver resolution follows declared return slots, including
+grouped named results and tuple assignments. Unknown receivers remain subject
+to the ambiguity rejection. Native contract checks
 compare original API results before and after using the localized APIs.
 
 An explicit custom sidebar title and a custom command description remain user

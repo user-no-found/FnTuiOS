@@ -18,8 +18,10 @@ The project version is selected and written back by BuildFlow under its build
 lock, then FnPackKit loads the application plan with that selected value. Use
 `--build-version 0.0.1` for an exact noninteractive choice or `--next-version
 --channel stable` for the next stable version. Channel changes retain the base
-version. Project metadata owns the default; the installed NAS version is only
-shown for reference. Package filenames, manifests and binary stamps consume the
+version. A failed or cancelled candidate remains the default retry, and only
+successful local publication consumes a version. A successful stable version
+resets the internal test serial to zero; the first test candidate uses `-01`.
+The installed NAS version is only shown for reference. Package filenames, manifests and binary stamps consume the
 same selected value.
 
 The plan resolves `project.json.upstream` (`user-no-found/Fnbak-tuios`)'s default
@@ -69,14 +71,23 @@ verification to this record under `application`. A temporary Go modfile supplies
 runtime replacement; maintained `go.mod` has no machine-specific absolute path.
 Both architectures use the same application inputs and resolved upstream SHA.
 
-The application's `setup.sh --playwright PATH --chromium PATH` checks the existing
-Playwright Node package and Chromium `--version`, then atomically saves the two
-paths to ignored `.build/environment.json`. It preserves the old configuration
-if validation fails. Omitted options reuse existing configuration or explicit
-environment settings; no dependencies are downloaded. Run setup again after
-moving a browser installation.
+The application's `setup.sh --playwright PATH --chromium PATH` delegates existing
+Node, Playwright and Chrome/Chromium validation and atomic registration to
+BuildFlow. Browser tools are shared in the user-level `buildflow/browser.json`
+configuration, independently of any application's cache. Invalid selections
+preserve the registered configuration. Omitted options reuse shared defaults;
+setup does not download dependencies. Run setup again after moving a tool.
 
-Application plan selection loads the saved browser paths for either the local
+The registry belongs to the selected `${XDG_CONFIG_HOME:-$HOME/.config}`.
+An SSH shell and a FnTuiOS terminal can select different directories even for
+the same NAS user. Run application setup in the terminal used for building,
+passing the absolute paths of the already installed tools when its registry is
+missing. Registration creates configuration only; it does not install a second
+copy. A missing-registry diagnostic names the selected file and tool key. An
+invalid explicit override reports its source and never falls back to another
+context.
+
+Application plan selection loads the shared browser tools for either the local
 entry or the shared FnPackKit entry. Explicit `FNTUIOS_PLAYWRIGHT` and
 `FNTUIOS_CHROMIUM` variables take precedence, including invalid values that must
 fail rather than fall back. No application paths enter the shared tool registry.
@@ -97,7 +108,10 @@ peer-verified Unix gateway, using a simulated broker and the current real UID.
 Every HOME/XDG/runtime path belongs to a temporary fixture. Browser checks cover
 Chinese iframe screens, actual terminal input, clipboard text/images, pane and
 session authority, bounded uploads and token replay. The keyboard negative
-control removes the served paste hook and requires the text regression to fail.
+control removes the served paste hook and requires the specific
+`keyboard.fallback.swallowed` assertion. Acceptance requires injection proof,
+three press/repeat/release events, missing outgoing frames and no unrelated
+browser errors; cancellation or other assertions remain failures.
 Evidence stays in `.build/verification/<fpk-hash>/`, bound to the actual FPK hash.
 
 These ordinary-user checks do not execute the privileged broker, switch between
@@ -134,13 +148,10 @@ python3 scripts/deliver.py --verified /path/to/verified.json \
 ```
 
 Delivery rechecks hashes and common inputs. It does not install, stop or replace
-an application. The CI workflow uses the same root build entry and native
-verification before artifact upload. Source changes require a new input review;
-no job automatically approves translations or publishes a release.
-
-The CI bootstrap pins fnpack 1.2.3 with its published download checksum. Local
-build provenance records the actual invoked fnpack version. The workflow requires
-the shared repositories to be published before remote checkout can succeed.
+an application. Builds and verification run locally on the designated build
+machine. Build provenance records the actual invoked fnpack version. Source
+changes require an input review; GitHub stores source and manually published
+artifacts without a build workflow.
 
 To check initialization independently of a full TUIOS build, run
 `scripts/verify_setup.py --buildflow /path/to/BuildFlow --fnpackkit /path/to/FnPackKit

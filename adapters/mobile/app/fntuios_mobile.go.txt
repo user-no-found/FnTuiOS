@@ -1,0 +1,18 @@
+package app
+
+import "github.com/Gaurav-Gosain/tuios/internal/config"
+
+func (m *OS) fnCompactTouch() bool {
+	return m.BrowserClient && m.TouchClient && m.GetRenderWidth() < config.SidebarBreakpointFull
+}
+
+// The phone rail is a client-local overlay, never a shared layout reservation.
+func (m *OS) fnMobileSidebarWidth() (int, bool) {
+	if !m.fnCompactTouch() {
+		return 0, false
+	}
+	if !m.SidebarFocused || m.GetRenderWidth() < 12 {
+		return 0, true
+	}
+	return m.GetRenderWidth(), true
+}

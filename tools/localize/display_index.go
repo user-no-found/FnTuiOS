@@ -221,6 +221,9 @@ func (index *displayIndex) role(file, decl string, lit *ast.BasicLit, parents []
 	if guestDisplayLiteral(lit, parents) {
 		return "config-display", "typed curated display field; canonical table is unchanged"
 	}
+	if menuDisplayLiteral(lit, parents) {
+		return "config-display", "typed menu display field; canonical table is unchanged"
+	}
 	fn := index.functions[decl]
 	if fn == nil || !index.reachable[decl] {
 		name := decl

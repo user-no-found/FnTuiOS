@@ -1,0 +1,67 @@
+package app
+
+import (
+	"context"
+	"fmt"
+	"strings"
+	"testing"
+	"unicode/utf8"
+
+	tea "charm.land/bubbletea/v2"
+)
+
+func TestFnMobilePanelCopyTextAndBinding(t *testing.T) {
+	m := browserImageTestModel(t)
+	ctx := context.Background()
+	b := m.EnableBrowserImages(ctx, func(tea.Msg) {})
+	target, code := m.captureBrowserImage(b, ctx)
+	if code != "" {
+		t.Fatal(code)
+	}
+	w := target.window
+	w.LockIO()
+	for i := range 80 {
+		_, _ = fmt.Fprintf(w.Terminal, "\x1b[31m中文-%03d\x1b[0m\r\n", i)
+	}
+	w.UnlockIO()
+	screen := m.copyBrowserPanel(browserPanelCopy{target: target})
+	history := m.copyBrowserPanel(browserPanelCopy{target: target, history: true})
+	if screen.code != "" || history.code != "" || history.truncated || !utf8.ValidString(history.text) ||
+		!strings.Contains(history.text, "中文-000") || !strings.Contains(screen.text, "中文-079") ||
+		strings.Contains(screen.text, "中文-000") || strings.ContainsAny(history.text, "\x1b\r") {
+		t.Fatalf("unexpected capture: screen=%+v history=%+v", screen, history)
+	}
+	w.LockIO()
+	busy := m.copyBrowserPanel(browserPanelCopy{target: target})
+	w.UnlockIO()
+	if busy.code != "busy" || busy.text != "" {
+		t.Fatal("locked pane did not fail promptly", busy)
+	}
+	m.SessionName = "other"
+	if got := m.copyBrowserPanel(browserPanelCopy{target: target}); got.code != "target_changed" || got.text != "" {
+		t.Fatal("stale binding disclosed text", got)
+	}
+}
+
+func TestFnMobilePanelCopyBounds(t *testing.T) {
+	for _, line := range []string{"x", strings.Repeat("中文", 20)} {
+		m := browserImageTestModel(t)
+		ctx := context.Background()
+		b := m.EnableBrowserImages(ctx, func(tea.Msg) {})
+		target, code := m.captureBrowserImage(b, ctx)
+		if code != "" {
+			t.Fatal(code)
+		}
+		w := target.window
+		w.SetScrollbackMaxLines(25000)
+		w.LockIO()
+		w.Terminal.Resize(100, 4)
+		_, _ = fmt.Fprint(w.Terminal, strings.Repeat(line+"\r\n", 23000)+"COPY_TAIL")
+		w.UnlockIO()
+		got := m.copyBrowserPanel(browserPanelCopy{target: target, history: true})
+		if got.code != "" || !got.truncated || len(got.text) > 2*1024*1024 ||
+			strings.Count(got.text, "\n") > 20004 || !strings.HasSuffix(got.text, "COPY_TAIL") || !utf8.ValidString(got.text) {
+			t.Fatalf("unbounded or damaged capture: code=%q truncated=%v bytes=%d", got.code, got.truncated, len(got.text))
+		}
+	}
+}

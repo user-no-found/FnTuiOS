@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Exercise real browser origin metadata across the isolated TLS-to-Unix gateway.
 import { mkdir, writeFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
+import { openPhoneKeyboard } from './verify_mobile_keyboard.mjs';
 
 const { values } = parseArgs({ options: {
   url: { type: 'string' }, output: { type: 'string' }, policy: { type: 'string' },
@@ -13,11 +14,10 @@ const entry = new URL(values.url);
 if (entry.protocol !== 'https:' || entry.hostname !== '127.0.0.1' || !['strict', 'repaired'].includes(values.policy)) {
   throw new Error('gateway browser checks require an isolated TLS fixture and explicit policy');
 }
-const { chromium } = createRequire(import.meta.url)(resolve(values.playwright));
+const { launchBrowser, closeBrowser } = await import(pathToFileURL(process.env.BUILDFLOW_BROWSER_RUNTIME));
 const output = resolve(values.output);
 await mkdir(output, { recursive: true });
-const browser = await chromium.launch({ executablePath: resolve(values.chromium), headless: true,
-  args: ['--no-sandbox', '--disable-dev-shm-usage'] });
+const browser = await launchBrowser({ args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 const context = await browser.newContext({ ignoreHTTPSErrors: true,
   viewport: values.mobile ? { width: 390, height: 844 } : { width: 1280, height: 800 },
   isMobile: values.mobile, hasTouch: values.mobile });
@@ -85,7 +85,15 @@ try {
   } else {
     await until(() => frame.evaluate(() => !!window.sipTerm?.connected), 'repaired gateway did not connect');
     const identity = await (await context.request.get(new URL('/__fixture_identity', entry).href)).json();
-    await frame.locator('.xterm-screen').click();
+    if (values.mobile) {
+      await openPhoneKeyboard(frame);
+      const inputReady = await frame.evaluate(() => window.FnMobileKeyboard.isOpen()
+        && document.activeElement === window.sipTerm.webterm.xterm.textarea);
+      if (!inputReady) throw new Error('explicit mobile keyboard entry did not focus terminal input');
+      checks.push('mobile shell input opens through the explicit backend-panel keyboard action');
+    } else {
+      await frame.locator('.xterm-screen').click();
+    }
     await page.keyboard.press('Control+b');
     await page.keyboard.press('c');
     await until(async () => (await screen()).includes(identity.username + '@'), 'isolated shell not ready');
@@ -135,5 +143,5 @@ try {
   throw error;
 } finally {
   await context.request.post(new URL('/__fixture_stop', entry).href).catch(() => {});
-  await browser.close();
+  await closeBrowser(browser);
 }

@@ -42,6 +42,29 @@ func guestDisplayLiteral(lit *ast.BasicLit, parents []ast.Node) bool {
 	return false
 }
 
+// menuDisplayLiteral follows the typed menu tables, including menuPart's
+// positional description. Action identifiers remain canonical.
+func menuDisplayLiteral(lit *ast.BasicLit, parents []ast.Node) bool {
+	typeName := compositeName(parents)
+	if typeName != "menuPart" && typeName != "menuRow" && typeName != "menuSection" {
+		return false
+	}
+	for i := len(parents) - 1; i >= 0; i-- {
+		if field, ok := parents[i].(*ast.KeyValueExpr); ok && directLiteral(field.Value, lit) {
+			key, ok := field.Key.(*ast.Ident)
+			return ok && displayParameter(key.Name)
+		}
+		if object, ok := parents[i].(*ast.CompositeLit); ok {
+			for position, value := range object.Elts {
+				if directLiteral(value, lit) {
+					return typeName == "menuPart" && position == 1
+				}
+			}
+		}
+	}
+	return false
+}
+
 func formatWrapper(fn *ast.FuncLit) int {
 	params := parameterNames(fn.Type)
 	if len(params) == 0 {

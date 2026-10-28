@@ -14,7 +14,7 @@ def apply(source):
         ('render_whichkey.go', 'config.PrefixMenuGroups(', 'fnPrefixMenuGroups(', 2),
         ('agents_seen.go', 'config.PrefixMenuGroups(', 'fnPrefixMenuGroups(', 1),
         ('factory.go', 'config.ConfigWarnings(cfg)', 'config.FnDisplayConfigWarnings(cfg)', 1),
-        ('sidebar_custom.go', '.ResolvedTitle()', '.FnDisplayResolvedTitle()', 1),
+        ('sidebar_custom.go', '.ResolvedTitle()', '.FnDisplayResolvedTitle()', 2),
         ('render_keybind_manager.go', 'config.Scopes(', 'config.FnDisplayScopes(', 1),
         ('render_keybind_manager.go', 'config.AmbiguityVerdict(', 'config.FnDisplayAmbiguityVerdict(', 1),
         ('keybind_manager.go', 'm.KeybindRegistry.Report(facts)', 'm.KeybindRegistry.FnDisplayReport(facts)', 1),

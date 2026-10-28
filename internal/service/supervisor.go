@@ -20,7 +20,7 @@ import (
 	"github.com/user-no-found/FnPackKit/runtime/securefs"
 )
 
-// Serve owns privileged filesystem setup and the identity-only launcher channel.
+// Serve owns privileged preparation and the identity-bound launcher/control channel.
 func Serve(ctx context.Context, configPath string) error {
 	if os.Geteuid() != 0 {
 		return errors.New("serve requires the package's privileged service launcher")

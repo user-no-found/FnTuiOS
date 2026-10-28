@@ -107,6 +107,7 @@ func runGateway(ctx context.Context) error {
 	if err := decodeInput(&options); err != nil {
 		return err
 	}
+	options.Name = displayName
 	listenerFile := os.NewFile(3, "gateway-listener")
 	defer listenerFile.Close()
 	brokerFile := os.NewFile(4, "gateway-broker")

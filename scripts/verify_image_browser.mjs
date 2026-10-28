@@ -126,7 +126,12 @@ export async function verifyImages({ page, frame, entry, output, until, wire, ca
     if (keyEvents.length !== 3) throw new Error('fixture did not emit press/repeat/release events');
     const keyFrames = keyEvents.map(event => event.encoded ?? (event.type === 'keydown' ? '\x16' : null)).filter(Boolean);
     const actualKeys = () => inputSince(start).match(/\x16|\x1b\[(?:86|118)(?::[0-9:]*)?;[0-9]+(?::[123])?(?:;[0-9:]*)?u/g) || [];
-    await until(() => actualKeys().length >= keyFrames.length, 'Ctrl+V fallback key frames were swallowed');
+    try {
+        await until(() => actualKeys().length >= keyFrames.length, 'Ctrl+V fallback key frames were swallowed');
+    } catch (error) {
+        throw Object.assign(error, { code: 'keyboard.fallback.swallowed',
+            evidence: { expected: keyFrames, actual: actualKeys(), events: keyEvents } });
+    }
     if (JSON.stringify(actualKeys()) !== JSON.stringify(keyFrames)) {
         throw new Error('Ctrl+V press/repeat/release fallback changed order or duplicated input');
     }

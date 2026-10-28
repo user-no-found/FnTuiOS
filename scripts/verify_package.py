@@ -98,6 +98,8 @@ def verify(args):
         run(capped([harness, '-test.run', '^TestNativeWorker$', '-test.v', '-test.timeout', '3m']), env=env)
     with activity('验证浏览器中文界面与图片粘贴'):
         browser_check(args, app, output, harness)
+    with activity('验证共享后端控制与终端设置'):
+        browser_check(args, app, output / 'runtime-panel', harness, panel=True)
     with activity('验证键盘回归预期负控'):
         negative_check(args, app, output, harness)
     with activity('验证公网网关与来源边界'):

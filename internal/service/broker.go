@@ -3,6 +3,7 @@ package service
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -19,6 +20,7 @@ import (
 
 	"fntuios/internal/config"
 	"fntuios/internal/gateway"
+	"github.com/user-no-found/FnPackKit/runtime/backend"
 	"github.com/user-no-found/FnPackKit/runtime/identity"
 	"github.com/user-no-found/FnPackKit/runtime/process"
 	"github.com/user-no-found/FnPackKit/runtime/securefs"
@@ -31,12 +33,14 @@ type instance struct {
 }
 
 type broker struct {
-	config     config.Config
-	self       string
-	gatewayUID uint32
-	mu         sync.Mutex
-	instances  map[uint32]*instance
-	stopping   bool
+	config      config.Config
+	self        string
+	gatewayUID  uint32
+	mu          sync.Mutex
+	instances   map[uint32]*instance
+	stopping    bool
+	controlOnce sync.Once
+	controls    *backend.Controller
 }
 
 func (broker *broker) serve(connection net.Conn) error {
@@ -46,7 +50,7 @@ func (broker *broker) serve(connection net.Conn) error {
 	for scanner.Scan() {
 		decoder := json.NewDecoder(bytes.NewReader(scanner.Bytes()))
 		decoder.DisallowUnknownFields()
-		var request identity.Request
+		var request gateway.BrokerRequest
 		err := decoder.Decode(&request)
 		var trailing any
 		if err == nil && decoder.Decode(&trailing) != io.EOF {
@@ -54,11 +58,23 @@ func (broker *broker) serve(connection net.Conn) error {
 		}
 		var endpoint gateway.Endpoint
 		if err == nil {
-			endpoint, err = broker.acquire(request)
+			if request.Control != nil {
+				var snapshot backend.Snapshot
+				snapshot, err = broker.controller().Execute(context.Background(), request.Request, *request.Control)
+				endpoint = gateway.Endpoint{UID: request.UID, Runtime: &snapshot}
+			} else {
+				err = broker.controller().Use(context.Background(), request.Request, func() error {
+					var acquireErr error
+					endpoint, acquireErr = broker.acquire(request.Request)
+					return acquireErr
+				})
+			}
 		}
 		if err != nil {
 			log.Printf("runtime request rejected uid=%d: %v", request.UID, err)
-			endpoint = gateway.Endpoint{UID: request.UID, Error: "user runtime unavailable"}
+			endpoint.UID = request.UID
+			endpoint.Error = "user runtime unavailable"
+			endpoint.Paused = errors.Is(err, backend.ErrPaused)
 		}
 		if err := encoder.Encode(endpoint); err != nil {
 			return err

@@ -1,0 +1,38 @@
+package main
+
+import (
+	"github.com/Gaurav-Gosain/sip"
+	"github.com/Gaurav-Gosain/tuios/internal/config"
+)
+
+// Mobile commands resolve through the same registry as desktop key bindings.
+func installFnMobileControls(cfg *sip.Config, registry *config.KeybindRegistry, leader string) {
+	if cfg.MobilePrefix.IsZero() {
+		return
+	}
+	keys := []sip.MobileKey{{Label: "前缀", Title: "前缀键，然后输入命令", Prefix: true}}
+	for _, command := range []struct{ label, action string }{
+		{"会话", "prefix_session_switcher"}, {"侧栏", "prefix_explore"},
+		{"新建", "prefix_new_window"}, {"下一个", "prefix_next_window"},
+		{"放大", "prefix_fullscreen"}, {"命令", "prefix_command_palette"},
+		{"上一个", "prefix_prev_window"}, {"关闭", "prefix_close_window"},
+		{"搜文件", "prefix_file_search"}, {"智能体", "prefix_inbox"},
+		{"平铺", "prefix_toggle_tiling"}, {"竖分屏", "prefix_split_vertical"},
+		{"横分屏", "prefix_split_horizontal"}, {"设置", "prefix_settings"},
+		{"帮助", "prefix_help"},
+	} {
+		if key, ok := commandKey(registry, command.label, command.action, leader); ok {
+			key.Title = command.label + " · " + leader
+			keys = append(keys, key)
+		}
+	}
+	if len(keys) == 1 {
+		return
+	}
+	row := sip.MobileRow{Label: "终端操作", Keys: keys, Collapsible: true}
+	if len(cfg.MobileRows) > 0 && cfg.MobileRows[0].Collapsible {
+		cfg.MobileRows[0] = row
+	} else {
+		cfg.MobileRows = append([]sip.MobileRow{row}, cfg.MobileRows...)
+	}
+}

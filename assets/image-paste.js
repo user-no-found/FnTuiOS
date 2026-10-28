@@ -91,6 +91,19 @@
             const operation = begin();
             if (operation) upload(operation, file);
         }, true);
+        const picker = document.createElement('input');
+        picker.type = 'file'; picker.accept = 'image/*'; picker.hidden = true;
+        document.body.append(picker);
+        let selectionConnection;
+        picker.addEventListener('cancel', () => { selectionConnection = null; picker.value = ''; });
+        picker.addEventListener('change', () => {
+            const image = picker.files?.[0]; picker.value = '';
+            const connection = selectionConnection; selectionConnection = null;
+            if (!image) return;
+            if (!client.connected || client.readOnly || client.connection !== connection) { display('disconnected'); return; }
+            const operation = begin();
+            if (operation) upload(operation, image).catch(error => finish(operation, error.message));
+        });
         instances.set(client, {
             input,
             receive(data) {
@@ -106,7 +119,13 @@
                 } else if (result.type === 'image-done') finish(operation, 'complete', true);
                 else if (result.type === 'image-error') finish(operation, aliases[result.code] || result.code, true);
             },
+            choose() {
+                if (current) { display('busy'); return; }
+                if (!client.connected || client.readOnly) { display(client.readOnly ? 'read_only' : 'disconnected'); return; }
+                picker.value = ''; selectionConnection = client.connection; picker.click();
+            },
             disconnect() {
+                selectionConnection = null; picker.value = '';
                 input.disconnect();
                 if (current) finish(current, 'disconnected', true);
             },
@@ -114,6 +133,7 @@
     }
     window.FnImagePaste = Object.freeze({
         install,
+        choose(client) { instances.get(client)?.choose(); },
         key(client, event) { return instances.get(client)?.input.key(event) ?? true; },
         transmit(connection, type, payload) {
             const instance = instances.get(connection.client);

@@ -18,6 +18,14 @@ func main() {
  expected := map[string]string{}
  if err := json.NewDecoder(os.Stdin).Decode(&expected); err != nil { panic(err) }
  checks := []string{}
+ shownKinds, queryWords := app.FnDisplayProbeGoto()
+ for key, want := range map[string]string{"agent":"智能体","session":"会话","workspace":"工作区","pane":"窗格"} {
+  require(shownKinds[key]==want,"go-to kind label not localized: "+key)
+  require(slicesContain(queryWords,key),"go-to query token was translated: "+key)
+ }
+ require(slicesContain(queryWords,"ws") && slicesContain(queryWords,"panes"),"go-to aliases were translated")
+ checks=append(checks,"go-to display nouns are Chinese while canonical query kinds and aliases stay intact")
+
  cfg := config.DefaultConfig()
  registry := config.NewKeybindRegistry(cfg)
  originalTables := snapshot(config.GuestPrograms)
@@ -35,7 +43,7 @@ func main() {
   if rebound { current.Keybindings.PrefixMode["terminal_focus_left"] = nil }
   current.Keybindings.Command = []config.CommandBinding{{Name:"user-help", Key:"prefix+alt+g", Command:"true", Description:"New window"}}
   r := config.NewKeybindRegistry(current)
-  for _, prefix := range []string{"","workspace","minimize","window","layout","tape","debug"} {
+  for _, prefix := range []string{"","tuios","workspace","minimize","window","layout","tape","debug"} {
    for _, daemon := range []bool{false,true} {
     for _, active := range []bool{false,true} {
      state := config.MenuState{Daemon:daemon,Minimized:-1}
@@ -105,3 +113,5 @@ func main() {
  checks=append(checks,"default and explicit title notification enums retain validity; invalid values retain Field/Key; custom sidebar title is unchanged")
  if err:=json.NewEncoder(os.Stdout).Encode(map[string]any{"checks":checks,"prefix_cases":prefixCases,"count_cases":countChecks,"custom_rows":customRows,"verified":true});err!=nil{panic(err)}
 }
+
+func slicesContain(items []string, value string) bool { for _, item := range items { if item==value { return true } }; return false }

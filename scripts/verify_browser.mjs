@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Exercise the real terminal in a same-origin iframe through the isolated gateway fixture.
 import { mkdir, rm, writeFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { verifyImages } from './verify_image_browser.mjs';
@@ -21,13 +21,11 @@ const entry = new URL(values.url);
 if (!['127.0.0.1', 'localhost'].includes(entry.hostname)) {
   throw new Error('This harness accepts only the isolated loopback fixture');
 }
-const require = createRequire(import.meta.url);
-const { chromium } = require(resolve(values.playwright));
+const { launchBrowser, closeBrowser } = await import(pathToFileURL(process.env.BUILDFLOW_BROWSER_RUNTIME));
 const identity = await (await fetch(new URL('/__fixture_identity', entry))).json();
 const output = resolve(values.output);
 await mkdir(output, { recursive: true });
-const browser = await chromium.launch({ executablePath: resolve(values.chromium),
-  headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
+const browser = await launchBrowser({ args: ['--no-sandbox', '--disable-dev-shm-usage'] });
 const checks = [], captures = {}, sockets = [], failures = [], wire = [];
 const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
 page.on('websocket', socket => {
@@ -69,6 +67,7 @@ async function until(predicate, reason, timeout = 20000) {
   throw new Error(reason);
 }
 let frame;
+let mutationApplied = false;
 async function screen() {
   return frame.evaluate(() => {
     const terminal = window.sipTerm.term, buffer = terminal.buffer.active;
@@ -118,8 +117,9 @@ try {
     await page.route('**/static/paste-input.js', async route => {
       const response = await route.fetch();
       const source = await response.text();
-      if (!source.includes('key(event) {')) throw new Error('negative key control anchor drift');
+      if (source.split('key(event) {').length !== 2) throw new Error('negative key control anchor drift');
       await route.fulfill({ response, body: source.replace('key(event) {', 'key(event) { return true;') });
+      mutationApplied = true;
     });
   }
   await page.goto(entry.href, { waitUntil: 'domcontentloaded' });
@@ -157,11 +157,18 @@ try {
   if (canonical.value !== 'bottom') throw new Error('CLI enum roundtrip corrupted canonical value');
   await option(originalOption.value);
   checks.push(`${values.english ? 'Displayed' : 'Translated'} enum changes the client layout; daemon value stays canonical; CLI bottom roundtrip is exact`);
+  const wideTerminal = await frame.evaluate(() => ({
+    cols: window.sipTerm.term.cols, rows: window.sipTerm.term.rows,
+  }));
   await page.setViewportSize({ width: 800, height: 600 });
   await until(async () => frame.evaluate(() => window.sipTerm.term.cols < 120), 'terminal did not resize');
   await capture('settings-narrow');
   await page.setViewportSize({ width: 1440, height: 960 });
-  await frame.locator('.xterm-screen').click();
+  await until(async () => frame.evaluate(({ cols, rows }) =>
+    window.sipTerm.term.cols === cols && window.sipTerm.term.rows === rows,
+  wideTerminal), 'terminal did not restore its wide dimensions');
+  // Focusing through a mouse click can activate a setting beneath the pointer.
+  await frame.evaluate(() => window.sipTerm.term.focus());
   await page.keyboard.press('Escape');
   await until(async () => !(values.english ? /Settings \(this session only\)/ : /设置（仅此会话）/).test(await screen()), 'settings did not close');
   await prefix('?');
@@ -206,9 +213,9 @@ try {
   if (!values.quiet) console.log(JSON.stringify({ checks, output }, null, 2));
 } catch (error) {
   if (frame) await capture('failure').catch(() => {});
-  await writeFile(`${output}/failure.json`, JSON.stringify({ error: error.message, failures, sockets, input: wire.filter(item => item.direction === 'sent' && item.bytes[0] === 0x30).slice(-30).map(item => item.bytes.subarray(1).toString()), paste: await frame?.evaluate(() => window.__fnPasteEvents), keys: await frame?.evaluate(() => window.__fnKeyEvents), imageStatus: await frame?.locator('#fn-image-paste-status').textContent().catch(() => '') }, null, 2));
+  await writeFile(`${output}/failure.json`, JSON.stringify({ error: error.message, code: error.code || null, evidence: error.evidence || null, mutation: { id: 'disable-native-paste-key', applied: mutationApplied }, failures, sockets, input: wire.filter(item => item.direction === 'sent' && item.bytes[0] === 0x30).slice(-30).map(item => item.bytes.subarray(1).toString()), paste: await frame?.evaluate(() => window.__fnPasteEvents), keys: await frame?.evaluate(() => window.__fnKeyEvents), imageStatus: await frame?.locator('#fn-image-paste-status').textContent().catch(() => '') }, null, 2));
   throw error;
 } finally {
-  await browser.close();
+  await closeBrowser(browser);
   await fetch(new URL('/__fixture_stop', entry), { method: 'POST' }).catch(() => {});
 }

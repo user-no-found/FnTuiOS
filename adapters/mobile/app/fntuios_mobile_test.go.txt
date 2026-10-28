@@ -1,0 +1,54 @@
+package app
+
+import (
+	"testing"
+
+	"github.com/Gaurav-Gosain/tuios/internal/config"
+)
+
+func TestFnMobileSidebarIsClientOverlay(t *testing.T) {
+	for _, width := range []int{20, 39, 44, 60, 89} {
+		m := &OS{Settings: config.DefaultSettings(), Width: width, Height: 30,
+			BrowserClient: true, TouchClient: true}
+		settings := m.Settings
+		before := m.OwnLayoutReserve()
+		if m.GetSidebarWidth() != 0 || before.Left != 0 || before.Right != 0 {
+			t.Fatalf("phone at %d columns reserves a resting rail: %+v", width, before)
+		}
+		m.SidebarFocused = true
+		if got := m.GetSidebarWidth(); got != width {
+			t.Fatalf("phone drawer at %d columns has width %d", width, got)
+		}
+		if after := m.OwnLayoutReserve(); after != before {
+			t.Fatalf("opening phone drawer changed shared reserve: %+v -> %+v", before, after)
+		}
+		if m.Settings.SidebarEnabled != settings.SidebarEnabled ||
+			m.Settings.SidebarPosition != settings.SidebarPosition ||
+			m.Settings.SidebarWidth != settings.SidebarWidth {
+			t.Fatal("phone presentation changed sidebar settings")
+		}
+		m.SidebarFocused = false
+		if m.GetSidebarWidth() != 0 {
+			t.Fatal("phone drawer did not close")
+		}
+	}
+}
+
+func TestFnMobileSidebarKeepsDesktopAndWideTouchLayout(t *testing.T) {
+	for _, c := range []struct {
+		width          int
+		browser, touch bool
+	}{
+		{44, true, false}, {44, false, true}, {120, true, true},
+	} {
+		m := &OS{Settings: config.DefaultSettings(), Width: c.width, Height: 30,
+			BrowserClient: c.browser, TouchClient: c.touch}
+		if _, handled := m.fnMobileSidebarWidth(); handled {
+			t.Fatalf("mobile override leaked to %+v", c)
+		}
+		want := sidebarResponsiveWidth(m.sidebarPreferredWidth(), c.width)
+		if got := m.GetSidebarWidth(); got != want {
+			t.Fatalf("ordinary sidebar width %d, want %d", got, want)
+		}
+	}
+}

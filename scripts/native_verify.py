@@ -8,11 +8,13 @@ import threading
 import urllib.request
 
 from buildflow.contracts import BuildError
+from buildflow.browser import resolve_browser
 from buildflow.runner import Runner
 from build_inputs import ROOT, capped, run, write_json, temporary_environment
 
 
-def browser_check(args, app, output, harness, negative=False):
+def browser_check(args, app, output, harness, negative=False, panel=False):
+    tools = resolve_browser({"playwright": args.playwright, "chromium": args.chromium})
     output.mkdir(parents=True, exist_ok=True)
     with socket.socket() as sock:
         sock.bind(('127.0.0.1', 0))
@@ -41,12 +43,16 @@ def browser_check(args, app, output, harness, negative=False):
                     time.sleep(0.2)
             else:
                 raise ValueError('native browser fixture readiness timed out')
-            command = ['node', ROOT / 'scripts/verify_browser.mjs', '--url', url,
-                       '--output', output / 'browser', '--playwright', args.playwright,
-                       '--chromium', args.chromium, '--quiet']
-            if negative:
-                command.append('--negative-image-key')
-            run(command)
+            if panel:
+                command = [tools.node, ROOT / 'scripts/verify_runtime_panel.mjs', '--url', url,
+                           '--output', output / 'browser']
+            else:
+                command = [tools.node, ROOT / 'scripts/verify_browser.mjs', '--url', url,
+                           '--output', output / 'browser', '--playwright', args.playwright,
+                           '--chromium', args.chromium, '--quiet']
+                if negative:
+                    command.append('--negative-image-key')
+            run(command, env=tools.environment())
         finally:
             try:
                 urllib.request.urlopen(urllib.request.Request(url + '/__fixture_stop', method='POST'), timeout=2).close()
@@ -61,13 +67,39 @@ def browser_check(args, app, output, harness, negative=False):
 
 def negative_check(args, app, output, harness):
     directory = output / 'negative-image-key'
+    failure_path = directory / 'browser/failure.json'
+    failure_path.unlink(missing_ok=True)
+    expected = 'keyboard.fallback.swallowed'
     try:
         browser_check(args, app, directory, harness, negative=True)
-    except BuildError:
-        failure = json.loads((directory / 'browser/failure.json').read_text())
-        if failure.get('error') != 'native text paste was lost':
-            raise ValueError('keyboard negative control failed for an unrelated reason')
+    except BuildError as error:
+        if error.exit_code == 130:
+            raise
+        if not failure_path.is_file():
+            raise ValueError(f'keyboard negative control produced no failure evidence: {error}') from error
+        failure = json.loads(failure_path.read_text())
+        evidence = failure.get('evidence') or {}
+        mutation = failure.get('mutation') or {}
+        keys = evidence.get('events') or []
+        frames = [key.get('encoded') if key.get('encoded') is not None else
+                  ('\x16' if key.get('type') == 'keydown' else None) for key in keys]
+        frames = [frame for frame in frames if frame]
+        checks = {
+            'failure_code': failure.get('code') == expected,
+            'browser_errors': not failure.get('failures'),
+            'injected_mutation': mutation == {'id': 'disable-native-paste-key', 'applied': True},
+            'event_sequence': [(key.get('type'), key.get('repeat')) for key in keys] ==
+                              [('keydown', False), ('keydown', True), ('keyup', False)],
+            'expected_frames': bool(frames) and evidence.get('expected') == frames,
+            'missing_frames': evidence.get('actual') == [],
+        }
+        rejected = [name for name, matched in checks.items() if not matched]
+        if rejected:
+            raise ValueError(f"keyboard negative control expected {expected}; observed "
+                             f"{failure.get('code')}: {failure.get('error')}; "
+                             f"failed checks: {', '.join(rejected)}; evidence: {failure_path}") from error
     else:
         raise ValueError('keyboard negative control unexpectedly passed')
     write_json(directory / 'control.json', {'mutation': 'disable native paste key hook in served asset',
-               'expected_failure': 'native text paste was lost', 'verified': True})
+               'expected_code': expected, 'observed_error': failure['error'],
+               'expected_frames': evidence['expected'], 'actual_frames': evidence['actual'], 'verified': True})

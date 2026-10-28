@@ -51,6 +51,9 @@ func (fixture *containerFixture) browserImageFixture(w http.ResponseWriter, r *h
 			args = []string{"new-window", "image-reader", "-s", "web", "--json", "--", "/bin/bash", "-c", "printf 'FN_IMAGE_READY\\n'; IFS= read -r image; printf 'FN_IMAGE_SUBMITTED\\n'; sleep 300"}
 		case "new":
 			args = []string{"new-window", "image-fixture", "-s", "web", "--json"}
+		case "copy":
+			args = []string{"new-window", "copy-fixture", "-s", "web", "--json", "--", "/bin/bash", "-c",
+				"printf 'COPY_HISTORY_START\\n'; for ((i=0;i<100;i++)); do printf 'COPY_LINE_%03d\\n' $i; done; printf '\\033[31mCOPY_SCREEN_中文 <tag>&\\033[0m\\n'; sleep 300"}
 		case "focus", "close":
 			if !fixturePaneID.MatchString(pane) {
 				http.Error(w, "pane", 400)

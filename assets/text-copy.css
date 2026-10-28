@@ -1,0 +1,26 @@
+#fn-text-copy {
+    color-scheme: light dark;
+    color: light-dark(#182230, #edf0f7); background: light-dark(#f8f9fc, #20202d);
+    border: 1px solid light-dark(#ccd3df, #535365); border-radius: 14px;
+    box-sizing: border-box; width: min(850px, calc(100vw - 24px));
+    position: fixed; inset: 0; margin: auto; height: min(760px, calc(100dvh - 24px));
+    max-height: calc(100dvh - 24px); padding: 16px;
+}
+#fn-text-copy[open] { display: flex; flex-direction: column; gap: 12px; }
+#fn-text-copy::backdrop { background: #0008; }
+#fn-text-copy header, #fn-text-copy nav, #fn-text-copy footer { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+#fn-text-copy header { justify-content: space-between; }
+#fn-text-copy button {
+    font: inherit; color: inherit; cursor: pointer; border-radius: 8px; padding: 9px 12px;
+    border: 1px solid light-dark(#bbc4d3, #626278); background: light-dark(#fff, #303044);
+}
+#fn-text-copy button[aria-pressed="true"] { color: #fff; background: #416fea; }
+#fn-text-copy button:disabled { opacity: .45; cursor: default; }
+#fn-text-copy pre {
+    margin: 0; padding: 12px; min-height: 140px; flex: 1; overflow: auto;
+    white-space: pre-wrap; overflow-wrap: anywhere; touch-action: pan-x pan-y;
+    user-select: text; -webkit-user-select: text; cursor: text;
+    background: light-dark(#fff, #15151f); border-radius: 8px; font: 14px/1.6 monospace;
+}
+#fn-text-copy p { margin: 0; font-size: 13px; }
+#fn-text-copy footer button { flex: 1; }

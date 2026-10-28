@@ -69,12 +69,17 @@ func snapshot() map[string]any {
 			continue
 		}
 		require(rules[index].Name == sample.Name && rules[index].Why == sample.Why, "canonical risk rule changed")
-		hits := risk.Match(rules, risk.Call{Tool: "Bash", Text: sample.Text, Root: "/work/api"})
-		require(reflect.DeepEqual(hits, []risk.Hit{{Rule: sample.Name, Why: sample.Why}}), "canonical risk match changed: "+sample.Name)
+		hits := risk.Match(rules, risk.Call{Tool: "Bash", Text: sample.Text, Root: "/work/api", RunDir: "/work/api"})
+		require(reflect.DeepEqual(hits, []risk.Hit{{Rule: sample.Name, Why: sample.Why}}), fmt.Sprintf("canonical risk match changed: %s; got %#v", sample.Name, hits))
 		require(encoded(hits) == encoded([]map[string]string{{"rule": sample.Name, "why": sample.Why}}), "canonical risk wire fields changed")
 		allHits = append(allHits, hits)
 	}
-	require(len(risk.Match(rules, risk.Call{Tool: "Bash", Text: "echo okay", Root: "/work/api"})) == 0, "safe call became risky")
+	require(len(risk.Match(rules, risk.Call{Tool: "Bash", Text: "echo okay", Root: "/work/api", RunDir: "/work/api"})) == 0, "safe call became risky")
+	unknownDir := risk.Match(rules, risk.Call{Tool: "Bash", Text: specimens[0].Text, Root: "/work/api"})
+	require(reflect.DeepEqual(unknownDir, []risk.Hit{
+		{Rule: specimens[0].Name, Why: specimens[0].Why},
+		{Rule: specimens[11].Name, Why: specimens[11].Why},
+	}), fmt.Sprintf("unknown run directory must also match outside the worktree; got %#v", unknownDir))
 	return map[string]any{"constants": constants, "rules": rules, "hits": allHits, "cut_short": risk.CutShortHit}
 }
 
@@ -119,6 +124,7 @@ func main() {
 		"13 builtin risk names and explanations rendered at widths 4096, 40 and 24",
 		"risk line wrapping preserves all translated text within the actual width budget",
 		"12 representative risk matches, safe call, 13 canonical identities and JSON fields remain unchanged",
+		"an unknown run directory retains both recursive-delete and outside-worktree risk hits",
 		"3 actual custom risk names retain their text, including a builtin-explanation collision",
 		"rendering leaves canonical rules, matches and cut-short marker unchanged",
 	}

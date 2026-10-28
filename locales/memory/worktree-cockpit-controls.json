@@ -1,0 +1,320 @@
+[
+  {
+    "source": "mention:",
+    "scope": "internal/app/cockpit_reply.go:OS.drawReplyArea:12fed90c0d2b:1",
+    "decision": "keep",
+    "reason": "Hit-action prefix consumed by the composer mention click dispatcher; not visible text."
+  },
+  {
+    "source": "Draft: ",
+    "scope": "internal/app/cockpit_reply.go:OS.drawReplyArea:9565c5e214a4:1",
+    "translation": "草稿：",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "typed at once",
+    "scope": "internal/app/cockpit_reply.go:OS.drawReplyArea:e0d02cc0d205:1",
+    "translation": "立即输入",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": " in ",
+    "scope": "internal/app/cockpit_spawn.go:OS.spawnStart:2eb9d0d30d4c:3",
+    "translation": "，会话：",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": ". The task was not sent: ",
+    "scope": "internal/app/cockpit_spawn.go:OS.spawnStart:72015adbd00e:1",
+    "translation": "。任务未发送：",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Started ",
+    "scope": "internal/app/cockpit_spawn.go:OS.spawnStart:fdc85156a1e2:4",
+    "translation": "已启动 ",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "--format=%(refname:short)",
+    "scope": "internal/app/cockpit_spawn.go:spawnBranches:1eb6f4483e3a:1",
+    "decision": "keep",
+    "reason": "Literal Git for-each-ref subcommand, option or ref namespace; preserve command semantics."
+  },
+  {
+    "source": "--sort=-committerdate",
+    "scope": "internal/app/cockpit_spawn.go:spawnBranches:69aa0596df08:1",
+    "decision": "keep",
+    "reason": "Literal Git for-each-ref subcommand, option or ref namespace; preserve command semantics."
+  },
+  {
+    "source": "for-each-ref",
+    "scope": "internal/app/cockpit_spawn.go:spawnBranches:c3cb0a1b32a4:1",
+    "decision": "keep",
+    "reason": "Literal Git for-each-ref subcommand, option or ref namespace; preserve command semantics."
+  },
+  {
+    "source": "--count=30",
+    "scope": "internal/app/cockpit_spawn.go:spawnBranches:c400d156b311:1",
+    "decision": "keep",
+    "reason": "Literal Git for-each-ref subcommand, option or ref namespace; preserve command semantics."
+  },
+  {
+    "source": "refs/heads",
+    "scope": "internal/app/cockpit_spawn.go:spawnBranches:e71119618bfc:1",
+    "decision": "keep",
+    "reason": "Literal Git for-each-ref subcommand, option or ref namespace; preserve command semantics."
+  },
+  {
+    "source": "New worktree: a branch and a session in this pane's repository",
+    "scope": "internal/app/command_palette.go:GetCommandPaletteItems:13946cd46169:1",
+    "translation": "新建工作树：在当前窗格的仓库中创建分支和会话",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "1, 2 and 3 answer a held approval. Enter goes to the pane.",
+    "scope": "internal/app/inbox.go:inboxNotHeldWords:187537b606f9:1",
+    "translation": "1、2、3 用于回应待审批项，Enter 进入窗格。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "The reply is empty. Type a message to send it.",
+    "scope": "internal/app/inbox_reply.go:OS.InboxReplySend:e7eb542bf309:1",
+    "translation": "回复为空，请输入内容后发送。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Close and lock",
+    "scope": "internal/app/lock_mode.go:OS.heldWhichKey:1ec0e9e8a961:1",
+    "translation": "关闭并锁定",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": " (repeat)",
+    "scope": "internal/app/lock_mode.go:OS.heldWhichKey:2d99daf257be:1",
+    "translation": "（重复）",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Close",
+    "scope": "internal/app/lock_mode.go:OS.heldWhichKey:7d9eb7acb13e:1",
+    "translation": "关闭",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Close, lock and type",
+    "scope": "internal/app/lock_mode.go:OS.heldWhichKey:b3abd24454f1:1",
+    "translation": "关闭、锁定并输入",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "A popup cannot be zoomed.",
+    "scope": "internal/app/os_minimize.go:OS.ToggleZoom:d15f49247ff0:1",
+    "translation": "弹窗无法放大。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "done",
+    "scope": "internal/app/render_cockpit.go:OS.drawCockpitHeader:a4c3ed04a95a:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state key passed to ckStateMark and the configured glyph-set lookup; not the displayed count label."
+  },
+  {
+    "source": "done",
+    "scope": "internal/app/render_cockpit.go:OS.drawFleetRow:a4c3ed04a95a:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state key passed to ckStateMark and the configured glyph-set lookup; not the displayed count label."
+  },
+  {
+    "source": "working",
+    "scope": "internal/app/render_cockpit.go:OS.drawFleetRow:dd5ace9e018d:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state key passed to ckStateMark and the configured glyph-set lookup; not the displayed count label."
+  },
+  {
+    "source": "errored",
+    "scope": "internal/app/render_cockpit.go:ckLook.ckItemMark:138bb025f5c1:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state key passed to ckStateMark and the configured glyph-set lookup; not the displayed count label."
+  },
+  {
+    "source": "done",
+    "scope": "internal/app/render_cockpit.go:ckLook.ckItemMark:a4c3ed04a95a:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state key passed to ckStateMark and the configured glyph-set lookup; not the displayed count label."
+  },
+  {
+    "source": "idle",
+    "scope": "internal/app/render_cockpit.go:ckLook.ckMark:4fb62348858c:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state key passed to ckStateMark and the configured glyph-set lookup; not the displayed count label."
+  },
+  {
+    "source": "actions",
+    "scope": "internal/app/render_command_palette.go:paletteHints:2b0dcdd40016:1",
+    "translation": "操作",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "PREFIX ",
+    "scope": "internal/app/render_overlays.go:OS.renderOverlays:3401f9a15966:1",
+    "translation": "前缀 ",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Files style",
+    "scope": "internal/app/settings_registry.go:settingLabels:a2a872a4bf2a:1",
+    "translation": "文件显示样式",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "You can open ",
+    "scope": "internal/app/sidebar_files_tree.go:OS.fileTreeOpenDir:00e6441ec584:1",
+    "translation": "最多可展开 ",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": " folders at most. Close a folder first.",
+    "scope": "internal/app/sidebar_files_tree.go:OS.fileTreeOpenDir:39ff6ef5ec41:1",
+    "translation": " 个文件夹，请先收起一个文件夹。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "empty",
+    "scope": "internal/app/sidebar_files_tree.go:fileTreeNote:2e1cfa82b035:1",
+    "translation": "空文件夹",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "loading",
+    "scope": "internal/app/sidebar_files_tree.go:fileTreeNote:b4a070a2d341:1",
+    "translation": "加载中",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "pane",
+    "scope": "internal/app/tml.go:OS.renderTML:24a3737d6b81:1",
+    "decision": "keep",
+    "reason": "TML view.placement discriminator passed to SetPlacement; documents compare the canonical pane/popup values."
+  },
+  {
+    "source": "popup",
+    "scope": "internal/app/tml.go:OS.renderTML:358771f2854c:1",
+    "decision": "keep",
+    "reason": "TML view.placement discriminator passed to SetPlacement; documents compare the canonical pane/popup values."
+  },
+  {
+    "source": "This pane is not in a git repository.",
+    "scope": "internal/app/worktree_prompt.go:OS.BeginWorktreePromptForFocusedPane:181dfe99067e:1",
+    "translation": "此窗格不在 Git 仓库中。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "This pane is on another machine. Run tuios worktree new on that machine.",
+    "scope": "internal/app/worktree_prompt.go:OS.BeginWorktreePromptForFocusedPane:5388885d279e:1",
+    "translation": "此窗格位于其他机器上，请在那台机器运行 tuios worktree new。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "No pane is focused.",
+    "scope": "internal/app/worktree_prompt.go:OS.BeginWorktreePromptForFocusedPane:a84ccbc8334c:1",
+    "translation": "当前没有选中的窗格。",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Next section, or open a tree folder",
+    "scope": "internal/config/keybind_descriptions.go:scopedDescriptions:0654b22b70b1:1",
+    "translation": "下一分区，或展开树形目录中的文件夹",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "First row, or the first file from a file row",
+    "scope": "internal/config/keybind_descriptions.go:scopedDescriptions:50d83552402c:1",
+    "translation": "首行，或文件列表的第一个文件",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Previous section, or close a tree folder",
+    "scope": "internal/config/keybind_descriptions.go:scopedDescriptions:7468695f39b5:1",
+    "translation": "上一分区，或收起树形目录中的文件夹",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Last row, or the last file from a file row",
+    "scope": "internal/config/keybind_descriptions.go:scopedDescriptions:f023373b7354:1",
+    "translation": "末行，或文件列表的最后一个文件",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Make a worktree session in the focused pane's repository",
+    "scope": "internal/config/registry.go:ActionDescriptions:1d675a6dba62:1",
+    "translation": "在当前窗格的仓库中创建工作树会话",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "New worktree",
+    "scope": "internal/config/whichkey_menu.go:leaderSessionRows:4f210afedcab:1",
+    "translation": "新建工作树",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Sessions/new worktree",
+    "scope": "internal/config/whichkey_menu.go:leaderSessionRows:b55cf7a1e451:1",
+    "translation": "会话／新建工作树",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "How the files section draws: list shows one folder at a time, tree opens folders in place under one root",
+    "scope": "settings.appearance.sidebar.files_style.description",
+    "translation": "文件分区的显示方式：列表每次显示一个文件夹，树形目录在同一根目录下展开文件夹",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Files style",
+    "scope": "settings.appearance.sidebar.files_style.label",
+    "translation": "文件显示样式",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "list",
+    "scope": "settings.appearance.sidebar.files_style.value.list",
+    "translation": "列表",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Background of a tuios mermaid picture: theme for the theme's colour, or none for the terminal's own background",
+    "scope": "settings.mermaid.background.description",
+    "translation": "tuios Mermaid 图的背景：theme 使用主题颜色，none 使用终端自身背景",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Open the pane navigator ready to type a search",
+    "scope": "settings.panes.navigator_search.description",
+    "translation": "打开窗格导航器并进入搜索输入状态",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Navigator search",
+    "scope": "settings.panes.navigator_search.label",
+    "translation": "导航器搜索",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "Worker engine (experimental)",
+    "scope": "sip:static/index.html:5d856b40ba18eeb9:2641",
+    "translation": "工作线程引擎（实验性）",
+    "reason": "Reviewed Simplified Chinese display text for this exact context; preserve dynamic data, commands and stored enum values."
+  },
+  {
+    "source": "working",
+    "scope": "internal/app/render_cockpit.go:OS.drawCockpitHeader:dd5ace9e018d:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state argument for ckStateMark; the visible count label is occurrence 2 and has its own Chinese display translation."
+  },
+  {
+    "source": "idle",
+    "scope": "internal/app/render_cockpit.go:OS.drawCockpitHeader:4fb62348858c:1",
+    "decision": "keep",
+    "reason": "Canonical agent-state argument for ckStateMark; the visible count label is occurrence 2 and has its own Chinese display translation."
+  }
+]

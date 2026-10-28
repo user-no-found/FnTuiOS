@@ -18,7 +18,7 @@ def main():
     for key, value in [('FNTUIOS_PLAYWRIGHT', args.playwright), ('FNTUIOS_CHROMIUM', args.chromium)]:
         if value is not None:
             os.environ[key] = value
-    configured = load_browser_environment(ROOT)
+    configured = load_browser_environment()
     latest = json.loads((ROOT / '.build/last-success.json').read_text())
     if latest.get('schema') != 2:
         raise ValueError('unsupported build success schema; run the current build entry')

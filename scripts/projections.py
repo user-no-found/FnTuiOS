@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 import config_display
+from build_inputs import ROOT
 
 
 def quote(value):
@@ -99,7 +100,10 @@ func fnActionDescription(fallback string) string {
             'if why, ok := risk.Why(name); ok {\n\t\treturn fnRiskText(why)')
     guarded(directory / 'settings_registry.go', 'Desc:    o.Description,',
             'Desc:    fnSettingDescription(path, o.Description),')
-    guarded(directory / 'help.go', 'desc := b.Description', 'desc := fnBindingDescription(b.Action, b.Description)')
+    guarded(directory / 'help.go', 'overlay.Truncate(b.Description, descMax)',
+            'overlay.Truncate(fnBindingDescription(b.Action, b.Description), descMax)')
+    guarded(directory / 'render_keybind_preset_picker.go', 'overlay.Truncate(about.Summary, 22)',
+            'overlay.Truncate(fnActionDescription(about.Summary), 22)')
     guarded(directory / 'render_settings.go', 'overlay.Cycler(overlay.Truncate(item.value(m),',
             'overlay.Cycler(overlay.Truncate(fnSettingValue(item.Path, item.value(m)),')
     for file, name, expression in [
@@ -118,6 +122,8 @@ func fnActionDescription(fallback string) string {
     guarded(directory / 'help.go', 'func helpTabLabel(name string) string {\n\tif short, ok := helpTabNames[name]; ok {\n\t\treturn short\n\t}\n\treturn name\n}',
             'func helpTabLabel(name string) string {\n\tif short, ok := helpTabNames[name]; ok { return short }; return fnActionDescription(name)\n}')
     guarded(directory / 'sidebar_strip.go', 'g.noun+"s"', 'g.noun')
+    guarded(directory / 'cockpit_side.go', '\tif len(files) != 1 {\n\t\tn += "s"\n\t}\n', '')
+    guarded(directory / 'render_cockpit.go', '\t\tif n != 1 {\n\t\t\tright += "s"\n\t\t}\n', '')
     guarded(Path(source) / 'internal/plural/plural.go', 'return CountAs(n, noun, noun+"s")',
             'for _, r := range noun { if r >= 0x3400 && r <= 0x9fff { return CountAs(n, noun, noun) } }; return CountAs(n, noun, noun+"s")')
     guarded(directory / 'sidebar_strip.go', 'return sidebarFit(sidebarStyle(bg, fg).Render(add)+sidebarStyle(bg, fg).Render(label), cw, bg)',
@@ -134,4 +140,19 @@ func fnActionDescription(fallback string) string {
     guarded(directory / 'render_keybind_manager.go', 'text := a.Desc', 'text := fnBindingDescription(a.Action, a.Desc)')
     guarded(directory / 'render_keybind_manager.go', 'text = a.Desc +', 'text = fnBindingDescription(a.Action, a.Desc) +')
     guarded(directory / 'render_keybind_manager.go', '+fate.SwallowReason,', '+fnActionDescription(fate.SwallowReason),')
+    # Chinese count nouns have no English plural suffix.
+    guarded(directory / 'render_cockpit.go', '\t\tif mr.agents != 1 {\n\t\t\tagents += "s"\n\t\t}\n', '')
+    guarded(directory / 'render_cockpit_compare.go', '\t\t\tif *a.Files != 1 {\n\t\t\t\tfiles += "s"\n\t\t\t}\n', '')
+    goto_labels = {item['en']: item['zh'] for item in json.loads((ROOT / 'locales/glossary.json').read_text())['terms']
+                   if item['en'] in {'agent', 'session', 'workspace', 'pane'}}
+    if len(goto_labels) != 4:
+        raise ValueError('go-to display requires all four reviewed glossary nouns')
+    contents = 'package app\n\nvar fnGotoKindLabels = map[string]string{\n'
+    contents += ''.join(f' {quote(key)}: {quote(value)},\n' for key, value in sorted(goto_labels.items()))
+    contents += '}\nfunc fnGotoKindLabel(value string) string { if label, ok := fnGotoKindLabels[value]; ok { return label }; return value }\n'
+    (directory / 'fntuios_goto.go').write_text(contents)
+    goto = directory / 'render_goto_picker.go'
+    guarded(goto, 'tag := gotoKindNames[r.kind][0]', 'tag := fnGotoKindLabel(gotoKindNames[r.kind][0])')
+    guarded(goto, 'gotoTagWidth-len(tag)', 'max(0, gotoTagWidth-lipgloss.Width(tag))')
+    guarded(goto, '\t"strings"\n', '\t"strings"\n\t"charm.land/lipgloss/v2"\n')
     config_display.apply(Path(source))

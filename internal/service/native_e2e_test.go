@@ -198,22 +198,7 @@ func TestNativeBrowser(t *testing.T) {
 	defer gatewayConn.Close()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	go func() {
-		decoder, encoder := json.NewDecoder(broker), json.NewEncoder(broker)
-		for {
-			var request identity.Request
-			if decoder.Decode(&request) != nil {
-				return
-			}
-			endpoint := fixture.endpoint
-			if request.UID != fixture.users[0].UID || request.Name != fixture.users[0].Name {
-				endpoint = gateway.Endpoint{UID: request.UID, Error: "native fixture has one principal"}
-			}
-			if encoder.Encode(endpoint) != nil {
-				return
-			}
-		}
-	}()
+	go serveNativeBroker(fixture, broker)
 	go func() {
 		if err := gateway.Serve(ctx, listener, gatewayConn, gateway.Options{Config: fixture.cfg, TrustedUIDs: []uint32{uint32(os.Geteuid())}}); err != nil {
 			t.Log(err)

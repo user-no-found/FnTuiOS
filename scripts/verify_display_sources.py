@@ -1,6 +1,7 @@
 """Verify real generated display APIs and fail-closed source/catalog boundaries."""
 
 import json
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -16,12 +17,24 @@ BRIDGE = '''package app
 import "github.com/Gaurav-Gosain/tuios/internal/config"
 func FnDisplayProbePrefix(r *config.KeybindRegistry,p string,s config.MenuState) []config.KeybindingGroup { return fnPrefixMenuGroups(r,p,s) }
 func FnDisplayProbeBinding(action,text string) string { return fnBindingDescription(action,text) }
+func FnDisplayProbeGoto() (map[string]string,[]string) {
+ shown:=map[string]string{}; original:=[]string{}
+ for _, names:=range gotoKindNames { original=append(original,names...); shown[names[0]]=fnGotoKindLabel(names[0]) }
+ return shown, original
+}
 '''
 
 
 def scan(go, source, path):
     run(capped([go, 'run', '.', '-root', source, '-out', path]), cwd=ROOT / 'tools/localize', env=goenv())
     return json.loads(path.read_text())
+
+
+def cockpit_state_contract(original, projected):
+    """A repeated display word must not translate the glyph lookup's state argument."""
+    calls = re.compile(r'\.ckStateMark\(\s*("(?:\\.|[^"\\])*")')
+    if calls.findall(original) != calls.findall(projected):
+        raise ValueError('cockpit glyph-state arguments were translated')
 
 
 def verify(args, reviewed):
@@ -40,6 +53,23 @@ def verify(args, reviewed):
                                 '-projection-report', output / 'projection.json']), cwd=ROOT / 'tools/localize', env=goenv())
         apply()
         projections.apply(source, reviewed)
+        cockpit = 'internal/app/render_cockpit.go'
+        original_cockpit = (args.source / cockpit).read_text()
+        projected_cockpit = (source / cockpit).read_text()
+        cockpit_state_contract(original_cockpit, projected_cockpit)
+        for state, group in [('working', 'ckWorking'), ('idle', 'ckIdle')]:
+            entry = next(e for e in reviewed if e['file'] == cockpit and e['source'] == state
+                         and 'OS.drawCockpitHeader' in e['id'] and e['decision'] == 'translate')
+            pattern = r'counts\[' + group + r'\][^\n]*,\s*' + re.escape(json.dumps(entry['translation'], ensure_ascii=False))
+            if not re.search(pattern, projected_cockpit):
+                raise ValueError('cockpit count label was not translated: ' + state)
+        damaged = projected_cockpit.replace('.ckStateMark("working"', '.ckStateMark("工作中"', 1)
+        try:
+            cockpit_state_contract(original_cockpit, damaged)
+        except ValueError:
+            checks.append('cockpit state arguments stay canonical while count labels are Chinese; translating a state is rejected')
+        else:
+            raise ValueError('translated cockpit state negative control was accepted')
         if any(digest(source / name) != value for name, value in original.items()):
             raise ValueError('display projection changed canonical configuration or risk source bytes')
         checks.extend(verify_risk_display.verify(args.go, source, reviewed, output / 'risk'))
@@ -107,6 +137,17 @@ def verify(args, reviewed):
         menu = source / 'internal/config/whichkey_menu.go'
         baseline_menu = menu.read_text()
         probe = source / 'internal/config/fntuios_negative_display.go'
+        probe.write_text('package config\nvar fntuiosRows = []menuRow{{parts: []menuPart{{"stable_action", "UnreviewedTableLabel"}}, desc: "UnreviewedTableRow"}}\n')
+        entries = scan(args.go, source, output / 'new-table.json')
+        for label in ['UnreviewedTableLabel', 'UnreviewedTableRow']:
+            found = [entry for entry in entries if entry['source'] == label]
+            if len(found) != 1 or found[0]['kind'] != 'config-display':
+                raise ValueError('typed menu table display field escaped semantic review: ' + label)
+        action = next(entry for entry in entries if entry['source'] == 'stable_action')
+        if action['kind'] == 'config-display':
+            raise ValueError('typed menu table action was classified as display text')
+        rejected('new menu table display fields rejected by an old catalog', apply, 'unclassified')
+        probe.unlink()
         menu.write_text(baseline_menu.replace('title: "Windows"', 'title: fntuiosFreshLabel()', 1))
         probe.write_text('package config\nfunc fntuiosFreshLabel() string { return "UnreviewedLabel" }\n')
         entries = scan(args.go, source, output / 'new-helper.json')

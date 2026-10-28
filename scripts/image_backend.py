@@ -57,7 +57,7 @@ def apply(source, sip, go=None):
     start = text.index('func (m *OS) applyImagePasted(msg ImagePastedMsg) {')
     end = text.index('\n// pastePathText ', start)
     body = text[start:end]
-    if body.count('\t\treturn\n') != 5 or not body.endswith('}\n'):
+    if body.count('\t\treturn\n') != 7 or not body.endswith('}\n'):
         raise ValueError('image paste completion adapter drift')
     body = body.replace('func (m *OS) applyImagePasted(msg ImagePastedMsg) {',
                         'func (m *OS) applyImagePasted(msg ImagePastedMsg) bool {')

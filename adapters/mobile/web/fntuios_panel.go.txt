@@ -1,0 +1,61 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"io"
+	"strings"
+	"time"
+
+	"github.com/Gaurav-Gosain/sip"
+)
+
+// Panel controls share the authenticated, ordered browser input transport.
+func browserPanelControl(sess sip.SessionIO, data []byte, reply func([]byte), readOnly bool) bool {
+	var req struct {
+		Type      string `json:"type"`
+		ID        string `json:"id"`
+		Direction string `json:"direction"`
+		History   bool   `json:"history"`
+	}
+	if len(data) > 256 || json.NewDecoder(strings.NewReader(string(data))).Decode(&req) != nil || (req.Type != "panel-split" && req.Type != "panel-copy") {
+		return false
+	}
+	send := func(code string) {
+		payload, _ := json.Marshal(map[string]string{"type": "panel-result", "id": req.ID, "code": code})
+		reply(payload)
+	}
+	decoder := json.NewDecoder(strings.NewReader(string(data)))
+	decoder.DisallowUnknownFields()
+	var extra any
+	if decoder.Decode(&req) != nil || decoder.Decode(&extra) != io.EOF || !browserImageRequestID(req.ID) ||
+		(req.Type == "panel-split" && (req.History || req.Direction != "up" && req.Direction != "down" && req.Direction != "left" && req.Direction != "right")) ||
+		(req.Type == "panel-copy" && req.Direction != "") {
+		send("invalid_request")
+		return true
+	}
+	if readOnly && req.Type == "panel-split" {
+		send("read_only")
+		return true
+	}
+	value, ok := browserImageClients.Load(sess.Context())
+	if !ok {
+		send("unavailable")
+		return true
+	}
+	ctx, cancel := context.WithTimeout(sess.Context(), 6*time.Second)
+	defer cancel()
+	target, code := value.(*browserImageClient).bridge.Capture(ctx, sess.InputWriter())
+	if code == "" && req.Type == "panel-copy" {
+		text, truncated, code := target.CopyText(ctx, req.History)
+		payload, _ := json.Marshal(map[string]any{"type": "panel-copy-result", "id": req.ID,
+			"code": code, "text": text, "truncated": truncated})
+		reply(payload)
+		return true
+	}
+	if code == "" {
+		code = target.Split(ctx, req.Direction)
+	}
+	send(code)
+	return true
+}

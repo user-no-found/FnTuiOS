@@ -1,0 +1,56 @@
+package app
+
+import (
+	"context"
+	"time"
+
+	"github.com/Gaurav-Gosain/tuios/internal/layout"
+)
+
+type browserPanelSplit struct {
+	target    *BrowserImageTarget
+	direction layout.PreselectionDir
+	answer    chan string
+}
+
+// Split uses the captured browser model, never a shell key binding or command.
+func (t *BrowserImageTarget) Split(ctx context.Context, direction string) string {
+	directions := map[string]layout.PreselectionDir{"up": layout.PreselectionUp, "down": layout.PreselectionDown,
+		"left": layout.PreselectionLeft, "right": layout.PreselectionRight}
+	dir, ok := directions[direction]
+	if !ok {
+		return "invalid_request"
+	}
+	job := browserPanelSplit{t, dir, make(chan string, 1)}
+	t.bridge.send(job)
+	limit := time.NewTimer(5 * time.Second)
+	defer limit.Stop()
+	select {
+	case code := <-job.answer:
+		return code
+	case <-ctx.Done():
+		return "expired"
+	case <-limit.C:
+		return "unavailable"
+	}
+}
+
+func (m *OS) applyBrowserPanelSplit(job browserPanelSplit) string {
+	if code := job.target.valid(m); code != "" {
+		return code
+	}
+	if m.GetFocusedWindow() != job.target.window {
+		return "target_changed"
+	}
+	if !m.AutoTiling || !m.UseBSPLayout {
+		return "requires_tiling"
+	}
+	if m.pendingSplitTarget != "" {
+		return "busy"
+	}
+	if m.SplitRefusal(job.direction) != nil {
+		return "too_small"
+	}
+	m.splitFocused(job.direction, false)
+	return ""
+}
