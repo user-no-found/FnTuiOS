@@ -26,6 +26,7 @@ import image_backend
 import mobile
 import gateway_browser
 import verify_package
+import startup
 
 
 def plan(project):
@@ -112,6 +113,7 @@ def plan(project):
             gateway_browser.apply(sip, output, state['gateway_browser'])
             image_backend.apply(source, sip, go)
             mobile.apply(source, sip, go)
+            startup.apply(sip, ROOT)
         run([go, 'mod', 'edit', '-replace=github.com/Gaurav-Gosain/sip=' + str(sip)], cwd=source, env=state['env'])
 
     def check(ctx):

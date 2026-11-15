@@ -22,6 +22,7 @@ import (
 	"github.com/user-no-found/FnPackKit/runtime/identity"
 	"github.com/user-no-found/FnPackKit/runtime/peer"
 	"github.com/user-no-found/FnPackKit/runtime/runtimepanel"
+	"github.com/user-no-found/FnPackKit/runtime/webassets"
 )
 
 // Endpoint is private broker data. Authentication never reaches the browser.
@@ -150,10 +151,6 @@ func Serve(ctx context.Context, listener net.Listener, broker net.Conn, options 
 		{ID: "keyboard", Label: "键盘", Selector: "#fn-panel-keyboard", Group: "phone-input", Columns: 2, Audience: "touch"},
 	}}
 	controls.Layout = &runtimepanel.Layout{Avoid: "#sip-keybar"}
-	panelFiles, err := newPanelAssets(&controls)
-	if err != nil {
-		return err
-	}
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		request, rejection := policy.Check(r)
 		if rejection == nil {
@@ -165,7 +162,7 @@ func Serve(ctx context.Context, listener net.Listener, broker net.Conn, options 
 			writeFailure(w, r, rejection, http.StatusForbidden)
 			return
 		}
-		if panelFiles.serve(w, r) || controls.Handle(w, r, request) {
+		if controls.Handle(w, r, request) {
 			return
 		}
 		if r.URL.Path == options.Config.Prefix+"/_gateway/grant" {
@@ -216,7 +213,7 @@ func newProxy(endpoint Endpoint, prefix string, transport http.RoundTripper) *ht
 					request.Out.Header.Del(key)
 				}
 			}
-			request.Out.Header.Set("Accept-Encoding", "identity")
+			webassets.Negotiate(request.Out, request.In, strings.HasPrefix(request.In.URL.Path, prefix+"/static/"))
 			request.Out.SetBasicAuth("fntuios", endpoint.Password)
 			if cookie, err := applicationCookie(request.In); err == nil && cookie != nil {
 				request.Out.AddCookie(cookie)
@@ -226,6 +223,9 @@ func newProxy(endpoint Endpoint, prefix string, transport http.RoundTripper) *ht
 			}
 		},
 		ModifyResponse: func(response *http.Response) error {
+			if err := webassets.Response(response, strings.HasPrefix(response.Request.URL.Path, "/static/")); err != nil {
+				return err
+			}
 			if err := rewriteResponse(response, prefix, endpoint.Address); err != nil {
 				return err
 			}
@@ -243,7 +243,6 @@ func newProxy(endpoint Endpoint, prefix string, transport http.RoundTripper) *ht
 
 func rewriteResponse(response *http.Response, prefix, address string) error {
 	response.Header.Del("WWW-Authenticate")
-	response.Header.Set("Cache-Control", "no-store")
 	response.Header.Set("X-Content-Type-Options", "nosniff")
 	response.Header.Set("X-Frame-Options", "SAMEORIGIN")
 	response.Header.Set("Content-Security-Policy", "frame-ancestors 'self'; object-src 'none'; base-uri 'self'")

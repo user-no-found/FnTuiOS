@@ -1,5 +1,29 @@
-// Click the visible half of a docked launcher, avoiding clipped pixels over the key bar.
+import assert from 'node:assert/strict';
+
+// Open through the shared half → revealed → open interaction using real pointer input.
 export async function activateLauncher(frame) {
+  const button = frame.getByRole('button', { name: '后端控制', exact: true });
+  if (await button.getAttribute('aria-expanded') === 'true') return;
+  await clickLauncher(frame);
+  if (await button.getAttribute('data-ui-state') === 'revealed') await clickLauncher(frame);
+}
+
+export async function activateLauncherByKeyboard(frame) {
+  const button = frame.getByRole('button', { name: '后端控制', exact: true });
+  assert.equal(await button.getAttribute('data-ui-state'), 'half');
+  const observed = ['half'];
+  await button.focus();
+  for (const expected of ['revealed', 'open']) {
+    await frame.page().keyboard.press('Enter');
+    const actual = await button.getAttribute('data-ui-state');
+    assert.equal(actual, expected);
+    assert.equal(await button.getAttribute('aria-expanded'), String(expected === 'open'));
+    observed.push(actual);
+  }
+  return observed;
+}
+
+export async function clickLauncher(frame) {
   const button = frame.getByRole('button', { name: '后端控制', exact: true });
   await button.evaluate(async node => {
     await new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done)));

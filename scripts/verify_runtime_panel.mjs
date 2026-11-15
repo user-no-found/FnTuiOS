@@ -1,4 +1,4 @@
-import { activateLauncher } from './panel_launcher.mjs';
+import { activateLauncher, activateLauncherByKeyboard } from './panel_launcher.mjs';
 import assert from 'node:assert/strict';
 import { parseArgs } from 'node:util';
 import { pathToFileURL } from 'node:url';
@@ -8,12 +8,14 @@ import { verifyMobile } from './verify_mobile_browser.mjs';
 import { verifySplits } from './verify_panel_controls.mjs';
 import { verifyPanelDrag } from './verify_panel_drag.mjs';
 import { verifyTextCopy } from './verify_text_copy.mjs';
+import { verifyStartup } from './verify_startup.mjs';
 const {values}=parseArgs({options:{url:{type:'string'},output:{type:'string'}}});
 const entry=new URL(values.url);
 if(!['127.0.0.1','localhost'].includes(entry.hostname))throw new Error('isolated loopback fixture required');
 const {withBrowser}=await import(pathToFileURL(process.env.BUILDFLOW_BROWSER_RUNTIME));
 await mkdir(values.output,{recursive:true});
 await withBrowser({},async browser=>{
+ const startup=await verifyStartup(browser,entry);
  const page=await browser.newPage({viewport:{width:1280,height:800}});const errors=[];const input=[];
  page.on('pageerror',e=>errors.push(e.message));
  page.on('websocket',ws=>ws.on('framesent',({payload})=>{const data=Buffer.from(payload);if(data[0]===0x30)input.push(data.toString('base64'))}));
@@ -31,7 +33,7 @@ await withBrowser({},async browser=>{
   await frame.locator('#settings-close').click();
   await frame.locator('#settings-panel').waitFor({state:'hidden'});
   const before=input.length;
-  await toggle.focus();await page.keyboard.press('Enter');await frame.getByRole('dialog').waitFor();
+  await activateLauncherByKeyboard(frame);await frame.getByRole('dialog').waitFor();
   await page.keyboard.press('Escape');await frame.getByRole('dialog').waitFor({state:'hidden'});
   await page.waitForTimeout(100);assert.equal(input.length,before,'runtime control keys reached terminal');
   await activateLauncher(frame);await frame.getByRole('button',{name:'停止后端',exact:true}).click();
@@ -50,7 +52,7 @@ await withBrowser({},async browser=>{
   const splits=await verifySplits(page,frame,entry,values.output);
   const copy=await verifyTextCopy(page,frame,entry,values.output,false);
   const mobile=await verifyMobile(browser,entry,values.output,frame);
-  const report={drag,splits,copy,runtimePanel:'passed',upstreamSettings:'passed',controlKeysDoNotReachTerminal:'passed',manualStopReloadStartRestart:'passed',mobile,pageErrors:0};
+  const report={startup,drag,splits,copy,runtimePanel:'passed',upstreamSettings:'passed',controlKeysDoNotReachTerminal:'passed',manualStopReloadStartRestart:'passed',mobile,pageErrors:0};
   await writeFile(resolve(values.output,'runtime-panel.json'),JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify(report));
  }catch(error){await page.screenshot({path:resolve(values.output,'runtime-panel-failure.png'),fullPage:true});throw error}
